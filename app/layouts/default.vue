@@ -1,20 +1,19 @@
 <template>
-    <select @change="switchLocale($event)" :value="locale">
-      <option v-for="locale in availableLocales" :key="locale.code" :value="locale.code">
-        {{ locale.name }}
-      </option>
-    </select>
+  <select @change="switchLocale($event)" name="locales">
+    <option v-for="locale in availableLocales" :key="locale.code" :value="locale.code" :selected="locale.code === currentLocale">
+      {{ locale.name }}
+    </option>
+  </select>
 
-    <div class="header">HEADER</div>
-    
-    <slot />
+  <div class="header">HEADER</div>
 
-    <div class="footer">FOOTER</div>
+  <slot />
+
+  <div class="footer">FOOTER</div>
 </template>
 
-
 <script setup>
-const { locales, locale, setLocale } = useI18n()
+const { locales, locale: currentLocale, setLocale } = useI18n()
 
 const availableLocales = locales.value
 
