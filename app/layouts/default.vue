@@ -5,6 +5,10 @@
     </option>
   </select>
 
+  <div class="row">
+    <div class="col-sm-6 col-xs-12">A</div>
+    <div class="col-sm-6 col-xs-12">B</div>
+  </div>
   <div class="header">HEADER</div>
 
   <slot />
