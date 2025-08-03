@@ -1,13 +1,13 @@
 <template>
   <div class="col-xs-12">
     <div class="header flex justify-between">
-      <div>Basikon</div>
+      <NuxtLink class="mr-5" :to="localePath('/')">Basikon</NuxtLink>
 
       <div class="flex">
-        <div>{{ $t("solutions") }}</div>
-        <div>{{ $t("customers") }}</div>
-        <NuxtLink :to="localePath('/about')">{{ $t("aboutUs") }}</NuxtLink>
-        <div>{{ $t("resources") }}</div>
+        <div class="ml-5 mr-5">{{ $t("solutions") }}</div>
+        <div class="ml-5 mr-5">{{ $t("customers") }}</div>
+        <NuxtLink class="ml-5 mr-5" :to="localePath('/about')">{{ $t("aboutUs") }}</NuxtLink>
+        <div class="ml-5 mr-5">{{ $t("resources") }}</div>
       </div>
 
       <select @change="switchLocale($event)" name="locales">

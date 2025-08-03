@@ -1,6 +1,6 @@
 <template>
   <div :class="className">
-    <div class="card">
+    <div class="card mt-2 mb-2">
       <slot />
     </div>
   </div>

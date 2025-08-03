@@ -17,20 +17,18 @@
 
 html {
   font-family: Arial, sans-serif;
-  font-size: 10px; // rem unit reference
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
+  color: var(--text-color);
+  line-height: var(--line-height);
   margin: 0 auto;
-  max-width: 800px;
-  font-size: 1.4rem;
 }
 
 .card {
   border: 1px solid gray;
-  margin: var(--block-v-spacing) 0;
 }
 
 @for $i from 1 through 100 {
