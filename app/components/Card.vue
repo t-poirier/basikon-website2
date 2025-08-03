@@ -18,6 +18,5 @@ const { lg, md, sm, xs, vh } = defineProps({
   vh: Number,
 })
 
-const className =
-  "" + (lg ? ` col-lg-${lg}` : "") + (md ? ` col-md-${md}` : "") + (sm ? ` col-sm-${sm}` : "") + ` col-xs-${xs}` + (vh ? ` vh-${vh}` : "")
+const className = (lg ? `col-lg-${lg}` : "") + (md ? ` col-md-${md}` : "") + (sm ? ` col-sm-${sm}` : "") + ` col-xs-${xs}` + (vh ? ` vh-${vh}` : "")
 </script>

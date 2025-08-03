@@ -28,6 +28,11 @@ body {
   font-size: 1.4rem;
 }
 
+.card {
+  border: 1px solid gray;
+  margin: var(--block-v-spacing) 0;
+}
+
 @for $i from 1 through 100 {
   .vh-#{$i} {
     height: #{$i}vh;
