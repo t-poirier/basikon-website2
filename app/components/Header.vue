@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-xs-12">
-      <div class="header max-w-5xl m-auto flex justify-between">
+      <div class="max-w-5xl m-auto flex justify-between">
         <NuxtLink class="mr-5" :to="localePath('/')">Basikon</NuxtLink>
 
         <div class="flex">
