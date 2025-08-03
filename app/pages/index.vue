@@ -1,5 +1,8 @@
 <template>
-  <Card>
+  <Card :sm="6">
+    <h1>{{ $t("welcome") }}</h1>
+  </Card>
+  <Card :sm="6">
     <h1>{{ $t("welcome") }}</h1>
   </Card>
 </template>
