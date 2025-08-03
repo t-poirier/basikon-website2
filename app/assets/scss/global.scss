@@ -28,11 +28,24 @@ body {
   overflow-x: hidden;
 }
 
-.headline {
-  font-size: 48px;
-  font-weight: bold;
+h2 {
+  &.headline {
+    font-size: 48px;
+    font-weight: bold;
+  }
+
+  &.subhead {
+    font-size: 24px;
+  }
 }
 
-.subhead {
-  font-size: 24px;
+h3 {
+  &.headline {
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  &.subhead {
+    font-size: 19px;
+  }
 }

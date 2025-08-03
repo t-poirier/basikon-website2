@@ -10,24 +10,8 @@
       ></div>
 
       <div :class="'pt-[61px] pb-[61px] h-full flex flex-col justify-between ' + textClass">
-        <div class="split-wrapper-top">
-          <h2 class="headline max-w-xs m-auto text-center">
-            {{ topHeadline }}
-          </h2>
-
-          <p class="subhead max-w-xs m-auto text-center">
-            {{ topSubhead }}
-          </p>
-        </div>
-        <div class="split-wrapper-bottom">
-          <h2 class="headline max-w-xs m-auto text-center">
-            {{ bottomHeadline }}
-          </h2>
-
-          <p class="subhead max-w-xs m-auto text-center">
-            {{ bottomSubhead }}
-          </p>
-        </div>
+        <CardBlock :headline="topHeadline" :subhead="topSubhead" :moduleTemplate="moduleTemplate" />
+        <CardBlock :headline="bottomHeadline" :subhead="bottomSubhead" :moduleTemplate="moduleTemplate" />
       </div>
     </div>
   </div>
@@ -51,6 +35,7 @@ const { lg, md, sm, xs, vh } = defineProps({
   topHeadline: String,
   topSubhead: String,
   imgName: String,
+  moduleTemplate: String,
   textClass: {
     type: String,
     default: "",
