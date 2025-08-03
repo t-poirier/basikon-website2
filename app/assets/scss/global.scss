@@ -25,14 +25,5 @@ body {
   color: var(--text-color);
   line-height: var(--line-height);
   margin: 0 auto;
-}
-
-.card {
-  border: 1px solid gray;
-}
-
-@for $i from 1 through 100 {
-  .vh-#{$i} {
-    height: #{$i}vh;
-  }
+  overflow-x: hidden;
 }

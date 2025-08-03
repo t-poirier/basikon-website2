@@ -1,6 +1,14 @@
 <template>
-  <div :class="className">
-    <div class="card mt-2 mb-2">
+  <div :class="colClassName">
+    <div :class="'card mt-2 mb-2 relative overflow-hidden ' + cardClass">
+      <div
+        v-if="imgName"
+        class="absolute w-full h-full bg-no-repeat bg-center z-[-1]"
+        :style="{
+          'background-image': `url(/img/${imgName})`,
+        }"
+      ></div>
+
       <slot />
     </div>
   </div>
@@ -15,8 +23,12 @@ const { lg, md, sm, xs, vh } = defineProps({
     type: Number,
     default: 12,
   },
-  vh: Number,
+  cardClass: {
+    type: String,
+    default: "",
+  },
+  imgName: String,
 })
 
-const className = (lg ? `col-lg-${lg}` : "") + (md ? ` col-md-${md}` : "") + (sm ? ` col-sm-${sm}` : "") + ` col-xs-${xs}` + (vh ? ` vh-${vh}` : "")
+const colClassName = (lg ? `col-lg-${lg}` : "") + (md ? ` col-md-${md}` : "") + (sm ? ` col-sm-${sm}` : "") + ` col-xs-${xs}`
 </script>
