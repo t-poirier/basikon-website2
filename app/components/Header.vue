@@ -6,7 +6,7 @@
       <div class="flex">
         <div>{{ $t("solutions") }}</div>
         <div>{{ $t("customers") }}</div>
-        <div>{{ $t("aboutUs") }}</div>
+        <NuxtLink :to="localePath('/about')">{{ $t("aboutUs") }}</NuxtLink>
         <div>{{ $t("resources") }}</div>
       </div>
 
@@ -20,6 +20,7 @@
 </template>
 
 <script setup>
+const localePath = useLocalePath()
 const { locales, locale: currentLocale, setLocale } = useI18n()
 
 const availableLocales = locales.value
