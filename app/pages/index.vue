@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <Card>
     <h1>{{ $t("welcome") }}</h1>
-  </div>
+  </Card>
 </template>
 
 <style lang="scss">

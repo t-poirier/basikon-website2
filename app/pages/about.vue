@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <Card>
     <p>{{ $t("about") }}</p>
-  </section>
+  </Card>
 </template>
