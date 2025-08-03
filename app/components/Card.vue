@@ -1,11 +1,13 @@
 <template>
   <div :class="className">
-    <slot />
+    <div class="card">
+      <slot />
+    </div>
   </div>
 </template>
 
 <script setup>
-const { lg, md, sm, xs } = defineProps({
+const { lg, md, sm, xs, vh } = defineProps({
   lg: Number,
   md: Number,
   sm: Number,
@@ -13,7 +15,9 @@ const { lg, md, sm, xs } = defineProps({
     type: Number,
     default: 12,
   },
+  vh: Number,
 })
 
-const className = `card ${lg ? `col-lg-${lg} ` : ""}${md ? `col-md-${md} ` : ""}${sm ? `col-sm-${sm} ` : ""}col-xs-${xs}`
+const className =
+  "" + (lg ? ` col-lg-${lg}` : "") + (md ? ` col-md-${md}` : "") + (sm ? ` col-sm-${sm}` : "") + ` col-xs-${xs}` + (vh ? ` vh-${vh}` : "")
 </script>

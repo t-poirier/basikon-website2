@@ -1,6 +1,6 @@
 <template>
   <div class="header col-xs-12">
-    HEADER
+    <span>Basikon</span>
 
     <select @change="switchLocale($event)" name="locales">
       <option v-for="locale in availableLocales" :key="locale.code" :value="locale.code" :selected="locale.code === currentLocale">

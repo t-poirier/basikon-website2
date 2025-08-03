@@ -27,3 +27,9 @@ body {
   max-width: 800px;
   font-size: 1.4rem;
 }
+
+@for $i from 1 through 100 {
+  .vh-#{$i} {
+    height: #{$i}vh;
+  }
+}
