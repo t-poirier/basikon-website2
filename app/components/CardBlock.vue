@@ -7,8 +7,8 @@
       {{ headline }}
     </h3>
 
-    <p class="subhead max-w-xs m-auto text-center">
-      {{ subhead }}
+    <p class="subhead text-center">
+      <template v-for="(fragment, index) in subhead?.split('<br>')"><br v-if="index" />{{ fragment }} </template>
     </p>
 
     <div v-if="btns.length" class="flex items-center justify-center mt-5">
@@ -33,5 +33,5 @@ const { lg, md, sm, xs, vh } = defineProps({
   },
 })
 
-const headlineClass = "headline max-w-xs m-auto text-center"
+const headlineClass = "headline text-center"
 </script>

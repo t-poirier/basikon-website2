@@ -5,7 +5,7 @@
 
       <div
         v-if="imgName"
-        class="absolute w-full h-full bg-no-repeat bg-center z-[1]"
+        class="absolute w-full h-full bg-no-repeat bg-center bg-cover z-[1]"
         :style="{
           'background-image': `url(/img/${imgName})`,
         }"

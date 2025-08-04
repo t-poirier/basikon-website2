@@ -1,6 +1,22 @@
 <template>
   <Card
     cardLinkTo="/about"
+    imgName="e2e0f0fc.jpg"
+    cardClass="h-[692px]"
+    topHeadline="European Leasing & Consumer Credit Industry"
+    topSubhead="ANNUAL CONVENTIONS<br>9 & 10 OCTOBER<br>CASCAIS, PORTUGAL"
+    textClass="text-white"
+    :topBtns="[
+      {
+        href: '/about',
+        text: 'More info here',
+        theme: 'primary-light',
+      },
+    ]"
+  >
+  </Card>
+  <Card
+    cardLinkTo="/about"
     imgName="hero_iphone_family__fuz5j2v5xx6y_largetall.jpg"
     cardClass="h-[692px]"
     topHeadline="iPhone"
