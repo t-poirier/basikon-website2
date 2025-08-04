@@ -1,6 +1,6 @@
 <template>
   <div class="md-content">
-    <div v-if="htmlContent"><div v-html="htmlContent"></div></div>
+    <div v-if="htmlContent" v-html="htmlContent"></div>
   </div>
 </template>
 
@@ -34,13 +34,11 @@ marked.use({
   },
 })
 
-const htmlContent = marked(markdown.replaceAll('$v{resourcesUrl}', resourcesUrl))
+const htmlContent = marked(markdown.replaceAll("$v{resourcesUrl}", resourcesUrl))
 </script>
 
 <style scoped lang="scss">
 .md-content :deep() {
-  max-width: var(--text-content-max-width);
-
   hr {
     border-color: var(--color-blue-darker);
     margin-left: 0;

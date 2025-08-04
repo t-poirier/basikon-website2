@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <MdContent :markdown="markdown"/>
+  <div class="col-xs-12">
+    <div class="max-w-5xl m-auto">
+      <MdContent :markdown="markdown" />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { resourcesUrl } from "@/services/utils"
-const { locale: currentLocale} = useI18n()
+const { locale: currentLocale } = useI18n()
 const route = useRoute()
 const { slug } = route.params
 const { data: markdown } = await useAsyncData(`post-${slug}`, () => $fetch(`${resourcesUrl}/content/blog/${slug}/${currentLocale.value}.md`))
