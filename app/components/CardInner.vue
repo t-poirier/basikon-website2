@@ -1,6 +1,6 @@
 <template>
   <div :class="colClassName">
-    <div :class="'mb-4 relative overflow-hidden ' + cardClass">
+    <div :class="'mb-4 relative overflow-hidden ' + (cardHeight ? `h-${cardHeight}` : '')">
       <a v-if="cardLinkTo" :href="cardLinkTo" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></a>
 
       <div
@@ -11,20 +11,20 @@
         }"
       ></div>
 
-      <div :class="'pt-[61px] pb-[61px] h-full flex flex-col justify-between relative pointer-events-none z-[4] ' + textBlocksClass">
+      <div :class="'pt-[61px] pb-[61px] h-full flex flex-col justify-between relative pointer-events-none z-[4] ' + (textColor ? `text-${textColor}` : '')">
         <CardBlock
           :headline="topHeadline"
           :subhead="topSubhead"
           :moduleTemplate="moduleTemplate"
           :btns="topBtns"
-          :subheadClass="topSubheadClass"
+          :subheadStyle="topSubheadStyle"
         />
         <CardBlock
           :headline="bottomHeadline"
           :subhead="bottomSubhead"
           :moduleTemplate="moduleTemplate"
           :btns="bottomBtns"
-          :subheadClass="bottomSubheadClass"
+          :subheadStyle="bottomSubheadStyle"
         />
       </div>
     </div>
@@ -41,27 +41,27 @@ const { lg, md, sm, xs, vh } = defineProps({
     type: String,
     default: "12",
   },
-  cardClass: {
+  cardHeight: {
     type: String,
     default: "",
   },
   bottomHeadline: String,
   bottomSubhead: String,
-  bottomSubheadClass: String,
+  bottomSubheadStyle: String,
   bottomBtns: {
     type: Array,
     default: () => [],
   },
   topHeadline: String,
   topSubhead: String,
-  topSubheadClass: String,
+  topSubheadStyle: String,
   topBtns: {
     type: Array,
     default: () => [],
   },
   imgName: String,
   moduleTemplate: String,
-  textBlocksClass: {
+  textColor: {
     type: String,
     default: "",
   },

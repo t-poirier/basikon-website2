@@ -8,7 +8,7 @@
     </h3>
 
     <p class="subhead text-center pointer-events-auto">
-      <span :class="subheadClass">
+      <span :class="subheadStyle === 'ai-gradient' ? subheadStyle : ''">
         <template v-for="(fragment, index) in subhead?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
       >
     </p>
@@ -25,7 +25,7 @@
 const { lg, md, sm, xs, vh } = defineProps({
   headline: String,
   subhead: String,
-  subheadClass: {
+  subheadStyle: {
     type: String,
     default: "",
   },

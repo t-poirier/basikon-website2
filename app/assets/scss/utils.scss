@@ -1,0 +1,22 @@
+.ai-gradient {
+  background: linear-gradient(94deg, #0090F7, #BA62FC, #F2416B, #F55600);
+  background-clip: border-box;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+// Tailwind purges unused CSS found in the code
+// so dynamic styles loaded from API cannot work.
+// There we must reference and limit what styles are available.
+.text-white {
+  color: white;
+}
+
+.h-700px {
+  height: 700px;
+}
+
+.h-600px {
+  height: 600px;
+}
