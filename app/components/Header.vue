@@ -4,7 +4,7 @@
       <div class="max-w-5xl m-auto flex justify-between">
         <NuxtLink class="mr-5" :to="localePath('/')">Basikon</NuxtLink>
 
-        <div class="flex">
+        <div class="hidden sm:flex">
           <div class="ml-5 mr-5">{{ $t("solutions") }}</div>
           <div class="ml-5 mr-5">{{ $t("customers") }}</div>
           <NuxtLink class="ml-5 mr-5" :to="localePath('/about')">{{ $t("aboutUs") }}</NuxtLink>
