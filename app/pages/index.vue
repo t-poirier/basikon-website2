@@ -1,36 +1,39 @@
 <template>
   <Card
-    cardLinkTo="/about"
-    imgName="e2e0f0fc.jpg"
-    cardClass="h-[692px]"
-    topHeadline="European Leasing & Consumer Credit Industry"
-    topSubhead="ANNUAL CONVENTIONS<br>9 & 10 OCTOBER<br>CASCAIS, PORTUGAL"
-    textBlocksClass="text-white"
-    :topBtns="[
+    :carousel="[
       {
-        href: '/blog/amfe-partnership-credit-mexico',
-        text: 'More info here',
-        theme: 'primary-light',
-      },
-    ]"
-  >
-  </Card>
-  <Card
-    cardLinkTo="/about"
-    imgName="hero_iphone_family__fuz5j2v5xx6y_largetall.jpg"
-    cardClass="h-[692px]"
-    topHeadline="iPhone"
-    topSubhead="Meet the iPhone 16 family."
-    :topBtns="[
-      {
-        href: '/about',
-        text: 'Learn more',
-        theme: 'primary',
+        cardLinkTo: '/about',
+        imgName: 'e2e0f0fc.jpg',
+        cardClass: 'h-[692px]',
+        topHeadline: 'European Leasing & Consumer Credit Industry',
+        topSubhead: 'ANNUAL CONVENTIONS<br>9 & 10 OCTOBER<br>CASCAIS, PORTUGAL',
+        textBlocksClass: 'text-white',
+        topBtns: [
+          {
+            href: '/blog/amfe-partnership-credit-mexico',
+            text: 'More info here',
+            theme: 'primary-light',
+          },
+        ],
       },
       {
-        href: '/about',
-        text: 'Shop iPhone',
-        theme: 'tertiary',
+        cardLinkTo: '/about',
+        imgName: 'hero_iphone_family__fuz5j2v5xx6y_largetall.jpg',
+        cardClass: 'h-[692px]',
+        topHeadline: 'iPhone',
+        topSubhead: 'Meet the iPhone 16 family.',
+        topBtns: [
+          {
+            href: '/about',
+            text: 'Learn more',
+            theme: 'primary',
+          },
+          {
+            href: '/about',
+            text: 'Shop iPhone',
+            theme: 'tertiary',
+          },
+        ],
       },
     ]"
   >
