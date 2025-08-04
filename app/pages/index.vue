@@ -6,7 +6,7 @@
         imgName: 'e2e0f0fc.jpg',
         cardClass: 'h-[692px]',
         topHeadline: 'European Leasing & Consumer Credit Industry',
-        topSubhead: 'ANNUAL CONVENTIONS<br>9 & 10 OCTOBER<br>CASCAIS, PORTUGAL',
+        topSubhead: 'Annual Convention<br>9 & 10 October - Cascais, Portugal',
         textBlocksClass: 'text-white',
         topBtns: [
           {
