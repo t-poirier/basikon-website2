@@ -2,7 +2,14 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="max-w-5xl m-auto flex justify-between">
-        <NuxtLink class="mr-5" :to="localePath('/')">Basikon</NuxtLink>
+        <NuxtLink
+          class="mr-5 h-[30px] w-[200px] bg-no-repeat bg-center bg-contain z-[1]"
+          :style="{
+            'background-image': `url(${resourcesUrl}/img/customers/basikon.svg)`,
+          }"
+          :to="localePath('/')"
+        >
+        </NuxtLink>
 
         <div class="hidden sm:flex">
           <div class="ml-5 mr-5">{{ $t("solutions") }}</div>
@@ -22,6 +29,7 @@
 </template>
 
 <script setup>
+import { resourcesUrl } from "@/services/utils"
 const localePath = useLocalePath()
 const { locales, locale: currentLocale, setLocale } = useI18n()
 

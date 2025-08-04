@@ -1,6 +1,6 @@
 <template>
   <div :class="colClassName">
-    <div :class="'mt-2 mb-2 relative overflow-hidden ' + cardClass">
+    <div :class="'mb-4 relative overflow-hidden ' + cardClass">
       <a v-if="cardLinkTo" :href="cardLinkTo" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></a>
 
       <div
