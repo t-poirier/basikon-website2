@@ -4,21 +4,23 @@
       <a v-if="cardLinkTo" :href="cardLinkTo" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></a>
 
       <div
-        v-if="imgName"
+        v-if="imgUrl"
         class="absolute w-full h-full bg-no-repeat bg-center bg-cover z-[1]"
         :style="{
-          'background-image': `url(/img/${imgName})`,
+          'background-image': `url(${imgUrl})`,
         }"
       ></div>
+      <video v-else-if="videoUrl" autoplay muted loop playsinline class="absolute w-full h-full z-[1]">
+        <source :src="videoUrl" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-      <div :class="'pt-[61px] pb-[61px] h-full flex flex-col justify-between relative pointer-events-none z-[4] ' + (textColor ? `text-${textColor}` : '')">
-        <CardBlock
-          :headline="topHeadline"
-          :subhead="topSubhead"
-          :moduleTemplate="moduleTemplate"
-          :btns="topBtns"
-          :subheadStyle="topSubheadStyle"
-        />
+      <div
+        :class="
+          'pt-[61px] pb-[61px] h-full flex flex-col justify-between relative pointer-events-none z-[4] ' + (textColor ? `text-${textColor}` : '')
+        "
+      >
+        <CardBlock :headline="topHeadline" :subhead="topSubhead" :moduleTemplate="moduleTemplate" :btns="topBtns" :subheadStyle="topSubheadStyle" />
         <CardBlock
           :headline="bottomHeadline"
           :subhead="bottomSubhead"
@@ -59,7 +61,8 @@ const { lg, md, sm, xs, vh } = defineProps({
     type: Array,
     default: () => [],
   },
-  imgName: String,
+  imgUrl: String,
+  videoUrl: String,
   moduleTemplate: String,
   textColor: {
     type: String,
