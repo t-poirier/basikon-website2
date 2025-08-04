@@ -10,6 +10,12 @@
     <p class="subhead max-w-xs m-auto text-center">
       {{ subhead }}
     </p>
+
+    <div v-if="btns.length" class="flex items-center justify-center mt-5">
+      <a v-for="btn in btns" :key="btn.text" :href="btn.href" :class="`mr-2 ml-2 button button-${btn.theme}`">
+        {{ btn.text }}
+      </a>
+    </div>
   </div>
 </template>
 
@@ -20,6 +26,10 @@ const { lg, md, sm, xs, vh } = defineProps({
   moduleTemplate: {
     type: String,
     default: "heroes",
+  },
+  btns: {
+    type: Array,
+    default: () => [],
   },
 })
 

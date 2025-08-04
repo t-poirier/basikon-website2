@@ -22,15 +22,6 @@
   }
 }
 
-[class*="col-"] {
-  float: unset;
-  max-width: 100%;
-  min-height: unset;
-  padding-left: calc(var(--block-spacing) / 2);
-  padding-right: calc(var(--block-spacing) / 2);
-}
-
-
 .col-xs-1 {
   position: relative;
   min-height: 1px;
@@ -575,4 +566,12 @@
     float: left;
     width: 100%;
   }
+}
+
+[class*="col-"] {
+  float: unset;
+  max-width: 100%;
+  min-height: unset;
+  padding-left: calc(var(--block-spacing) / 2);
+  padding-right: calc(var(--block-spacing) / 2);
 }
