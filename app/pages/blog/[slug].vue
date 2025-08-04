@@ -8,10 +8,16 @@
 
 <script setup>
 import { resourcesUrl } from "@/services/utils"
-const { locale: currentLocale } = useI18n()
+import { watch } from 'vue'
+
+const { locale } = useI18n()
 const route = useRoute()
 const { slug } = route.params
-const { data: markdown } = await useAsyncData(`post-${slug}`, () => $fetch(`${resourcesUrl}/content/blog/${slug}/${currentLocale.value}.md`))
+const { data: markdown, refresh } = await useAsyncData(`post-${slug}`, () => $fetch(`${resourcesUrl}/content/blog/${slug}/${locale.value}.md`))
+
+watch(locale, () => {
+  refresh()
+})
 
 // useHead({
 //   title: post?.value?.title,
