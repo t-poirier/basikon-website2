@@ -26,6 +26,14 @@ body {
   line-height: var(--line-height);
   margin: 0 auto;
   overflow-x: hidden;
+
+  [data-module-template="heroes"]>.subhead {
+    font-size: 24px;
+  }
+
+  [data-module-template="promo"]>.subhead {
+    font-size: 19px;
+  }
 }
 
 h2 {
@@ -33,19 +41,11 @@ h2 {
     font-size: 48px;
     font-weight: bold;
   }
-
-  &.subhead {
-    font-size: 24px;
-  }
 }
 
 h3 {
   &.headline {
     font-size: 32px;
     font-weight: bold;
-  }
-
-  &.subhead {
-    font-size: 19px;
   }
 }
