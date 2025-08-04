@@ -24,7 +24,7 @@ const { lg, md, sm, xs, vh } = defineProps({
   sm: String,
   xs: {
     type: String,
-    default: 12,
+    default: "12",
   },
   cardClass: {
     type: String,
