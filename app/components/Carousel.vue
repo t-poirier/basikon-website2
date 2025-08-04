@@ -6,10 +6,16 @@
       </div>
     </div>
 
-    <button @click="prevSlide" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white p-2 rounded-full shadow">
+    <button
+      @click="prevSlide"
+      class="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full shadow w-[30px] h-[30px] flex items-center justify-center"
+    >
       ‹
     </button>
-    <button @click="nextSlide" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white p-2 rounded-full shadow">
+    <button
+      @click="nextSlide"
+      class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full shadow w-[30px] h-[30px] flex items-center justify-center"
+    >
       ›
     </button>
 
@@ -50,11 +56,10 @@ const goToSlide = index => {
 }
 
 onMounted(() => {
-  interval = setInterval(nextSlide, 5000)
+  interval = setInterval(nextSlide, 7000)
 })
 
 onBeforeUnmount(() => {
   clearInterval(interval)
 })
 </script>
-
