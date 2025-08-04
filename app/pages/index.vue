@@ -5,10 +5,10 @@
     cardClass="h-[692px]"
     topHeadline="European Leasing & Consumer Credit Industry"
     topSubhead="ANNUAL CONVENTIONS<br>9 & 10 OCTOBER<br>CASCAIS, PORTUGAL"
-    textClass="text-white"
+    textBlocksClass="text-white"
     :topBtns="[
       {
-        href: '/about',
+        href: '/blog/amfe-partnership-credit-mexico',
         text: 'More info here',
         theme: 'primary-light',
       },
@@ -39,11 +39,13 @@
     cardLinkTo="/about"
     sm="6"
     imgName="promo_ipadpro_avail__s271j89g8kii_large.jpg"
-    textClass="text-white"
+    textBlocksClass="text-white"
     cardClass="h-[580px]"
     moduleTemplate="promo"
     topHeadline="iPad Pro"
     topSubhead="Unbelievably thin. Incredibly powerful."
+    bottomSubhead="Built for Basikon Intelligence."
+    bottomSubheadClass="ai-gradient"
     :topBtns="[
       {
         href: '/about',
@@ -62,7 +64,7 @@
     sm="6"
     imgName="promo_apple_intelligence_visual_intelligence__fz9rjall8kii_large.jpg"
     cardClass="h-[580px]"
-    textClass="text-white"
+    textBlocksClass="text-white"
     moduleTemplate="promo"
     bottomHeadline="Apple Intelligence"
     bottomSubhead="Turn a poster into a Calendar event with visual intelligence."

@@ -7,12 +7,14 @@
       {{ headline }}
     </h3>
 
-    <p class="subhead text-center">
-      <template v-for="(fragment, index) in subhead?.split('<br>')"><br v-if="index" />{{ fragment }} </template>
+    <p class="subhead text-center pointer-events-auto">
+      <span :class="subheadClass">
+        <template v-for="(fragment, index) in subhead?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
+      >
     </p>
 
     <div v-if="btns.length" class="flex items-center justify-center mt-5">
-      <a v-for="btn in btns" :key="btn.text" :href="btn.href" :class="`mr-2 ml-2 button button-${btn.theme}`">
+      <a v-for="btn in btns" :key="btn.text" :href="btn.href" :class="`mr-2 ml-2 pointer-events-auto button button-${btn.theme}`">
         {{ btn.text }}
       </a>
     </div>
@@ -23,6 +25,10 @@
 const { lg, md, sm, xs, vh } = defineProps({
   headline: String,
   subhead: String,
+  subheadClass: {
+    type: String,
+    default: "",
+  },
   moduleTemplate: {
     type: String,
     default: "heroes",
@@ -33,5 +39,5 @@ const { lg, md, sm, xs, vh } = defineProps({
   },
 })
 
-const headlineClass = "headline text-center"
+const headlineClass = "headline text-center pointer-events-auto"
 </script>

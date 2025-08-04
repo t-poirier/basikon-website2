@@ -11,9 +11,21 @@
         }"
       ></div>
 
-      <div :class="'pt-[61px] pb-[61px] h-full flex flex-col justify-between relative z-[4] ' + textClass">
-        <CardBlock :headline="topHeadline" :subhead="topSubhead" :moduleTemplate="moduleTemplate" :btns="topBtns" />
-        <CardBlock :headline="bottomHeadline" :subhead="bottomSubhead" :moduleTemplate="moduleTemplate" :btns="bottomBtns" />
+      <div :class="'pt-[61px] pb-[61px] h-full flex flex-col justify-between relative pointer-events-none z-[4] ' + textBlocksClass">
+        <CardBlock
+          :headline="topHeadline"
+          :subhead="topSubhead"
+          :moduleTemplate="moduleTemplate"
+          :btns="topBtns"
+          :subheadClass="topSubheadClass"
+        />
+        <CardBlock
+          :headline="bottomHeadline"
+          :subhead="bottomSubhead"
+          :moduleTemplate="moduleTemplate"
+          :btns="bottomBtns"
+          :subheadClass="bottomSubheadClass"
+        />
       </div>
     </div>
   </div>
@@ -35,19 +47,21 @@ const { lg, md, sm, xs, vh } = defineProps({
   },
   bottomHeadline: String,
   bottomSubhead: String,
+  bottomSubheadClass: String,
   bottomBtns: {
     type: Array,
     default: () => [],
   },
   topHeadline: String,
   topSubhead: String,
+  topSubheadClass: String,
   topBtns: {
     type: Array,
     default: () => [],
   },
   imgName: String,
   moduleTemplate: String,
-  textClass: {
+  textBlocksClass: {
     type: String,
     default: "",
   },
