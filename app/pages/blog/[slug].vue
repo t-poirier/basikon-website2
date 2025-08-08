@@ -1,7 +1,7 @@
 <template>
   <div class="col-xs-12">
     <div class="max-w-5xl m-auto">
-      <MdContent :markdown="markdown" />
+      <Markdown :markdown="markdown" />
     </div>
   </div>
 </template>

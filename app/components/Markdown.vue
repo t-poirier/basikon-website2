@@ -1,5 +1,5 @@
 <template>
-  <div class="md-content">
+  <div class="markdown">
     <div v-if="htmlContent" v-html="htmlContent"></div>
   </div>
 </template>
@@ -38,7 +38,7 @@ const htmlContent = marked(markdown.replaceAll("$v{resourcesUrl}", resourcesUrl)
 </script>
 
 <style scoped lang="scss">
-.md-content :deep() {
+.markdown :deep() {
   hr {
     border-color: var(--color-blue-darker);
     margin-left: 0;
@@ -146,7 +146,7 @@ const htmlContent = marked(markdown.replaceAll("$v{resourcesUrl}", resourcesUrl)
   }
 }
 
-.md-content[data-theme="default"] :deep() {
+.markdown[data-theme="default"] :deep() {
   h1,
   h2,
   h3,
@@ -171,7 +171,7 @@ const htmlContent = marked(markdown.replaceAll("$v{resourcesUrl}", resourcesUrl)
   }
 }
 
-.md-content[data-theme="alt1"] :deep() {
+.markdown[data-theme="alt1"] :deep() {
   h1,
   h2,
   h3,
