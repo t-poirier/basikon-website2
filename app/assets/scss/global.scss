@@ -114,3 +114,10 @@ h3 {
 .header-menu-items {
   display: none;
 }
+
+a {
+  &:hover {
+    color: var(--link-color);
+    text-decoration: underline;
+  }
+}

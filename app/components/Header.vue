@@ -3,7 +3,7 @@
     <div class="col-xs-12">
       <div class="max-w-[2560px] m-auto flex justify-between items-center h-[44px]">
         <NuxtLink
-          class="h-[22px] w-[260px] bg-no-repeat bg-center bg-contain"
+          class="h-[28px] w-[260px] bg-no-repeat bg-center bg-contain"
           :style="{
             'background-image': `url(${resourcesUrl}/img/customers/basikon.svg)`,
           }"
@@ -15,7 +15,7 @@
           <div v-for="menu in page.menus" class="ml-5 mr-5" :key="`${locale}-${menu.title}`">
             <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block">{{ menu.title }}</NuxtLink>
             <div v-else class="header-menu-block relative">
-              <div class="text-center">{{ menu.title }}</div>
+              <div class="text-center cursor-pointer">{{ menu.title }}</div>
 
               <div v-if="menu.items" class="header-menu-items absolute z-[1] justify-between bg-white shadow-xs rounded-md">
                 <div v-for="item in menu.items" class="p-4">
