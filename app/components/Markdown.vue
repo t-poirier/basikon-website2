@@ -6,14 +6,41 @@
 
 <script setup>
 import { resourcesUrl } from "@/services/utils"
-import { marked } from "marked"
+import { marked, Marked } from "marked"
 
 const { markdown } = defineProps({
   markdown: String,
 })
+const localePath = useLocalePath()
+const markedInstance = new Marked()
 
-marked.use({
+markedInstance.use({
   renderer: {
+    link(options) {
+      const { href, title, text: optionsText } = options
+      let text = optionsText
+      // When we want to display bare URL markdown linters forces us to
+      // repeat the link both in the text and href parts [some-link](some-link).
+      // To avoid that we support [](some-link) and the text part automatically gets the href.
+      if (!text && href) text = href
+
+      let optionalTags = ""
+      let hasNewTabOption
+      if (title) {
+        // We only support target=_blank, no need to support other values as they are rare
+        const strippedTitle = title.replaceAll("[newTab]", () => {
+          hasNewTabOption = true
+          return ""
+        })
+        if (strippedTitle) optionalTags += ` title="${strippedTitle}"`
+        if (hasNewTabOption) {
+          if (optionalTags) optionalTags += " "
+          optionalTags += ` target="_blank"`
+        }
+      }
+
+      return `<a${optionalTags} href="${localePath(href)}">${text}</a>`
+    },
     heading(options) {
       const { depth, text } = options
 
