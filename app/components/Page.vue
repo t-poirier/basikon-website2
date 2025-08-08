@@ -14,8 +14,14 @@ const { locale } = useI18n()
 const { data: page, refresh } = await useAsyncData(`${pageName}-${locale.value}`, () =>
   $fetch(`${resourcesUrl}/pages/${locale.value}/${pageName}.json`),
 )
+
 const { head, cards } = page.value || {}
 
-watch(locale, () => refresh())
-useHead(head)
+if (cards) {
+  watch(locale, () => refresh())
+  useHead(head)
+} else {
+  const router = useRouter()
+  router.push("/404")
+}
 </script>

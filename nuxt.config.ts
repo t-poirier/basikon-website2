@@ -12,12 +12,12 @@ export default defineNuxtConfig({
       {
         code: 'en',
         name: 'English',
-        files: ['en/index.json', 'en/about.json']
+        files: ['en/index.json']
       },
       {
         code: 'fr',
         name: 'Français',
-        files: ['fr/index.json', 'fr/about.json']
+        files: ['fr/index.json']
       }
     ],
     defaultLocale: 'en',
