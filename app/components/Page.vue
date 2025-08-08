@@ -1,5 +1,12 @@
 <template>
-  <Card v-for="card in cards" v-bind="card" />
+  <div v-for="card in cards" class="row">
+    <div class="col-xs-12" v-if="Array.isArray(card)">
+      <div class="row">
+        <Card v-bind="row" v-for="row in card" inArray />
+      </div>
+    </div>
+    <Card v-else v-bind="card" />
+  </div>
 </template>
 
 <script setup>

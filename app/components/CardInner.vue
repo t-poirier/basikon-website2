@@ -1,5 +1,5 @@
 <template>
-  <div :class="colClassName">
+  <div :class="colClassName + (inArray ? '' : ' !p-0')">
     <div :class="'mb-4 relative overflow-hidden ' + (cardHeight ? `h-${cardHeight}` : '')">
       <NuxtLink v-if="bgHref" :href="localePath(bgHref)" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></NuxtLink>
 
@@ -25,6 +25,7 @@
 
 <script setup>
 const { lg, md, sm, xs, vh } = defineProps({
+  inArray: Boolean,
   bgHref: String,
   lg: String,
   md: String,
