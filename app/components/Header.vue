@@ -3,7 +3,7 @@
     <div class="col-xs-12">
       <div class="max-w-[2560px] m-auto flex justify-between items-center h-[44px]">
         <NuxtLink
-          class="mr-5 h-[22px] w-[270px] bg-no-repeat bg-center bg-contain"
+          class="h-[22px] w-[270px] bg-no-repeat bg-center bg-contain"
           :style="{
             'background-image': `url(${resourcesUrl}/img/customers/basikon.svg)`,
           }"
@@ -13,17 +13,17 @@
 
         <div class="hidden sm:flex">
           <div v-for="menu in page.menus" class="ml-5 mr-5" :key="`${locale}-${menu.title}`">
-            <NuxtLink v-if="menu.href" class="ml-5 mr-5" :href="localePath(menu.href)">{{ menu.title }}</NuxtLink>
+            <NuxtLink v-if="menu.href" :href="localePath(menu.href)">{{ menu.title }}</NuxtLink>
             <div v-else>{{ menu.title }}</div>
           </div>
         </div>
 
-        <div class="ml w-[270px] flex">
+        <div class="w-[270px] flex justify-end">
           <NuxtLink href="/demo-request" class="mr-2 ml-2 pointer-events-auto button button-sm">
             {{ $t("requestDemo") }}
           </NuxtLink>
 
-          <select @change="switchLocale($event)" name="locales">
+          <select @change="switchLocale($event)" name="locales" class="mr-2 ml-2">
             <option
               v-for="availableLocale in availableLocales"
               :key="availableLocale.code"
