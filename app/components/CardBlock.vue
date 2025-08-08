@@ -1,5 +1,5 @@
 <template>
-  <div :class="'split-wrapper' + (textColor ? ` text-${textColor}` : '')" :data-module-template="moduleTemplate">
+  <div :class="'card-block pl-4 pr-4' + (textColor ? ` text-${textColor}` : '') + (align === 'side' ? ' sm:pl-20 sm:pr-20' : '')" :data-module-template="moduleTemplate">
     <h2 v-if="moduleTemplate === 'heroes'" :class="headlineClass">
       {{ headline }}
     </h2>
@@ -7,18 +7,18 @@
       {{ headline }}
     </h3>
 
-    <p class="subhead text-center pointer-events-auto">
+    <p :class="'subhead pointer-events-auto' + (align === 'side' ? '' : ' text-center')">
       <span :class="subheadStyle === 'ai-gradient' ? subheadStyle : ''">
         <template v-for="(fragment, index) in subhead?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
       >
     </p>
 
-    <div v-if="buttons.length" class="flex items-center justify-center mt-5">
+    <div v-if="buttons.length" :class="'flex items-center mt-5' + (align === 'side' ? '' : ' justify-center')">
       <NuxtLink
         v-for="button in buttons"
         :key="button.text"
         :href="button.href"
-        :class="`mr-2 ml-2 pointer-events-auto button button-${button.theme}`"
+        :class="`ml-4 first:ml-0 pointer-events-auto button button-${button.theme}`"
       >
         {{ button.text }}
       </NuxtLink>
@@ -27,7 +27,8 @@
 </template>
 
 <script setup>
-const { lg, md, sm, xs, vh } = defineProps({
+const { align, lg, md, sm, xs, vh } = defineProps({
+  align: String,
   headline: String,
   subhead: String,
   subheadStyle: String,
@@ -42,5 +43,5 @@ const { lg, md, sm, xs, vh } = defineProps({
   },
 })
 
-const headlineClass = "headline text-center pointer-events-auto"
+const headlineClass = "headline pointer-events-auto"+ (align === 'side' ? '' : ' text-center')
 </script>

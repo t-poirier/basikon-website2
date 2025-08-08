@@ -16,6 +16,7 @@
 
       <div class="pt-[61px] pb-[61px] h-full flex flex-col justify-between relative pointer-events-none z-[4]">
         <CardBlock v-bind="blocks.top" />
+        <CardBlock v-bind="blocks.middle" />
         <CardBlock v-bind="blocks.bottom" />
       </div>
     </div>
@@ -40,6 +41,7 @@ const { lg, md, sm, xs, vh } = defineProps({
     type: Object,
     default: () => ({
       bottom: {},
+      middle: {},
       top: {},
     }),
   },
