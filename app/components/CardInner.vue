@@ -1,15 +1,15 @@
 <template>
   <div :class="colClassName + (inArray ? '' : ' !p-0')">
-    <div :class="'mb-4 relative overflow-hidden ' + (cardHeight ? `h-${cardHeight}` : '')">
+    <div :class="'mb-4 relative overflow-hidden' + (cardHeight ? ` h-${cardHeight}` : '') + (cardMinHeight ? ` min-h-${cardMinHeight}` : '')">
       <NuxtLink v-if="bgHref" :href="localePath(bgHref)" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></NuxtLink>
 
       <div
         v-if="imgUrl || bgCss"
         class="absolute w-full h-full bg-no-repeat bg-center bg-cover z-[1]"
-        :style="{
+        :style="{...{
           'background': bgCss,
-          'background-image': `url(${imgUrl})`,
-        }"
+          'background-image': imgUrl ? `url(${imgUrl})` : undefined,
+        }}"
       ></div>
       <video v-else-if="videoUrl" autoplay muted loop playsinline class="absolute w-full h-full z-[1]">
         <source :src="videoUrl" type="video/mp4" />
@@ -36,10 +36,8 @@ const { lg, md, sm, xs, vh } = defineProps({
     type: String,
     default: "12",
   },
-  cardHeight: {
-    type: String,
-    default: "",
-  },
+  cardHeight: String,
+  cardMinHeight: String,
   blocks: {
     type: Object,
     default: () => ({
