@@ -18,7 +18,7 @@
         v-for="button in buttons"
         :key="button.text"
         :href="button.href"
-        :class="`ml-4 first:ml-0 pointer-events-auto button button-${button.theme}`"
+        :class="`ml-4 first:ml-0 pointer-events-auto button button-${button.style}`"
       >
         {{ button.text }}
       </NuxtLink>

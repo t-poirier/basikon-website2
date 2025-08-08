@@ -77,6 +77,21 @@ h3 {
     border-color: transparent;
   }
 
+  &.button-primary-light {
+    background: #F5F5F7 !important;
+    color: #000 !important;
+
+    &:hover {
+      background: #FFF !important;
+    }
+  }
+  
+  &.button-secondary {
+    background: var(--theme-bg-color);
+    color: #FFF;
+    border-color: rgba(0, 0, 0, 0);
+  }
+
   &.button-tertiary {
     background: rgba(0, 0, 0, 0);
     color: #06c;
@@ -91,15 +106,6 @@ h3 {
     &:hover {
       background: #FFF !important;
       color: #000 !important;
-    }
-  }
-
-  &.button-primary-light {
-    background: #F5F5F7 !important;
-    color: #000 !important;
-
-    &:hover {
-      background: #FFF !important;
     }
   }
 }
