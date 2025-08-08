@@ -1,7 +1,7 @@
 <template>
   <div :class="colClassName">
     <div :class="'mb-4 relative overflow-hidden ' + (cardHeight ? `h-${cardHeight}` : '')">
-      <a v-if="cardLinkTo" :href="cardLinkTo" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></a>
+      <a v-if="bgHref" :href="bgHref" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></a>
 
       <div
         v-if="imgUrl"
@@ -35,7 +35,7 @@
 
 <script setup>
 const { lg, md, sm, xs, vh } = defineProps({
-  cardLinkTo: String,
+  bgHref: String,
   lg: String,
   md: String,
   sm: String,
