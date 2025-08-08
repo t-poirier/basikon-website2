@@ -78,21 +78,10 @@
   --link-color: var(--color-blue);
   --font-family: "Inter", -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --line-height: 1.5; // min required for accessibility
-  --border-radius-base: 4px;
-  --block-spacing: 16px;
-  --block-v-spacing: 8px;
+  --spacing: 16px;
   
   // the min size value to reach AA accessibility level
   --wcag-aa-min-size: 24px;
-
-  --icn-xxxs: 10px;
-  --icn-xxs: 12px;
-  --icn-xs: 16px;
-  --icn-sm: 20px;
-  --icn-md: var(--wcag-aa-min-size);
-  --icn-lg: 28px;
-  --icn-xl: 32px;
-  --icn-xxl: 36px;
 }
 
 @include meta.load-css("global.scss");

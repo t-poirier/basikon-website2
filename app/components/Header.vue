@@ -3,7 +3,7 @@
     <div class="col-xs-12">
       <div class="max-w-[2560px] m-auto flex justify-between items-center h-[44px]">
         <NuxtLink
-          class="h-[22px] w-[270px] bg-no-repeat bg-center bg-contain"
+          class="h-[22px] w-[260px] bg-no-repeat bg-center bg-contain"
           :style="{
             'background-image': `url(${resourcesUrl}/img/customers/basikon.svg)`,
           }"
@@ -13,12 +13,23 @@
 
         <div class="hidden sm:flex">
           <div v-for="menu in page.menus" class="ml-5 mr-5" :key="`${locale}-${menu.title}`">
-            <NuxtLink v-if="menu.href" :href="localePath(menu.href)">{{ menu.title }}</NuxtLink>
-            <div v-else>{{ menu.title }}</div>
+            <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block">{{ menu.title }}</NuxtLink>
+            <div v-else class="header-menu-block relative">
+              <div class="text-center">{{ menu.title }}</div>
+
+              <div v-if="menu.items" class="header-menu-items absolute z-[1] justify-between bg-white shadow-xs rounded-md">
+                <div v-for="item in menu.items" class="p-4">
+                  <div class="font-bold whitespace-nowrap p-1">{{ item.title }}</div>
+                  <div v-for="subItem in item.items">
+                    <NuxtLink :href="localePath(subItem.href)" class="whitespace-nowrap p-1 block">{{ subItem.title }}</NuxtLink>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="w-[270px] flex justify-end">
+        <div class="w-[260px] flex justify-end">
           <NuxtLink href="/demo-request" class="mr-2 ml-2 pointer-events-auto button button-sm">
             {{ $t("requestDemo") }}
           </NuxtLink>
