@@ -1,5 +1,5 @@
 <template>
-  <div class="row relative z-[10]">
+  <div class="row fixed bg-white z-[10] w-full">
     <div class="col-xs-12">
       <div class="max-w-[2560px] m-auto flex justify-between items-center h-[44px]">
         <NuxtLink
