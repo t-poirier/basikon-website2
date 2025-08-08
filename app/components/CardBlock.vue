@@ -14,9 +14,9 @@
     </p>
 
     <div v-if="btns.length" class="flex items-center justify-center mt-5">
-      <a v-for="btn in btns" :key="btn.text" :href="btn.href" :class="`mr-2 ml-2 pointer-events-auto button button-${btn.theme}`">
+      <NuxtLink v-for="btn in btns" :key="btn.text" :href="btn.href" :class="`mr-2 ml-2 pointer-events-auto button button-${btn.theme}`">
         {{ btn.text }}
-      </a>
+      </NuxtLink>
     </div>
   </div>
 </template>

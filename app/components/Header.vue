@@ -13,15 +13,15 @@
 
         <div class="hidden sm:flex">
           <div v-for="menu in page.menus" class="ml-5 mr-5" :key="`${locale}-${menu.title}`">
-            {{ menu.title }}
+            <NuxtLink v-if="menu.href" class="ml-5 mr-5" :href="localePath(menu.href)">{{ menu.title }}</NuxtLink>
+            <div v-else>{{ menu.title }}</div>
           </div>
-          <NuxtLink class="ml-5 mr-5" :to="localePath('/about')">{{ $t("aboutUs") }}</NuxtLink>
         </div>
 
         <div class="ml w-[270px] flex">
-          <a href="/demo-request" class="mr-2 ml-2 pointer-events-auto button button-sm">
+          <NuxtLink href="/demo-request" class="mr-2 ml-2 pointer-events-auto button button-sm">
             {{ $t("requestDemo") }}
-          </a>
+          </NuxtLink>
 
           <select @change="switchLocale($event)" name="locales">
             <option

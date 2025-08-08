@@ -1,7 +1,7 @@
 <template>
   <div :class="colClassName">
     <div :class="'mb-4 relative overflow-hidden ' + (cardHeight ? `h-${cardHeight}` : '')">
-      <a v-if="bgHref" :href="bgHref" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></a>
+      <NuxtLink v-if="bgHref" :href="localePath(bgHref)" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></NuxtLink>
 
       <div
         v-if="imgUrl"
@@ -70,5 +70,6 @@ const { lg, md, sm, xs, vh } = defineProps({
   },
 })
 
+const localePath = useLocalePath()
 const colClassName = (lg ? `col-lg-${lg}` : "") + (md ? ` col-md-${md}` : "") + (sm ? ` col-sm-${sm}` : "") + ` col-xs-${xs}`
 </script>
