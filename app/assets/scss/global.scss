@@ -28,18 +28,18 @@ body {
   overflow-x: hidden;
 
   [data-module-template="heroes"]>.subhead {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   [data-module-template="promo"]>.subhead {
-    font-size: 19px;
+    font-size: 1.2rem;
     line-height: 2rem;
   }
 }
 
 h2 {
   &.headline {
-    font-size: 48px;
+    font-size: 3rem;
     font-weight: bold;
     line-height: 3.5rem;
   }
@@ -47,7 +47,7 @@ h2 {
 
 h3 {
   &.headline {
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: bold;
   }
 }
@@ -61,7 +61,7 @@ h3 {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-size: 17px;
+  font-size: 1.1rem;
   min-width: 30px;
   padding: 7px 15px;
   text-align: center;
