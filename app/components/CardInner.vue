@@ -4,9 +4,10 @@
       <NuxtLink v-if="bgHref" :href="localePath(bgHref)" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></NuxtLink>
 
       <div
-        v-if="imgUrl"
+        v-if="imgUrl || bgCss"
         class="absolute w-full h-full bg-no-repeat bg-center bg-cover z-[1]"
         :style="{
+          'background': bgCss,
           'background-image': `url(${imgUrl})`,
         }"
       ></div>
@@ -27,6 +28,7 @@
 const { lg, md, sm, xs, vh } = defineProps({
   inArray: Boolean,
   bgHref: String,
+  bgCss: String,
   lg: String,
   md: String,
   sm: String,
