@@ -25,7 +25,6 @@ body {
   color: var(--text-color);
   line-height: var(--line-height);
   margin: 0 auto;
-  overflow-x: hidden;
 
   [data-module-template="heroes"]>.subhead {
     font-size: 1.5rem;
@@ -110,4 +109,9 @@ a {
     color: var(--link-color);
     text-decoration: underline;
   }
+}
+
+.grid-container {
+  padding: 0 calc(var(--spacing) / 2);
+  width: 100%;
 }
