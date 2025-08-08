@@ -13,18 +13,20 @@
           </NuxtLink>
 
           <div class="hidden h-full lg:flex items-center">
-            <div v-for="menu in page.menus" class="ml-5 mr-5 h-full flex items-center" :key="`${locale}-${menu.title}`">
-              <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block">{{ menu.title }}</NuxtLink>
+            <div v-for="menu in page.menus" class="h-full flex items-center" :key="`${locale}-${menu.title}`">
+              <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block pl-5 pr-5">{{ menu.title }}</NuxtLink>
 
-              <div v-else class="header-menu-block relative h-full flex items-center">
+              <div v-else class="header-menu-block pl-5 pr-5 relative h-full flex items-center">
                 <div class="text-center cursor-pointer">{{ menu.title }}</div>
 
-                <div v-if="menu.items" class="header-menu-items absolute z-[1] justify-between bg-white shadow-xs rounded-md top-[44px]">
-                  <div v-for="item in menu.items" class="p-4">
-                    <div class="font-bold whitespace-nowrap p-1">{{ item.title }}</div>
+                <div v-if="menu.items" class="absolute z-[1] top-[44px] pt-[10px]">
+                  <div class="header-menu-items justify-between bg-white shadow-xs rounded-md">
+                    <div v-for="item in menu.items" class="p-4">
+                      <div class="font-bold whitespace-nowrap p-1">{{ item.title }}</div>
 
-                    <div v-for="subItem in item.items">
-                      <NuxtLink :href="localePath(subItem.href)" class="whitespace-nowrap p-1 block">{{ subItem.title }}</NuxtLink>
+                      <div v-for="subItem in item.items">
+                        <NuxtLink :href="localePath(subItem.href)" class="whitespace-nowrap p-1 block">{{ subItem.title }}</NuxtLink>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -82,11 +84,23 @@ function switchLocale(event) {
     .header-menu-items {
       display: flex;
     }
+
+    &::after {
+      border-bottom: 11px solid var(--color-white);
+      border-left: 11px solid rgba(0, 0, 0, 0);
+      border-right: 11px solid rgba(0, 0, 0, 0);
+      content: "";
+      display: inline-block;
+      left: auto;
+      position: absolute;
+      left: 45%;
+      top: 44px;
+    }
   }
 }
 
 .header-menu-items {
   display: none;
-  box-shadow: 0 0 0 1px rgba(155, 155, 155, 0.1);
+  box-shadow: 0 1px 0 1px rgba(155, 155, 155, 0.1);
 }
 </style>
