@@ -15,9 +15,9 @@
 
           <div class="hidden h-full lg:flex items-center">
             <div v-for="menu in page.menus" class="h-full flex items-center" :key="`${locale}-${menu.title}`">
-              <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block pl-4 pr-4">{{ menu.title }}</NuxtLink>
+              <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block pl-3 pr-3 xl:pl-4 xl:pr-4">{{ menu.title }}</NuxtLink>
 
-              <div v-else class="header-menu-block pl-4 pr-4 relative h-full flex items-center">
+              <div v-else class="header-menu-block pl-3 pr-3 xl:pl-4 xl:pr-4 relative h-full flex items-center">
                 <div class="text-center cursor-pointer">{{ menu.title }}</div>
 
                 <div v-if="menu.items" class="absolute z-[1] top-[44px] pt-[10px]">
