@@ -1,5 +1,5 @@
 <template>
-  <div class="split-wrapper" :data-module-template="moduleTemplate">
+  <div :class="'split-wrapper' + (textColor ? ` text-${textColor}` : '')" :data-module-template="moduleTemplate">
     <h2 v-if="moduleTemplate === 'heroes'" :class="headlineClass">
       {{ headline }}
     </h2>
@@ -13,9 +13,14 @@
       >
     </p>
 
-    <div v-if="btns.length" class="flex items-center justify-center mt-5">
-      <NuxtLink v-for="btn in btns" :key="btn.text" :href="btn.href" :class="`mr-2 ml-2 pointer-events-auto button button-${btn.theme}`">
-        {{ btn.text }}
+    <div v-if="buttons.length" class="flex items-center justify-center mt-5">
+      <NuxtLink
+        v-for="button in buttons"
+        :key="button.text"
+        :href="button.href"
+        :class="`mr-2 ml-2 pointer-events-auto button button-${button.theme}`"
+      >
+        {{ button.text }}
       </NuxtLink>
     </div>
   </div>
@@ -25,15 +30,13 @@
 const { lg, md, sm, xs, vh } = defineProps({
   headline: String,
   subhead: String,
-  subheadStyle: {
-    type: String,
-    default: "",
-  },
+  subheadStyle: String,
+  textColor: String,
   moduleTemplate: {
     type: String,
     default: "heroes",
   },
-  btns: {
+  buttons: {
     type: Array,
     default: () => [],
   },

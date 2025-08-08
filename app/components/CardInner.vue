@@ -12,22 +12,11 @@
       ></div>
       <video v-else-if="videoUrl" autoplay muted loop playsinline class="absolute w-full h-full z-[1]">
         <source :src="videoUrl" type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
 
-      <div
-        :class="
-          'pt-[61px] pb-[61px] h-full flex flex-col justify-between relative pointer-events-none z-[4] ' + (textColor ? `text-${textColor}` : '')
-        "
-      >
-        <CardBlock :headline="topHeadline" :subhead="topSubhead" :moduleTemplate="moduleTemplate" :btns="topBtns" :subheadStyle="topSubheadStyle" />
-        <CardBlock
-          :headline="bottomHeadline"
-          :subhead="bottomSubhead"
-          :moduleTemplate="moduleTemplate"
-          :btns="bottomBtns"
-          :subheadStyle="bottomSubheadStyle"
-        />
+      <div class="pt-[61px] pb-[61px] h-full flex flex-col justify-between relative pointer-events-none z-[4]">
+        <CardBlock v-bind="blocks.top" />
+        <CardBlock v-bind="blocks.bottom" />
       </div>
     </div>
   </div>
@@ -47,27 +36,15 @@ const { lg, md, sm, xs, vh } = defineProps({
     type: String,
     default: "",
   },
-  bottomHeadline: String,
-  bottomSubhead: String,
-  bottomSubheadStyle: String,
-  bottomBtns: {
-    type: Array,
-    default: () => [],
-  },
-  topHeadline: String,
-  topSubhead: String,
-  topSubheadStyle: String,
-  topBtns: {
-    type: Array,
-    default: () => [],
+  blocks: {
+    type: Object,
+    default: () => ({
+      bottom: {},
+      top: {},
+    }),
   },
   imgUrl: String,
   videoUrl: String,
-  moduleTemplate: String,
-  textColor: {
-    type: String,
-    default: "",
-  },
 })
 
 const localePath = useLocalePath()
