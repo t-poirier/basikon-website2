@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row relative z-[2]">
     <div class="col-xs-12">
       <div class="max-w-[2560px] m-auto flex justify-between items-center h-[44px]">
         <NuxtLink
@@ -21,6 +21,7 @@
               <div v-if="menu.items" class="header-menu-items absolute z-[1] justify-between bg-white shadow-xs rounded-md top-[44px]">
                 <div v-for="item in menu.items" class="p-4">
                   <div class="font-bold whitespace-nowrap p-1">{{ item.title }}</div>
+
                   <div v-for="subItem in item.items">
                     <NuxtLink :href="localePath(subItem.href)" class="whitespace-nowrap p-1 block">{{ subItem.title }}</NuxtLink>
                   </div>
