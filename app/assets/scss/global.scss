@@ -103,18 +103,6 @@ h3 {
   }
 }
 
-.header-menu-block {
-  &:hover {
-    .header-menu-items {
-      display: flex;
-    }
-  }
-}
-
-.header-menu-items {
-  display: none;
-}
-
 a {
   &:hover {
     color: var(--link-color);

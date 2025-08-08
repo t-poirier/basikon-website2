@@ -11,7 +11,7 @@
         >
         </NuxtLink>
 
-        <div class="hidden sm:flex">
+        <div class="hidden lg:flex">
           <div v-for="menu in page.menus" class="ml-5 mr-5" :key="`${locale}-${menu.title}`">
             <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block">{{ menu.title }}</NuxtLink>
             <div v-else class="header-menu-block relative">
@@ -30,8 +30,8 @@
         </div>
 
         <div class="w-[260px] flex justify-end">
-          <NuxtLink href="/demo-request" class="mr-2 ml-2 pointer-events-auto button button-sm">
-            {{ $t("requestDemo") }}
+          <NuxtLink v-if="page.button" :href="page.button.href" class="mr-2 ml-2 pointer-events-auto button button-sm">
+            {{ page.button.title }}
           </NuxtLink>
 
           <select @change="switchLocale($event)" name="locales" class="mr-2 ml-2 cursor-pointer">
@@ -67,3 +67,17 @@ function switchLocale(event) {
   setLocale(event.target.value)
 }
 </script>
+
+<style scoped lang="scss">
+.header-menu-block {
+  &:hover {
+    .header-menu-items {
+      display: flex;
+    }
+  }
+}
+
+.header-menu-items {
+  display: none;
+}
+</style>
