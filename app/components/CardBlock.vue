@@ -1,11 +1,13 @@
 <template>
-  <div :class="'card-block pl-4 pr-4' + (textColor ? ` text-${textColor}` : '') + (align === 'side' ? ' sm:pl-20 sm:pr-20' : '')" :data-module-template="moduleTemplate">
-    <h2 v-if="moduleTemplate === 'heroes'" :class="headlineClass">
-      {{ headline }}
-    </h2>
-    <h3 v-if="moduleTemplate === 'promo'" :class="headlineClass">
-      {{ headline }}
-    </h3>
+  <div
+    :class="'card-block pl-4 pr-4' + (textColor ? ` text-${textColor}` : '') + (align === 'side' ? ' sm:pl-20 sm:pr-20' : '')"
+    :data-module-template="moduleTemplate"
+  >
+    <component :is="moduleTemplate === 'heroes' ? 'h2' : 'h3'" :class="headlineClass">
+      <span>
+        <template v-for="(fragment, index) in headline?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
+      >
+    </component>
 
     <p :class="'subhead pointer-events-auto' + (align === 'side' ? '' : ' text-center')">
       <span :class="subheadStyle === 'ai-gradient' ? subheadStyle : ''">
@@ -43,5 +45,5 @@ const { align, lg, md, sm, xs, vh } = defineProps({
   },
 })
 
-const headlineClass = "headline pointer-events-auto"+ (align === 'side' ? '' : ' text-center')
+const headlineClass = "headline pointer-events-auto" + (align === "side" ? "" : " text-center")
 </script>
