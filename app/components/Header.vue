@@ -12,11 +12,10 @@
         </NuxtLink>
 
         <div class="hidden sm:flex">
-          <div class="ml-5 mr-5">{{ $t("solution") }}</div>
-          <div class="ml-5 mr-5">{{ $t("ourClients") }}</div>
+          <div v-for="menu in page.menus" class="ml-5 mr-5" :key="`${locale}-${menu.title}`">
+            {{ menu.title }}
+          </div>
           <NuxtLink class="ml-5 mr-5" :to="localePath('/about')">{{ $t("aboutUs") }}</NuxtLink>
-          <div class="ml-5 mr-5">{{ $t("newsroom") }}</div>
-          <div class="ml-5 mr-5">{{ $t("aiHub") }}</div>
         </div>
 
         <div class="ml w-[270px] flex">
@@ -25,8 +24,13 @@
           </a>
 
           <select @change="switchLocale($event)" name="locales">
-            <option v-for="locale in availableLocales" :key="locale.code" :value="locale.code" :selected="locale.code === currentLocale">
-              {{ locale.code.toUpperCase() }}
+            <option
+              v-for="availableLocale in availableLocales"
+              :key="availableLocale.code"
+              :value="availableLocale.code"
+              :selected="availableLocale.code === locale"
+            >
+              {{ availableLocale.code.toUpperCase() }}
             </option>
           </select>
         </div>
@@ -38,9 +42,15 @@
 <script setup>
 import { resourcesUrl } from "@/services/utils"
 const localePath = useLocalePath()
-const { locales, locale: currentLocale, setLocale } = useI18n()
+const { locales, locale, setLocale } = useI18n()
 
 const availableLocales = locales.value
+
+const pageName = "header"
+const { data: page, refresh } = await useAsyncData(`${pageName}-${locale.value}`, () =>
+  $fetch(`${resourcesUrl}/pages/${locale.value}/${pageName}.json`),
+)
+watch(locale, () => refresh())
 
 function switchLocale(event) {
   setLocale(event.target.value)
