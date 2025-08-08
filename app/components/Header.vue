@@ -9,6 +9,7 @@
               'background-image': `url(/img/basikon.svg)`,
             }"
             :to="localePath('/')"
+            @click="closeMenu"
           >
           </NuxtLink>
 
@@ -51,7 +52,9 @@
 
             <div class="responsive-menu lg:!hidden h-screen w-full absolute z-[1] top-[44px] left-0" :data-show="showMenu">
               <div v-for="menu in page.menus" class="" :key="`${locale}-${menu.title}`">
-                <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="block pl-5 pr-5 pt-2 pb-2">{{ menu.title }}</NuxtLink>
+                <NuxtLink v-if="menu.href" :href="localePath(menu.href)" @click="closeMenu" class="block pl-5 pr-5 pt-2 pb-2">{{
+                  menu.title
+                }}</NuxtLink>
 
                 <div v-else class="header-menu-block-responsive pl-5 pr-5">
                   <div class="cursor-pointer pt-2 pb-2">{{ menu.title }}</div>
@@ -61,24 +64,17 @@
                       <div class="font-bold p-1 pl-4">{{ item.title }}</div>
 
                       <div v-for="subItem in item.items">
-                        <NuxtLink :href="localePath(subItem.href)" class="p-1 pl-4 block">{{ subItem.title }}</NuxtLink>
+                        <NuxtLink :href="localePath(subItem.href)" @click="closeMenu" class="p-1 pl-4 block">{{ subItem.title }}</NuxtLink>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+
+              <LocaleSelect />
             </div>
 
-            <select @change="switchLocale($event)" name="locales" class="ml-2 cursor-pointer hidden lg:block">
-              <option
-                v-for="availableLocale in availableLocales"
-                :key="availableLocale.code"
-                :value="availableLocale.code"
-                :selected="availableLocale.code === locale"
-              >
-                {{ availableLocale.code.toUpperCase() }}
-              </option>
-            </select>
+            <LocaleSelect responsive />
           </div>
         </div>
       </div>
@@ -91,23 +87,26 @@ import { resourcesUrl } from "@/services/utils"
 import { ref } from "vue"
 
 const localePath = useLocalePath()
-const { locales, locale, setLocale } = useI18n()
+const { locale } = useI18n()
 
-const availableLocales = locales.value
-
+const showMenu = ref(false)
 const pageName = "header"
+
 const { data: page, refresh } = await useAsyncData(`${pageName}-${locale.value}`, () =>
   $fetch(`${resourcesUrl}/pages/${locale.value}/${pageName}.json`),
 )
-watch(locale, () => refresh())
 
-function switchLocale(event) {
-  setLocale(event.target.value)
-}
+watch(locale, () => {
+  refresh()
+  showMenu.value = false
+})
 
-const showMenu = ref(false)
 function toggleMobileMenu() {
   showMenu.value = !showMenu.value
+}
+
+function closeMenu() {
+  showMenu.value = false
 }
 </script>
 
