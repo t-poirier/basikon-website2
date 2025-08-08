@@ -1,6 +1,6 @@
 <template>
-  <Carousel v-if="hasCarousel" :items="items" />
-  <CardInner v-else v-bind="items[0]" />
+  <Carousel v-if="hasCarousel" v-bind="carousel" />
+  <CardInner v-else v-bind="[attrs][0]" />
 </template>
 
 <script setup>
@@ -14,6 +14,5 @@ const { carousel } = defineProps({
   },
 })
 
-const hasCarousel = carousel.length
-const items = hasCarousel ? carousel : [attrs]
+const hasCarousel = carousel.cards?.length
 </script>
