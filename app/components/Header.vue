@@ -34,7 +34,7 @@
             {{ $t("requestDemo") }}
           </NuxtLink>
 
-          <select @change="switchLocale($event)" name="locales" class="mr-2 ml-2">
+          <select @change="switchLocale($event)" name="locales" class="mr-2 ml-2 cursor-pointer">
             <option
               v-for="availableLocale in availableLocales"
               :key="availableLocale.code"
