@@ -3,9 +3,9 @@
     <div class="col-xs-12">
       <div class="max-w-[2560px] m-auto flex justify-between items-center h-[44px]">
         <NuxtLink
-          class="h-[28px] w-[260px] bg-no-repeat bg-center bg-contain"
+          class="h-full w-[260px] bg-no-repeat bg-center bg-contain"
           :style="{
-            'background-image': `url(${resourcesUrl}/img/customers/basikon.svg)`,
+            'background-image': `url(/img/basikon.svg)`,
           }"
           :to="localePath('/')"
         >
