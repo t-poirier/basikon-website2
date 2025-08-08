@@ -1,7 +1,8 @@
 {
-  "solutions": "Solutions",
-  "customers": "Clients",
+  "solution": "Solution",
+  "ourClients": "Nos Clients",
   "aboutUs": "A propos de nous",
-  "resources": "Ressources",
-  "welcome": "Bienvenue"
+  "newsroom": "Actualités",
+  "aiHub": "Hub IA",
+  "requestDemo": "Demander une Démo"
 }

@@ -61,12 +61,14 @@ h3 {
   display: inline-block;
   font-size: 17px;
   min-width: 30px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding: 7px 15px;
   text-align: center;
   white-space: nowrap;
+
+  &.button-sm {
+    font-size: 13px;
+    padding: 4px 7px;
+  }
 
   &:hover {
     background: #0077ED;
