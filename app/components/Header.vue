@@ -33,7 +33,11 @@
           </div>
 
           <div class="w-[260px] flex justify-end">
-            <NuxtLink v-if="page.button" :href="page.button.href" class="mr-2 ml-2 pointer-events-auto button button-sm">
+            <NuxtLink
+              v-if="page.button"
+              :href="page.button.href"
+              :class="'mr-2 ml-2 pointer-events-auto button button-sm' + (page.button.style ? ` button-${page.button.style}` : '')"
+            >
               {{ page.button.title }}
             </NuxtLink>
 

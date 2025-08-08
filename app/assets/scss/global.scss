@@ -53,7 +53,7 @@ h3 {
 
 .button {
   background: #0071e3;
-  border-color: rgba(0, 0, 0, 0);
+  border-color: transparent;
   border-radius: 980px;
   border-style: solid;
   border-width: 1px;
@@ -74,7 +74,6 @@ h3 {
   &:hover {
     background: #0077ED;
     color: #fff;
-    border-color: transparent;
   }
 
   &.button-primary-light {
@@ -85,15 +84,18 @@ h3 {
       background: #FFF !important;
     }
   }
-  
+
   &.button-secondary {
-    background: var(--theme-bg-color);
+    background: var(--color-blue-dark);
     color: #FFF;
-    border-color: rgba(0, 0, 0, 0);
+
+    &:hover {
+      background: var(--color-blue-dark-lighter);
+    }
   }
 
   &.button-tertiary {
-    background: rgba(0, 0, 0, 0);
+    background: transparent;
     color: #06c;
     border-color: #06c;
   }
