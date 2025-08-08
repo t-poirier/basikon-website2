@@ -11,13 +11,14 @@
         >
         </NuxtLink>
 
-        <div class="hidden lg:flex">
-          <div v-for="menu in page.menus" class="ml-5 mr-5" :key="`${locale}-${menu.title}`">
+        <div class="hidden h-full lg:flex items-center">
+          <div v-for="menu in page.menus" class="ml-5 mr-5 h-full flex items-center" :key="`${locale}-${menu.title}`">
             <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block">{{ menu.title }}</NuxtLink>
-            <div v-else class="header-menu-block relative">
+
+            <div v-else class="header-menu-block relative h-full flex items-center">
               <div class="text-center cursor-pointer">{{ menu.title }}</div>
 
-              <div v-if="menu.items" class="header-menu-items absolute z-[1] justify-between bg-white shadow-xs rounded-md">
+              <div v-if="menu.items" class="header-menu-items absolute z-[1] justify-between bg-white shadow-xs rounded-md top-[44px]">
                 <div v-for="item in menu.items" class="p-4">
                   <div class="font-bold whitespace-nowrap p-1">{{ item.title }}</div>
                   <div v-for="subItem in item.items">
@@ -79,5 +80,6 @@ function switchLocale(event) {
 
 .header-menu-items {
   display: none;
+  box-shadow: 0 0 0 1px rgba(155, 155, 155, 0.1);
 }
 </style>
