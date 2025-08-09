@@ -33,21 +33,22 @@ function getItemCards({ item, data }) {
             headline: {
               text: item.title,
               color: "midnight-blue-lightest",
-              weight: "normal",
+              fontWeight: "normal",
             },
           },
           middle: {
             suphead: {
-              text: '“' + item.quote?.text + '“',
+              text: "“" + item.quote?.text + "“",
               color: "midnight-blue-lightest",
-              weight: "normal",
+              fontStyle: "italic",
+              fontWeight: "normal",
             },
           },
           bottom: {
             suphead: {
               text: item.quote?.author,
               color: "midnight-blue-lightest",
-              weight: "bold",
+              fontWeight: "bold",
             },
           },
         },
@@ -65,12 +66,12 @@ function getItemCards({ item, data }) {
         headline: {
           text: item.title,
           color: "midnight-blue-lightest",
-          weight: "normal",
+          fontWeight: "normal",
         },
         subhead: {
           text: item.desc || item.meta,
           color: "midnight-blue-lightest",
-          weight: "normal",
+          fontWeight: "normal",
         },
       },
     },

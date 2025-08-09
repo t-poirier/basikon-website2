@@ -2,26 +2,39 @@
   <div :class="'card-block' + (height ? ` min-h-${height}` : '')">
     <CardBackground :background="background" />
 
-    <div v-if="suphead?.text" :class="'px-[2.5%] pointer-events-auto mt-2' + getTextStyle(suphead)" v-html="parseMarkdown(suphead?.text)"></div>
+    <div
+      v-if="suphead?.text"
+      :class="
+        'px-[2.5%] pointer-events-auto mt-2' +
+        (suphead?.fontWeight === 'normal' ? '' : ' font-bold') +
+        (suphead?.fontStyle === 'italic' ? ' italic' : '') +
+        getTextStyle(suphead)
+      "
+      v-html="parseMarkdown(suphead?.text)"
+    ></div>
 
-    <h2
-      v-if="moduleTemplate === 'heroes'"
+    <component
+      :is="isHeroTemplate ? 'h2' : 'h3'"
       :class="
-        'px-[2.5%] text-5xl leading-[3.5rem] pointer-events-auto mt-3' + (headline?.weight === 'normal' ? '' : ' font-bold') + getTextStyle(headline)
+        'px-[2.5%] pointer-events-auto mt-3' +
+        (headline?.fontWeight === 'normal' ? '' : ' font-bold') +
+        (headline?.fontStyle === 'italic' ? ' italic' : '') +
+        (isHeroTemplate ? ' text-5xl leading-[3.5rem] ' : ' text-4xl leading-[3rem] ') +
+        getTextStyle(headline)
       "
-      v-html="parseMarkdown(headline?.text)"
-    ></h2>
-    <h3
-      v-else
-      :class="
-        'px-[2.5%] text-4xl leading-[3rem] pointer-events-auto mt-3' + (headline?.weight === 'normal' ? '' : ' font-bold') + getTextStyle(headline)
-      "
-      v-html="parseMarkdown(headline?.text)"
-    ></h3>
+    >
+      <template v-html="parseMarkdown(headline?.text)"></template>
+    </component>
 
     <div
       v-if="subhead?.text"
-      :class="'px-[2.5%] mt-1 pointer-events-auto' + (moduleTemplate === 'heroes' ? ' text-2xl' : ' text-xl') + getTextStyle(subhead)"
+      :class="
+        'px-[2.5%] mt-1 pointer-events-auto' +
+        (isHeroTemplate ? ' text-2xl' : ' text-xl') +
+        (subhead?.fontWeight === 'normal' ? '' : ' font-bold') +
+        (subhead?.fontStyle === 'italic' ? ' italic' : '') +
+        getTextStyle(subhead)
+      "
       v-html="parseMarkdown(subhead?.text)"
     ></div>
 
@@ -39,7 +52,9 @@
 </template>
 
 <script setup>
-const { lg, md, sm, xs, vh } = defineProps({
+import { getMarkedInstance, resourcesUrl } from "@/services/utils"
+
+const { lg, md, sm, xs, vh, moduleTemplate } = defineProps({
   height: String,
   background: {
     type: Object,
@@ -80,8 +95,7 @@ const { lg, md, sm, xs, vh } = defineProps({
   },
 })
 
-import { getMarkedInstance, resourcesUrl } from "@/services/utils"
-
+const isHeroTemplate = moduleTemplate === "heroes"
 const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
 
