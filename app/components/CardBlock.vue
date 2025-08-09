@@ -12,7 +12,7 @@
       <NuxtLink
         v-for="button in buttons"
         :key="button.text"
-        :href="button.href"
+        :href="localePath(button.href)"
         :class="`mt-3 mx-2 first:ml-0 pointer-events-auto button button-${button.style}`"
       >
         {{ button.text }}
