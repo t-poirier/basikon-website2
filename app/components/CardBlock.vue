@@ -1,16 +1,12 @@
 <template>
   <div :class="'card-block pl-4 pr-4' + (align === 'side' ? ' sm:pl-10 sm:pr-10' : '')" :data-module-template="moduleTemplate">
-    <component :is="moduleTemplate === 'heroes' ? 'h2' : 'h3'" :class="headlineClass">
-      <span :class="getTextStyle(headline)">
-        <template v-for="(fragment, index) in headline?.text?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
-      >
-    </component>
+    <h2 v-if="moduleTemplate === 'heroes'" :class="headlineClass + getTextStyle(headline)" v-html="parseMarkdown(headline?.text)"></h2>
+    <h3 v-else :class="headlineClass + getTextStyle(headline)" v-html="parseMarkdown(headline?.text)"></h3>
 
-    <p :class="'subhead pointer-events-auto' + (align === 'side' ? '' : ' text-center')">
-      <span :class="getTextStyle(subhead)">
-        <template v-for="(fragment, index) in subhead?.text?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
-      >
-    </p>
+    <div
+      :class="'subhead pointer-events-auto' + (align === 'side' ? '' : ' text-center') + getTextStyle(subhead)"
+      v-html="parseMarkdown(subhead?.text)"
+    ></div>
 
     <div v-if="buttons.length" :class="'flex items-center mt-5' + (align === 'side' ? '' : ' justify-center')">
       <NuxtLink
@@ -52,9 +48,17 @@ const { align, lg, md, sm, xs, vh } = defineProps({
   },
 })
 
+import { getMarkedInstance, resourcesUrl } from "@/services/utils"
+
+const localePath = useLocalePath()
+const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
 const headlineClass = "headline pointer-events-auto" + (align === "side" ? "" : " text-center")
 
 function getTextStyle({ style } = {}) {
-  return style === "ai-gradient" ? style : style ? ` text-${style}` : ""
+  return style === "ai-gradient" ? ` ${style}` : style ? ` text-${style}` : ""
+}
+
+function parseMarkdown(text) {
+  return markedInstance.parse(text.replaceAll("$v{resourcesUrl}", resourcesUrl))
 }
 </script>

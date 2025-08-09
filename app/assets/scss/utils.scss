@@ -4,6 +4,7 @@
   background-clip: text;
   color: transparent;
   display: inline-block;
+  width: 100%;
 }
 
 // Tailwind purges unused CSS found in the code
@@ -28,5 +29,9 @@
 @for $i from 1 through 20 {
   .h-#{$i * 50}px {
     height: $i * 50px;
+  }
+  
+  .min-h-#{$i * 50}px {
+    min-height: $i * 50px;
   }
 }
