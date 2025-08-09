@@ -4,12 +4,15 @@
       <NuxtLink v-if="bgHref" :href="localePath(bgHref)" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></NuxtLink>
 
       <div
-        v-if="imgUrl || bgCss"
+        v-if="bgImg || bgCss"
         class="absolute w-full h-full bg-no-repeat bg-center bg-cover z-[1]"
         :style="{
           ...{
+            // bg image can also be provided in bgCss
             background: bgCss,
-            'background-image': imgUrl ? `url(${resourcesUrl}${imgUrl})` : undefined,
+            'background-image': bgImg?.url ? `url(${resourcesUrl}${bgImg.url})` : undefined,
+            'background-position': bgImg?.position,
+            'background-size': bgImg?.size,
           },
         }"
       ></div>
@@ -57,7 +60,12 @@ const { lg, md, sm, xs, vh } = defineProps({
       top: undefined,
     }),
   },
-  imgUrl: String,
+  bgImg: {
+    type: Object,
+    default: () => ({
+      url: "",
+    }),
+  },
   videoUrl: String,
 })
 
