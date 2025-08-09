@@ -9,7 +9,6 @@
               'background-image': `url(/img/basikon-white.svg)`,
             }"
             :to="localePath('/')"
-            @click="closeMenu"
           >
           </NuxtLink>
 
