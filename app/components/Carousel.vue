@@ -19,7 +19,7 @@
       ›
     </button>
 
-    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
       <button
         v-for="(slide, index) in cards"
         :key="index"
