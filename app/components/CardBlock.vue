@@ -21,11 +21,11 @@
 
     <div
       v-if="subhead?.text"
-      :class="'px-[2.5%] mt-2 pointer-events-auto' + (moduleTemplate === 'heroes' ? ' text-2xl' : ' text-xl') + getTextStyle(subhead)"
+      :class="'px-[2.5%] mt-1 pointer-events-auto' + (moduleTemplate === 'heroes' ? ' text-2xl' : ' text-xl') + getTextStyle(subhead)"
       v-html="parseMarkdown(subhead?.text)"
     ></div>
 
-    <div v-if="buttons.length" class="mt-2 px-[2.5%]">
+    <div v-if="buttons.length" class="mt-1 px-[2.5%]">
       <NuxtLink
         v-for="button in buttons"
         :key="button.text"
