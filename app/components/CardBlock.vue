@@ -4,11 +4,11 @@
     <h3 v-else :class="headlineClass + getTextStyle(headline)" v-html="parseMarkdown(headline?.text)"></h3>
 
     <div
-      :class="'subhead pointer-events-auto' + (align === 'side' ? '' : ' text-center') + getTextStyle(subhead)"
+      :class="'subhead pointer-events-auto' + getTextStyle(subhead)"
       v-html="parseMarkdown(subhead?.text)"
     ></div>
 
-    <div v-if="buttons.length" :class="'flex items-center mt-5' + (align === 'side' ? '' : ' justify-center')">
+    <div v-if="buttons.length" class="mt-5">
       <NuxtLink
         v-for="button in buttons"
         :key="button.text"
@@ -22,8 +22,7 @@
 </template>
 
 <script setup>
-const { align, lg, md, sm, xs, vh } = defineProps({
-  align: String,
+const { lg, md, sm, xs, vh } = defineProps({
   headline: {
     type: Object,
     default: () => ({
@@ -52,7 +51,7 @@ import { getMarkedInstance, resourcesUrl } from "@/services/utils"
 
 const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
-const headlineClass = "headline pointer-events-auto" + (align === "side" ? "" : " text-center")
+const headlineClass = "headline pointer-events-auto"
 
 function getTextStyle({ style } = {}) {
   return style === "ai-gradient" ? ` ${style}` : style ? ` text-${style}` : ""
