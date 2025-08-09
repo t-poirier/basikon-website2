@@ -4,6 +4,7 @@
       :class="
         'relative overflow-hidden flex justify-center' +
         (margin?.bottom === 0 ? '' : ' mb-4') +
+        (maxWidth ? ` max-w-${maxWidth} m-auto` : '') +
         (height ? ` min-h-${height}` : '') +
         (blocks?.align === 'side' ? '' : ' text-center')
       "
@@ -49,6 +50,7 @@ const { lg, md, sm, xs, vh } = defineProps({
     type: String,
     default: "12",
   },
+  maxWidth: String,
   height: String,
   margin: {
     type: Object,

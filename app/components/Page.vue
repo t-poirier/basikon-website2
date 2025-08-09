@@ -129,7 +129,7 @@ function getItemCards({ item, data }) {
 
 let cards = ref([])
 if (pageCategory) {
-  const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.index`, () =>
+  const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.json`, () =>
     $fetch(`${resourcesUrl}/content/${pageCategory}/index_${locale.value}.json`),
   )
   let _categoryItem

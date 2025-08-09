@@ -30,6 +30,10 @@
   color: var(--color-midnight-blue-lightest);
 }
 
+.max-w-400px {
+  max-width: 400px;
+}
+
 @for $i from 1 through 20 {
   .h-#{$i * 50}px {
     height: $i * 50px;
