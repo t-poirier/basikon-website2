@@ -16,7 +16,6 @@
 }
 
 html {
-  font-family: Arial, sans-serif;
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -24,40 +23,8 @@ html {
 body {
   color: var(--text-color);
   line-height: var(--line-height);
-  font-family: 'Avenir', sans-serif;
+  font-family: Avenir, sans-serif;
   margin: 0 auto;
-
-  [data-module-template="heroes"]> {
-    .subhead {
-      font-size: 1.5rem;
-    }
-  }
-
-  [data-module-template="promo"]> {
-    .headline {
-      line-height: 2.8rem;
-    }
-
-    .subhead {
-      font-size: 1.2rem;
-      line-height: 2rem;
-    }
-  }
-}
-
-h2 {
-  &.headline {
-    font-size: 3rem;
-    font-weight: bold;
-    line-height: 3.5rem;
-  }
-}
-
-h3 {
-  &.headline {
-    font-size: 2rem;
-    font-weight: bold;
-  }
 }
 
 .button {

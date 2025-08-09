@@ -21,10 +21,6 @@ const { pageName, pageCategory } = defineProps({
 const router = useRouter()
 const { locale } = useI18n()
 
-function setPageWithCategory () {
-  
-}
-
 let cards = ref([])
 if (pageCategory) {
   const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.index`, () =>

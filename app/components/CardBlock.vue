@@ -1,13 +1,25 @@
 <template>
-  <div :class="'card-block' + (height ? ` min-h-${height}` : '')" :data-module-template="moduleTemplate">
+  <div :class="'card-block' + (height ? ` min-h-${height}` : '')">
     <CardBackground :background="background" />
 
-    <div v-if="suphead?.text" :class="'suphead px-[2.5%] pointer-events-auto' + getTextStyle(suphead)" v-html="parseMarkdown(suphead?.text)"></div>
+    <div v-if="suphead?.text" :class="'px-[2.5%] pointer-events-auto mt-2' + getTextStyle(suphead)" v-html="parseMarkdown(suphead?.text)"></div>
 
-    <h2 v-if="moduleTemplate === 'heroes'" :class="headlineClass + getTextStyle(headline)" v-html="parseMarkdown(headline?.text)"></h2>
-    <h3 v-else :class="headlineClass + getTextStyle(headline)" v-html="parseMarkdown(headline?.text)"></h3>
+    <h2
+      v-if="moduleTemplate === 'heroes'"
+      :class="'px-[2.5%] text-5xl font-bold leading-[3.5rem] pointer-events-auto mt-3' + getTextStyle(headline)"
+      v-html="parseMarkdown(headline?.text)"
+    ></h2>
+    <h3
+      v-else
+      :class="'px-[2.5%] text-4xl font-bold leading-[3rem] pointer-events-auto mt-3' + getTextStyle(headline)"
+      v-html="parseMarkdown(headline?.text)"
+    ></h3>
 
-    <div v-if="subhead?.text" :class="'subhead px-[2.5%] pointer-events-auto' + getTextStyle(subhead)" v-html="parseMarkdown(subhead?.text)"></div>
+    <div
+      v-if="subhead?.text"
+      :class="'px-[2.5%] mt-2 pointer-events-auto' + (moduleTemplate === 'heroes' ? ' text-2xl' : ' text-xl') + getTextStyle(subhead)"
+      v-html="parseMarkdown(subhead?.text)"
+    ></div>
 
     <div v-if="buttons.length" class="mt-2 px-[2.5%]">
       <NuxtLink
@@ -68,9 +80,9 @@ import { getMarkedInstance, resourcesUrl } from "@/services/utils"
 
 const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
-const headlineClass = "headline px-[2.5%] pointer-events-auto"
 
 function getTextStyle({ style } = {}) {
+  // moduleTemplate
   return style === "ai-gradient" ? ` ${style}` : style ? ` text-${style}` : ""
 }
 
