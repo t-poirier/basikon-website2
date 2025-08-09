@@ -11,24 +11,90 @@
 
 <script setup>
 import { resourcesUrl } from "@/services/utils"
-import { watch } from "vue"
+import { ref, watch } from "vue"
 
-const { pageName } = defineProps({
+const { pageName, pageCategory } = defineProps({
   pageName: String,
+  pageCategory: String,
 })
 
+const router = useRouter()
 const { locale } = useI18n()
-const { data: page, refresh } = await useAsyncData(`${pageName}-${locale.value}`, () =>
-  $fetch(`${resourcesUrl}/pages/${locale.value}/${pageName}.json`),
-)
 
-const { head, cards } = page.value || {}
+function setPageWithCategory () {
+  
+}
 
-if (cards) {
-  watch(locale, () => refresh())
-  useHead(head)
+let cards = ref([])
+if (pageCategory) {
+  const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.index`, () =>
+    $fetch(`${resourcesUrl}/content/${pageCategory}/index_${locale.value}.json`),
+  )
+  let _categoryItem
+  for (const categoryItem of categoryItems.value) {
+    if (categoryItem?.uri === pageName) {
+      _categoryItem = categoryItem
+      break
+    }
+  }
+
+  if (_categoryItem) {
+    const { data, refresh: refreshMarkdown } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.md`, () =>
+      $fetch(`${resourcesUrl}/content/${pageCategory}/${pageName}/${locale.value}.md`),
+    )
+    cards = [
+      {
+        height: "300px",
+        blocks: {
+          middle: {
+            headline: {
+              text: _categoryItem.title,
+            },
+          },
+        },
+      },
+      {
+        blocks: {
+          markdown: {
+            text: data.value,
+          },
+        },
+      },
+    ]
+
+    watch(locale, async () => {
+      await refreshCategoryIndex()
+      await refreshMarkdown()
+    })
+    useHead({
+      title: _categoryItem.title,
+      meta: [
+        {
+          name: "description",
+          content: _categoryItem.desc || _categoryItem.meta,
+        },
+        {
+          property: "og:title",
+          content: _categoryItem.title,
+        },
+      ],
+    })
+  } else {
+    router.push("/404")
+  }
 } else {
-  const router = useRouter()
-  router.push("/404")
+  const { data: page, refresh } = await useAsyncData(`${pageName}-${locale.value}`, () =>
+    $fetch(`${resourcesUrl}/pages/${locale.value}/${pageName}.json`),
+  )
+
+  cards = page.value?.cards
+  const head = page.value?.head
+
+  if (cards) {
+    watch(locale, () => refresh())
+    useHead(head)
+  } else {
+    router.push("/404")
+  }
 }
 </script>

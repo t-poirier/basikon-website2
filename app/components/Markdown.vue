@@ -7,13 +7,13 @@
 <script setup>
 import { getMarkedInstance, resourcesUrl } from "@/services/utils"
 
-const { markdown } = defineProps({
-  markdown: String,
+const { text } = defineProps({
+  text: String,
 })
 const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true  })
 
-const htmlContent = markedInstance.parse(markdown.replaceAll("$v{resourcesUrl}", resourcesUrl))
+const htmlContent = markedInstance.parse(text.replaceAll("$v{resourcesUrl}", resourcesUrl))
 </script>
 
 <style scoped lang="scss">

@@ -22,6 +22,7 @@
 
       <MediaSlider v-if="blocks?.mediaSlider?.items?.length" :items="blocks?.mediaSlider.items" />
       <HubspotForm v-if="blocks?.hubspotForm" :hubspotForm="blocks.hubspotForm" />
+      <Markdown v-if="blocks?.markdown" :text="blocks.markdown.text" />
 
       <div
         v-if="blocks.top || blocks.middle || blocks.bottom"

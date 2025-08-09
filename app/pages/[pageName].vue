@@ -1,8 +1,8 @@
 <template>
-  <Page :pageName="slug" />
+  <Page :pageName="pageName" />
 </template>
 
 <script setup>
 const route = useRoute()
-const { slug } = route.params
+const { pageName } = route.params
 </script>
