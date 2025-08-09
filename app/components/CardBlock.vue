@@ -13,7 +13,7 @@
         v-for="button in buttons"
         :key="button.text"
         :href="button.href"
-        :class="`mt-3 ml-2 mr-2 first:ml-0 pointer-events-auto button button-${button.style}`"
+        :class="`mt-3 mx-2 first:ml-0 pointer-events-auto button button-${button.style}`"
       >
         {{ button.text }}
       </NuxtLink>

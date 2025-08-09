@@ -8,13 +8,13 @@
 
     <button
       @click="prevSlide"
-      class="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full shadow w-[30px] h-[30px] flex cards-center justify-center"
+      class="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full shadow size-[30px] flex cards-center justify-center"
     >
       ‹
     </button>
     <button
       @click="nextSlide"
-      class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full shadow w-[30px] h-[30px] flex cards-center justify-center"
+      class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full shadow size-[30px] flex cards-center justify-center"
     >
       ›
     </button>
@@ -24,7 +24,7 @@
         v-for="(slide, index) in cards"
         :key="index"
         @click="goToSlide(index)"
-        :class="['w-3 h-3 rounded-full', currentSlide === index ? 'bg-white' : 'bg-white/50']"
+        :class="['size-3 rounded-full', currentSlide === index ? 'bg-white' : 'bg-white/50']"
       />
     </div>
   </div>

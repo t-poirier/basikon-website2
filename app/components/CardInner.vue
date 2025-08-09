@@ -10,16 +10,16 @@
       <NuxtLink
         v-if="background?.href"
         :href="localePath(background.href)"
-        class="w-full h-full z-[3] left-[0] top-[0] absolute"
+        class="size-full z-[3] left-[0] top-[0] absolute"
         tabindex="-1"
       ></NuxtLink>
 
-      <video v-if="background?.url && background?.type === 'video'" autoplay muted loop playsinline class="absolute w-full h-full z-[1]">
+      <video v-if="background?.url && background?.type === 'video'" autoplay muted loop playsinline class="absolute size-full z-[1]">
         <source :src="background.url" type="video/mp4" />
       </video>
       <div
         v-else-if="(background?.url || background?.color) && ['image', undefined].includes(background?.type)"
-        class="absolute w-full h-full bg-no-repeat bg-center bg-cover z-[1]"
+        class="absolute size-full bg-no-repeat bg-center bg-cover z-[1]"
         :style="{
           ...{
             'background-color': background.color,
