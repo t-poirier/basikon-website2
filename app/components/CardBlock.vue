@@ -23,7 +23,7 @@
         getTextStyle(headline)
       "
     >
-      <template v-html="parseMarkdown(headline?.text)"></template>
+      <span v-html="parseMarkdown(headline?.text)"></span>
     </component>
 
     <div
@@ -31,7 +31,7 @@
       :class="
         'px-[2.5%] mt-1 pointer-events-auto' +
         (isHeroTemplate ? ' text-2xl' : ' text-xl') +
-        (subhead?.fontWeight === 'normal' ? '' : ' font-bold') +
+        (subhead?.fontWeight === 'bold' ? ' font-bold' : '') +
         (subhead?.fontStyle === 'italic' ? ' italic' : '') +
         getTextStyle(subhead)
       "

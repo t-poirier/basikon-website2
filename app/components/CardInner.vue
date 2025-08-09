@@ -1,5 +1,5 @@
 <template>
-  <div :class="colClassName + (inArray ? '' : ' !p-0') + (show ? '' : ' hidden')">
+  <div :class="colClassName + (inArray ? '' : ' !p-0')">
     <div
       :class="
         'relative overflow-hidden flex justify-center' +

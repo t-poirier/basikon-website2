@@ -9,10 +9,10 @@ const attrs = useAttrs()
 
 const { carousel } = defineProps({
   carousel: {
-    type: Array,
-    default: () => [],
+    type: Object,
+    default: () => {},
   },
 })
 
-const hasCarousel = carousel.cards?.length
+const hasCarousel = carousel?.cards?.length
 </script>

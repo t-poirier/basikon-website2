@@ -20,6 +20,7 @@ const { pageName, pageCategory } = defineProps({
 
 const router = useRouter()
 const { locale } = useI18n()
+const notFoundPagePath = `/${locale.value}/404`
 
 function getItemCards({ item, data }) {
   if (pageCategory === "customers-success-stories") {
@@ -163,7 +164,7 @@ if (pageCategory) {
       ],
     })
   } else {
-    router.push("/404")
+    router.push(notFoundPagePath)
   }
 } else {
   const { data: page, refresh } = await useAsyncData(`${pageName}-${locale.value}`, () =>
@@ -177,7 +178,7 @@ if (pageCategory) {
     watch(locale, () => refresh())
     useHead(head)
   } else {
-    router.push("/404")
+    router.push(notFoundPagePath)
   }
 }
 </script>
