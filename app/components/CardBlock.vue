@@ -2,10 +2,12 @@
   <div :class="'card-block' + (height ? ` min-h-${height}` : '')" :data-module-template="moduleTemplate">
     <CardBackground :background="background" />
 
+    <div v-if="suphead?.text" :class="'suphead px-[2.5%] pointer-events-auto' + getTextStyle(suphead)" v-html="parseMarkdown(suphead?.text)"></div>
+
     <h2 v-if="moduleTemplate === 'heroes'" :class="headlineClass + getTextStyle(headline)" v-html="parseMarkdown(headline?.text)"></h2>
     <h3 v-else :class="headlineClass + getTextStyle(headline)" v-html="parseMarkdown(headline?.text)"></h3>
 
-    <div :class="'subhead px-[2.5%] pointer-events-auto' + getTextStyle(subhead)" v-html="parseMarkdown(subhead?.text)"></div>
+    <div v-if="subhead?.text" :class="'subhead px-[2.5%] pointer-events-auto' + getTextStyle(subhead)" v-html="parseMarkdown(subhead?.text)"></div>
 
     <div v-if="buttons.length" class="mt-2 px-[2.5%]">
       <NuxtLink
@@ -32,6 +34,13 @@ const { lg, md, sm, xs, vh } = defineProps({
     }),
   },
   headline: {
+    type: Object,
+    default: () => ({
+      text: "",
+      style: "",
+    }),
+  },
+  suphead: {
     type: Object,
     default: () => ({
       text: "",

@@ -27,6 +27,8 @@
         v-if="blocks.top || blocks.middle || blocks.bottom"
         class="py-[2.5%] grow w-full flex flex-col justify-between relative pointer-events-none z-[4]"
       >
+        <!-- We need the 3 blocks to always be present in the DOM for the flex justify between effect to occur -->
+        <!-- Inside the card block there can be nothing as long as the wrapper is there -->
         <CardBlock v-bind="blocks.top" :align="blocks?.align" />
         <CardBlock v-bind="blocks.middle" :align="blocks?.align" />
         <CardBlock v-bind="blocks.bottom" :align="blocks?.align" />
