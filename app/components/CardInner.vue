@@ -18,18 +18,7 @@
       <video v-if="background?.url && background?.type === 'video'" autoplay muted loop playsinline class="absolute size-full z-[1]">
         <source :src="background.url" type="video/mp4" />
       </video>
-      <div
-        v-else-if="(background?.url || background?.style) && ['image', undefined].includes(background?.type)"
-        class="absolute size-full bg-no-repeat bg-center bg-cover z-[1]"
-        :style="{
-          ...{
-            'background-color': background.style ? `var(--color-${background.style})` : undefined,
-            'background-image': background.url ? `url(${resourcesUrl}${background.url})` : undefined,
-            'background-position': background.position,
-            'background-size': background.size,
-          },
-        }"
-      ></div>
+      <CardBackground absolute :background="background" />
 
       <MediaSlider v-if="blocks?.mediaSlider?.items?.length" :items="blocks?.mediaSlider.items" />
       <HubspotForm v-if="blocks?.hubspotForm" :hubspotForm="blocks.hubspotForm" />
@@ -47,7 +36,6 @@
 </template>
 
 <script setup>
-import { resourcesUrl } from "@/services/utils"
 const { lg, md, sm, xs, vh } = defineProps({
   inArray: Boolean,
   lg: String,

@@ -1,17 +1,6 @@
 <template>
   <div :class="'card-block' + (height ? ` min-h-${height}` : '')" :data-module-template="moduleTemplate">
-    <div
-      v-if="(background?.url || background?.style) && ['image', undefined].includes(background?.type)"
-      class="size-full bg-no-repeat bg-center bg-cover z-[1]"
-      :style="{
-        ...{
-          'background-color': background.style ? `var(--color-${background.style})` : undefined,
-          'background-image': background.url ? `url(${resourcesUrl}${background.url})` : undefined,
-          'background-position': background.position,
-          'background-size': background.size,
-        },
-      }"
-    ></div>
+    <CardBackground :background="background" />
 
     <h2 v-if="moduleTemplate === 'heroes'" :class="headlineClass + getTextStyle(headline)" v-html="parseMarkdown(headline?.text)"></h2>
     <h3 v-else :class="headlineClass + getTextStyle(headline)" v-html="parseMarkdown(headline?.text)"></h3>
