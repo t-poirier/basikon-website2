@@ -1,7 +1,8 @@
 <template>
   <div class="medias-slider h-full flex items-center">
     <div class="wrapper">
-      <div v-for="copy of [1, 2, 3] /* We want multiple copies of these images for a seamless transition. */" :key="copy" class="flex items-center">
+      <!--  We want multiple copies of these images for a seamless transition.  -->
+      <div v-for="copy of [1, 2, 3]" :key="copy" class="flex items-center">
         <img v-for="(item, index) of items" :key="index" :src="`${resourcesUrl}${item.url}`" :alt="item.url" />
       </div>
     </div>
