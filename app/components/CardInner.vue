@@ -20,7 +20,7 @@
         }"
       ></div>
 
-      <ImgSlider v-if="imgSlider?.images?.length" :images="imgSlider.images" />
+      <MediaSlider v-if="mediaSlider?.length" :medias="mediaSlider" />
 
       <div v-if="blocks.top || blocks.middle || blocks.bottom" class="h-full flex flex-col justify-between relative pointer-events-none z-[4]">
         <CardBlock v-bind="blocks.top" />
@@ -45,7 +45,7 @@ const { lg, md, sm, xs, vh } = defineProps({
     default: "12",
   },
   height: String,
-  imgSlider: {
+  mediaSlider: {
     type: Array,
     default: () => [],
   },

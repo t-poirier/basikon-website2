@@ -1,36 +1,26 @@
 <template>
-  <div class="img-slider h-full flex items-center">
+  <div class="media-slider h-full flex items-center">
     <div class="wrapper">
-      <div
-        v-for="copy of [1, 2, 3] /* We want multiple copies of these images for a seamless transition. */"
-        :key="copy"
-        class="flex items-center"
-      >
-        <img
-          v-for="(url, index) of images"
-          :key="index"
-          :src="`${resourcesUrl}${url}`"
-          :alt="url"
-        />
+      <div v-for="copy of [1, 2, 3] /* We want multiple copies of these images for a seamless transition. */" :key="copy" class="flex items-center">
+        <img v-for="(media, index) of medias" :key="index" :src="`${resourcesUrl}${media.url}`" :alt="media.url" />
       </div>
     </div>
   </div>
 </template>
 
-
 <script setup>
 import { resourcesUrl } from "@/services/utils"
 
 defineProps({
-  images: {
+  medias: {
     type: Array,
-    default: () => []
+    default: () => [],
   },
 })
 </script>
 
 <style scoped lang="scss">
-.img-slider {
+.media-slider {
   overflow-x: hidden;
 }
 
