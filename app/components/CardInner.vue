@@ -6,7 +6,7 @@
         (margin?.bottom === 0 ? '' : ' mb-4') +
         (maxWidth ? ` max-w-${maxWidth} m-auto` : '') +
         (height ? ` min-h-${height}` : '') +
-        (blocks?.align === 'side' ? '' : ' text-center')
+        (blocks?.align === 'side' ? ' text-left' : ' text-center')
       "
     >
       <NuxtLink
@@ -24,6 +24,7 @@
       <MediaSlider v-if="blocks?.mediaSlider?.items?.length" :items="blocks?.mediaSlider.items" />
       <HubspotForm v-if="blocks?.hubspotForm" :hubspotForm="blocks.hubspotForm" />
       <Markdown v-if="blocks?.markdown" :text="blocks.markdown.text" />
+      <IndexedContent v-if="blocks?.indexedContent" :type="blocks.indexedContent.type" />
 
       <div
         v-if="blocks.top || blocks.middle || blocks.bottom"
@@ -31,9 +32,9 @@
       >
         <!-- We need the 3 blocks to always be present in the DOM for the flex justify between effect to occur -->
         <!-- Inside the card block there can be nothing as long as the wrapper is there -->
-        <CardBlock v-bind="blocks.top" :align="blocks?.align" />
-        <CardBlock v-bind="blocks.middle" :align="blocks?.align" />
-        <CardBlock v-bind="blocks.bottom" :align="blocks?.align" />
+        <CardBlock v-bind="blocks.top" />
+        <CardBlock v-bind="blocks.middle" />
+        <CardBlock v-bind="blocks.bottom" />
       </div>
     </div>
   </div>

@@ -1,0 +1,59 @@
+<template>
+  <div class="row">
+    <Card v-bind="card" v-for="card in cards" inArray />
+  </div>
+</template>
+
+<script setup>
+import { resourcesUrl } from "@/services/utils"
+import { watch } from "vue"
+
+const { type } = defineProps({
+  type: String,
+})
+
+const { locale } = useI18n()
+
+const { data: items, refresh } = await useAsyncData(`${type}-${locale.value}.json`, () =>
+  $fetch(`${resourcesUrl}/content/${type}/index_${locale.value}.json`),
+)
+
+watch(locale, () => refresh())
+
+const cards = items.value?.map(item => {
+  const href = item.uri?.startsWith("http") ? item.uri : type + item.uri
+  return {
+    sm: "4",
+    height: "600px",
+    maxWidth: "400px",
+    blocks: {
+      align: "side",
+      top: {
+        height: "300px",
+        background: {
+          href,
+          url: item.imgSrc,
+          position: "bottom",
+          borderRadius: "rounded",
+        },
+      },
+      bottom: {
+        moduleTemplate: "promo",
+        headline: {
+          text: item.title,
+        },
+        subhead: {
+          text: item.desc || item.meta,
+        },
+        buttons: [
+          {
+            href,
+            text: "Read more",
+            color: "transparent",
+          },
+        ],
+      },
+    },
+  }
+})
+</script>

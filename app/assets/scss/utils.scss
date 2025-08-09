@@ -30,14 +30,6 @@
   color: var(--color-midnight-blue-lightest);
 }
 
-.max-w-300px {
-  max-width: 300px;
-}
-
-.max-w-400px {
-  max-width: 400px;
-}
-
 @for $i from 1 through 20 {
   .h-#{$i * 50}px {
     height: $i * 50px;
@@ -45,5 +37,9 @@
   
   .min-h-#{$i * 50}px {
     min-height: $i * 50px;
+  }
+  
+  .max-w-#{$i * 50}px {
+    max-width: $i * 50px;
   }
 }

@@ -6,7 +6,7 @@
       v-if="suphead?.text"
       :class="
         'px-[2.5%] pointer-events-auto mt-2 max-w-[1200px] m-auto' +
-        (suphead?.fontWeight === 'normal' ? '' : ' font-bold') +
+        (subhead?.fontWeight === 'bold' ? ' font-bold' : '') +
         (suphead?.fontStyle === 'italic' ? ' italic' : '') +
         getTextStyle(suphead)
       "
@@ -37,6 +37,15 @@
         getTextStyle(subhead)
       "
       v-html="parseMarkdown(subhead?.text)"
+    ></div>
+
+    <div
+      v-if="summary?.text"
+      :class="
+        'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px] m-auto' +
+        getTextStyle(summary)
+      "
+      v-html="parseMarkdown(summary?.text)"
     ></div>
 
     <div v-if="buttons.length" class="mt-1 px-[2.5%] max-w-[1200px] m-auto">
@@ -80,6 +89,13 @@ const { lg, md, sm, xs, vh, moduleTemplate } = defineProps({
     }),
   },
   subhead: {
+    type: Object,
+    default: () => ({
+      text: "",
+      style: "",
+    }),
+  },
+  summary: {
     type: Object,
     default: () => ({
       text: "",
