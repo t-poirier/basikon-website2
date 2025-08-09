@@ -4,7 +4,7 @@
       <NuxtLink v-if="bgHref" :href="localePath(bgHref)" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></NuxtLink>
 
       <div
-        v-if="bgImg || bgCss"
+        v-if="bgImg?.url || bgCss"
         class="absolute w-full h-full bg-no-repeat bg-center bg-cover z-[1]"
         :style="{
           ...{
@@ -16,15 +16,15 @@
           },
         }"
       ></div>
-      <video v-else-if="videoUrl" autoplay muted loop playsinline class="absolute w-full h-full z-[1]">
-        <source :src="videoUrl" type="video/mp4" />
+      <video v-else-if="bgVideo?.url" autoplay muted loop playsinline class="absolute w-full h-full z-[1]">
+        <source :src="bgVideo.url" type="video/mp4" />
       </video>
 
       <ImgSlider v-if="imgSlider?.images?.length" :images="imgSlider.images" />
 
       <div
         v-if="blocks.top || blocks.middle || blocks.bottom"
-        class="pt-[30px] pb-[30px] lg:pt-[60px] lg:pb-[60px] h-full flex flex-col justify-between relative pointer-events-none z-[4]"
+        class="h-full flex flex-col justify-between relative pointer-events-none z-[4]"
       >
         <CardBlock v-bind="blocks.top" />
         <CardBlock v-bind="blocks.middle" />
@@ -64,9 +64,16 @@ const { lg, md, sm, xs, vh } = defineProps({
     type: Object,
     default: () => ({
       url: "",
+      position: "",
+      size: "",
     }),
   },
-  videoUrl: String,
+  bgVideo: {
+    type: Object,
+    default: () => ({
+      url: "",
+    }),
+  },
 })
 
 const localePath = useLocalePath()

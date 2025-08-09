@@ -1,5 +1,5 @@
 <template>
-  <div :class="'card-block pl-4 pr-4' + (align === 'side' ? ' sm:pl-10 sm:pr-10' : '')" :data-module-template="moduleTemplate">
+  <div :class="'card-block'" :data-module-template="moduleTemplate">
     <h2 v-if="moduleTemplate === 'heroes'" :class="headlineClass + getTextStyle(headline)" v-html="parseMarkdown(headline?.text)"></h2>
     <h3 v-else :class="headlineClass + getTextStyle(headline)" v-html="parseMarkdown(headline?.text)"></h3>
 
