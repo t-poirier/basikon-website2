@@ -1,5 +1,5 @@
 <template>
-  <div class="grid-container fixed bg-white z-[10]">
+  <div class="header grid-container fixed bg-white z-[10]">
     <div class="row w-full">
       <div class="col-xs-12 !p-0">
         <div class="max-w-[2560px] m-auto flex justify-between items-center h-[44px]">
@@ -111,6 +111,10 @@ function closeMenu() {
 </script>
 
 <style scoped lang="scss">
+.header {
+  box-shadow: 0 0 0 1px rgba(100, 100, 100, 0.1);
+}
+
 .header-menu-block {
   &:hover {
     .header-menu-items {
