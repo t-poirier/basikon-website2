@@ -30,7 +30,7 @@
         v-for="button in buttons"
         :key="button.text"
         :href="localePath(button.href)"
-        :class="`mt-3 mx-2 first:ml-0 pointer-events-auto button button-${button.style}`"
+        :class="`mt-3 mx-2 first:ml-0 pointer-events-auto button button-${button.color}`"
       >
         {{ button.text }}
       </NuxtLink>
@@ -85,8 +85,8 @@ import { getMarkedInstance, resourcesUrl } from "@/services/utils"
 const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
 
-function getTextStyle({ style } = {}) {
-  return style === "ai-gradient" ? ` ${style}` : style ? ` text-${style}` : ""
+function getTextStyle({ color } = {}) {
+  return color === "ai-gradient" ? ` ${color}` : color ? ` text-${color}` : ""
 }
 
 function parseMarkdown(text) {

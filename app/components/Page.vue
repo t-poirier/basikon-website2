@@ -21,25 +21,56 @@ const { pageName, pageCategory } = defineProps({
 const router = useRouter()
 const { locale } = useI18n()
 
-function getBlogItemCards({ item, data }) {
+function getItemCards({ item, data }) {
+  if (pageCategory === "customers-success-stories") {
+    return [
+      {
+        background: {
+          color: "ice-mist",
+        },
+        blocks: {
+          top: {
+            headline: {
+              text: item.title,
+              color: "midnight-blue-lightest",
+              weight: "normal",
+            },
+          },
+          middle: {
+            suphead: {
+              text: '“' + item.quote?.text + '“',
+              color: "midnight-blue-lightest",
+              weight: "normal",
+            },
+          },
+          bottom: {
+            suphead: {
+              text: item.quote?.author,
+              color: "midnight-blue-lightest",
+              weight: "bold",
+            },
+          },
+        },
+      },
+    ]
+  }
+
   return [
     {
       background: {
-        style: "ice-mist",
+        color: "ice-mist",
       },
       height: "300px",
       blocks: {
-        middle: {
-          headline: {
-            text: item.title,
-            style: "midnight-blue-lightest",
-            weight: "normal",
-          },
-          subhead: {
-            text: item.desc || item.meta,
-            style: "midnight-blue-lightest",
-            weight: "normal",
-          },
+        headline: {
+          text: item.title,
+          color: "midnight-blue-lightest",
+          weight: "normal",
+        },
+        subhead: {
+          text: item.desc || item.meta,
+          color: "midnight-blue-lightest",
+          weight: "normal",
         },
       },
     },
@@ -54,11 +85,13 @@ function getBlogItemCards({ item, data }) {
     {
       blocks: {
         markdown: {
-          text: new Date(item.date).toLocaleString(locale, {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }),
+          text: item.date
+            ? new Date(item.date).toLocaleString(locale, {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            : "",
         },
       },
     },
@@ -82,7 +115,7 @@ if (pageCategory) {
     const { data, refresh: refreshMarkdown } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.md`, () =>
       $fetch(`${resourcesUrl}/content/${pageCategory}/${pageName}/${locale.value}.md`),
     )
-    cards = getBlogItemCards({ item: _categoryItem, data })
+    cards = getItemCards({ item: _categoryItem, data })
 
     watch(locale, async () => {
       await refreshCategoryIndex()
