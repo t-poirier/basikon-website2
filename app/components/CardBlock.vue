@@ -14,6 +14,7 @@
     ></div>
 
     <component
+      v-if="headline?.text"
       :is="isHeroTemplate ? 'h2' : 'h3'"
       :class="
         'px-[2.5%] pointer-events-auto mt-3 max-w-[1200px] m-auto' +
