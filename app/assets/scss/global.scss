@@ -114,8 +114,10 @@ h3 {
 }
 
 a {
+  color: var(--link-color);
+  cursor: pointer;
+
   &:hover {
-    color: var(--link-color);
     text-decoration: underline;
   }
 }
