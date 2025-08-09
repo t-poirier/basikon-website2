@@ -34,7 +34,7 @@
 
       <div
         v-if="blocks.top || blocks.middle || blocks.bottom"
-        class="h-[85%] w-[85%] flex flex-col justify-between relative pointer-events-none z-[4]"
+        class="p-[2.5%] h-full w-full flex flex-col justify-between relative pointer-events-none z-[4]"
       >
         <CardBlock v-bind="blocks.top" :align="blocks?.align" />
         <CardBlock v-bind="blocks.middle" :align="blocks?.align" />
