@@ -111,6 +111,15 @@ h3 {
       color: #000 !important;
     }
   }
+
+  &.button-fourth {
+    background: var(--color-cyan);
+    color: #FFF;
+
+    &:hover {
+      background: var(--color-states-cyan);
+    }
+  }
 }
 
 a {
