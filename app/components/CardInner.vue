@@ -32,6 +32,7 @@
       ></div>
 
       <MediaSlider v-if="blocks?.mediaSlider?.items?.length" :items="blocks?.mediaSlider.items" />
+      <HubspotForm v-if="blocks?.hubspotForm" :hubspotForm="blocks.hubspotForm" />
 
       <div
         v-if="blocks.top || blocks.middle || blocks.bottom"
@@ -70,7 +71,7 @@ const { lg, md, sm, xs, vh } = defineProps({
       bottom: undefined,
       middle: undefined,
       top: undefined,
-      mediaSlider: undefined
+      mediaSlider: undefined,
     }),
   },
   background: {
