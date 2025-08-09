@@ -6,12 +6,16 @@
 
     <h2
       v-if="moduleTemplate === 'heroes'"
-      :class="'px-[2.5%] text-5xl font-bold leading-[3.5rem] pointer-events-auto mt-3' + getTextStyle(headline)"
+      :class="
+        'px-[2.5%] text-5xl leading-[3.5rem] pointer-events-auto mt-3' + (headline?.weight === 'normal' ? '' : ' font-bold') + getTextStyle(headline)
+      "
       v-html="parseMarkdown(headline?.text)"
     ></h2>
     <h3
       v-else
-      :class="'px-[2.5%] text-4xl font-bold leading-[3rem] pointer-events-auto mt-3' + getTextStyle(headline)"
+      :class="
+        'px-[2.5%] text-4xl leading-[3rem] pointer-events-auto mt-3' + (headline?.weight === 'normal' ? '' : ' font-bold') + getTextStyle(headline)
+      "
       v-html="parseMarkdown(headline?.text)"
     ></h3>
 
@@ -82,7 +86,6 @@ const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
 
 function getTextStyle({ style } = {}) {
-  // moduleTemplate
   return style === "ai-gradient" ? ` ${style}` : style ? ` text-${style}` : ""
 }
 

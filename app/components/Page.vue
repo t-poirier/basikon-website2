@@ -21,6 +21,34 @@ const { pageName, pageCategory } = defineProps({
 const router = useRouter()
 const { locale } = useI18n()
 
+function getBlogItemCards({ item, data }) {
+  return [
+    {
+      background: {
+        style: "ice-mist",
+      },
+      height: "300px",
+      blocks: {
+        middle: {
+          headline: {
+            text: item.title,
+            style: "midnight-blue-lightest",
+            weight: "normal",
+          },
+        },
+      },
+    },
+    {
+      blocks: {
+        align: "side",
+        markdown: {
+          text: data.value,
+        },
+      },
+    },
+  ]
+}
+
 let cards = ref([])
 if (pageCategory) {
   const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.index`, () =>
@@ -38,25 +66,7 @@ if (pageCategory) {
     const { data, refresh: refreshMarkdown } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.md`, () =>
       $fetch(`${resourcesUrl}/content/${pageCategory}/${pageName}/${locale.value}.md`),
     )
-    cards = [
-      {
-        height: "300px",
-        blocks: {
-          middle: {
-            headline: {
-              text: _categoryItem.title,
-            },
-          },
-        },
-      },
-      {
-        blocks: {
-          markdown: {
-            text: data.value,
-          },
-        },
-      },
-    ]
+    cards = getBlogItemCards({ item: _categoryItem, data })
 
     watch(locale, async () => {
       await refreshCategoryIndex()
