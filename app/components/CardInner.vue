@@ -20,7 +20,7 @@
         }"
       ></div>
 
-      <MediaSlider v-if="mediaSlider?.length" :medias="mediaSlider" />
+      <MediaSlider v-if="mediaSlider?.items?.length" :items="mediaSlider.items" />
 
       <div v-if="blocks.top || blocks.middle || blocks.bottom" class="h-full flex flex-col justify-between relative pointer-events-none z-[4]">
         <CardBlock v-bind="blocks.top" />
