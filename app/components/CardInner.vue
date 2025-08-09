@@ -17,7 +17,7 @@
         <source :src="videoUrl" type="video/mp4" />
       </video>
 
-      <div class="pt-[30px] pb-[30px] sm:pt-[60px] sm:pb-[60px] h-full flex flex-col justify-between relative pointer-events-none z-[4]">
+      <div class="pt-[30px] pb-[30px] lg:pt-[60px] lg:pb-[60px] h-full flex flex-col justify-between relative pointer-events-none z-[4]">
         <CardBlock v-bind="blocks.top" />
         <CardBlock v-bind="blocks.middle" />
         <CardBlock v-bind="blocks.bottom" />
