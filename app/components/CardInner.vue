@@ -1,6 +1,6 @@
 <template>
   <div :class="colClassName + (inArray ? '' : ' !p-0')">
-    <div :class="'mb-4 relative overflow-hidden' + (cardHeight ? ` h-${cardHeight} min-h-${cardHeight}` : '')">
+    <div :class="'mb-4 relative overflow-hidden' + (height ? ` h-${height} min-h-${height}` : '')">
       <NuxtLink v-if="bgHref" :href="localePath(bgHref)" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></NuxtLink>
 
       <div
@@ -44,7 +44,7 @@ const { lg, md, sm, xs, vh } = defineProps({
     type: String,
     default: "12",
   },
-  cardHeight: String,
+  height: String,
   imgSlider: {
     type: Array,
     default: () => [],
