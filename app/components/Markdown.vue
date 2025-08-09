@@ -22,6 +22,7 @@ const htmlContent = markedInstance.parse(text.replaceAll("$v{resourcesUrl}", res
 
   font-size: 1.1rem;
   max-width: 940px;
+  width: 100%;
 
   hr {
     border-color: var(--heading-color);

@@ -1,5 +1,5 @@
 <template>
-  <div :class="colClassName + (inArray ? '' : ' !p-0')">
+  <div :class="colClassName + (inArray ? '' : ' !p-0') + (show ? '' : ' hidden')">
     <div
       :class="
         'relative overflow-hidden flex justify-center' +
@@ -40,6 +40,7 @@
 
 <script setup>
 const { lg, md, sm, xs, vh } = defineProps({
+  show: { type: Boolean, default: true },
   inArray: Boolean,
   lg: String,
   md: String,

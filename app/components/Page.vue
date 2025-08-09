@@ -53,6 +53,33 @@ function getItemCards({ item, data }) {
           },
         },
       },
+      {
+        show: item.logoImg,
+        height: "100px",
+        background: {
+          url: item.logoImg,
+          size: "15%"
+        },
+      },
+      {
+        blocks: {
+          align: "side",
+          markdown: {
+            text: item.companyBrief?.join("<br>"),
+          },
+        },
+      },
+      {
+        blocks: {
+          align: "side",
+          markdown: {
+            text: data.value,
+          },
+        },
+      },
+      {
+        height: "100px"
+      },
     ]
   }
 
