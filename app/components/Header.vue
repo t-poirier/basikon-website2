@@ -38,7 +38,7 @@
           <div class="w-[260px] flex justify-end">
             <NuxtLink
               v-if="page.button"
-              :href="page.button.href"
+              :href="localePath(page.button.href)"
               :class="'pointer-events-auto button button-sm' + (page.button.style ? ` button-${page.button.style}` : '')"
             >
               {{ page.button.text }}
