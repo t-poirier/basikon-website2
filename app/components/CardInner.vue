@@ -31,7 +31,7 @@
         }"
       ></div>
 
-      <MediaSlider v-if="mediaSlider?.items?.length" :items="mediaSlider.items" />
+      <MediaSlider v-if="blocks?.mediaSlider?.items?.length" :items="blocks?.mediaSlider.items" />
 
       <div
         v-if="blocks.top || blocks.middle || blocks.bottom"
@@ -63,10 +63,6 @@ const { lg, md, sm, xs, vh } = defineProps({
       bottom: undefined,
     }),
   },
-  mediaSlider: {
-    type: Array,
-    default: () => [],
-  },
   blocks: {
     type: Object,
     default: () => ({
@@ -74,6 +70,7 @@ const { lg, md, sm, xs, vh } = defineProps({
       bottom: undefined,
       middle: undefined,
       top: undefined,
+      mediaSlider: undefined
     }),
   },
   background: {
