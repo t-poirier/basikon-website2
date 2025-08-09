@@ -18,11 +18,11 @@
         <source :src="background.url" type="video/mp4" />
       </video>
       <div
-        v-else-if="(background?.url || background?.color) && ['image', undefined].includes(background?.type)"
+        v-else-if="(background?.url || background?.style) && ['image', undefined].includes(background?.type)"
         class="absolute size-full bg-no-repeat bg-center bg-cover z-[1]"
         :style="{
           ...{
-            'background-color': background.color,
+            'background-color': background.style ? `var(--color-${background.style})` : undefined,
             'background-image': background.url ? `url(${resourcesUrl}${background.url})` : undefined,
             'background-position': background.position,
             'background-size': background.size,
