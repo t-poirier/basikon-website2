@@ -3,7 +3,7 @@
     <div
       :class="
         'relative overflow-hidden flex justify-center' +
-        (margins?.bottom === 0 ? '' : ' mb-4') +
+        (margin?.bottom === 0 ? '' : ' mb-4') +
         (height ? ` min-h-${height}` : '') +
         (blocks?.align === 'side' ? '' : ' text-center')
       "
@@ -46,7 +46,7 @@ const { lg, md, sm, xs, vh } = defineProps({
     default: "12",
   },
   height: String,
-  margins: {
+  margin: {
     type: Object,
     default: () => ({
       bottom: undefined,
