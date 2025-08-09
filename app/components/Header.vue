@@ -157,7 +157,7 @@ function closeMenu() {
   width: 28px;
 
   span {
-    background-color: var(--color-blue-dark);
+    background-color: var(--color-midnight-blue);
     display: block;
     height: 3px;
     transition:

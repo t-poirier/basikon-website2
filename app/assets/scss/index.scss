@@ -13,8 +13,10 @@
   --color-purple: #A451CD;
   --color-red: #EE0000;
   --color-yellow: #FFCC00;
-  --color-blue-dark: #182431;
-  --color-blue-dark-lighter: #394552;
+  --color-cyan: #01B2B5;
+  --color-midnight-blue: #182431;
+  --color-midnight-blue-lighter: #394552;
+  --color-midnight-blue-lightest: #072B6A;
 
   --color-states-blue: #005FBE;
   --color-states-green: #007600;
@@ -81,7 +83,7 @@
   --font-family: "Inter", -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --line-height: 1.5; // min required for accessibility
   --spacing: 16px;
-  --theme-bg-color: var(--color-blue-dark);
+  --theme-bg-color: var(--color-midnight-blue);
   
   // the min size value to reach AA accessibility level
   --wcag-aa-min-size: 24px;

@@ -10,13 +10,26 @@
 // so dynamic styles loaded from API cannot work.
 // There we must reference and limit what styles are available.
 .text-white {
-  color: white;
+  color: var(--color-white);
+}
+
+.text-blue {
+  color: var(--color-blue);
+}
+
+.text-cyan {
+  color: var(--color-cyan);
+}
+
+.text-midnight-blue-lightest {
+  color: var(--color-midnight-blue-lightest);
 }
 
 @for $i from 1 through 100 {
   .h-#{$i * 100}px {
     height: $i * 100px;
   }
+
   .min-h-#{$i * 100}px {
     height: $i * 100px;
   }

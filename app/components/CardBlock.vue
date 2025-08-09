@@ -1,13 +1,13 @@
 <template>
   <div :class="'card-block pl-4 pr-4' + (align === 'side' ? ' sm:pl-20 sm:pr-20' : '')" :data-module-template="moduleTemplate">
     <component :is="moduleTemplate === 'heroes' ? 'h2' : 'h3'" :class="headlineClass">
-      <span :class="headline?.style === 'white' ? ` text-${headline.style}` : ''">
+      <span :class="getTextStyle(headline)">
         <template v-for="(fragment, index) in headline?.text?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
       >
     </component>
 
     <p :class="'subhead pointer-events-auto' + (align === 'side' ? '' : ' text-center')">
-      <span :class="subhead?.style === 'ai-gradient' ? subhead.style : subhead?.style === 'white' ? ` text-${headline.style}` : ''">
+      <span :class="getTextStyle(subhead)">
         <template v-for="(fragment, index) in subhead?.text?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
       >
     </p>
@@ -53,4 +53,8 @@ const { align, lg, md, sm, xs, vh } = defineProps({
 })
 
 const headlineClass = "headline pointer-events-auto" + (align === "side" ? "" : " text-center")
+
+function getTextStyle({ style } = {}) {
+  return style === "ai-gradient" ? style : ` text-${style}`
+}
 </script>
