@@ -12,8 +12,8 @@ import { watch } from 'vue'
 
 const { locale } = useI18n()
 const route = useRoute()
-const { slug } = route.params
-const { data: markdown, refresh } = await useAsyncData(`post-${slug}`, () => $fetch(`${resourcesUrl}/content/blog/${slug}/${locale.value}.md`))
+const { category, slug } = route.params
+const { data: markdown, refresh } = await useAsyncData(`post-${slug}`, () => $fetch(`${resourcesUrl}/content/${category}/${slug}/${locale.value}.md`))
 
 watch(locale, () => {
   refresh()
