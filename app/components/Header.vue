@@ -18,7 +18,7 @@
               <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block px-3 xl:px-4">{{ menu.text }}</NuxtLink>
 
               <div v-else class="header-menu-block px-3 xl:px-4 relative h-full flex items-center">
-                <div class="text-center cursor-pointer">{{ menu.text }}</div>
+                <div class="text-center cursor-pointer" tabindex="1">{{ menu.text }}</div>
 
                 <div v-if="menu.items" class="absolute z-[1] top-[44px] pt-[10px]">
                   <div class="header-menu-items justify-between bg-white rounded-md">

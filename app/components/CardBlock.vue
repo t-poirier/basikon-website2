@@ -38,7 +38,7 @@
       v-html="parseMarkdown(subhead?.text)"
     ></div>
 
-    <div v-if="buttons.length" class="mt-1 px-[2.5%]">
+    <div v-if="buttons.length" class="mt-1 px-[2.5%] max-w-[1200px] m-auto">
       <NuxtLink
         v-for="button in buttons"
         :key="button.text"
