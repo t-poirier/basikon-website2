@@ -1,17 +1,14 @@
 <template>
-  <div
-    :class="'card-block pl-4 pr-4' + (textColor ? ` text-${textColor}` : '') + (align === 'side' ? ' sm:pl-20 sm:pr-20' : '')"
-    :data-module-template="moduleTemplate"
-  >
+  <div :class="'card-block pl-4 pr-4' + (align === 'side' ? ' sm:pl-20 sm:pr-20' : '')" :data-module-template="moduleTemplate">
     <component :is="moduleTemplate === 'heroes' ? 'h2' : 'h3'" :class="headlineClass">
-      <span>
-        <template v-for="(fragment, index) in headline?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
+      <span :class="headline?.style === 'white' ? ` text-${headline.style}` : ''">
+        <template v-for="(fragment, index) in headline?.text?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
       >
     </component>
 
     <p :class="'subhead pointer-events-auto' + (align === 'side' ? '' : ' text-center')">
-      <span :class="subheadStyle === 'ai-gradient' ? subheadStyle : ''">
-        <template v-for="(fragment, index) in subhead?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
+      <span :class="subhead?.style === 'ai-gradient' ? subhead.style : subhead?.style === 'white' ? ` text-${headline.style}` : ''">
+        <template v-for="(fragment, index) in subhead?.text?.split('<br>')"><br v-if="index" />{{ fragment }} </template></span
       >
     </p>
 
@@ -31,10 +28,20 @@
 <script setup>
 const { align, lg, md, sm, xs, vh } = defineProps({
   align: String,
-  headline: String,
-  subhead: String,
-  subheadStyle: String,
-  textColor: String,
+  headline: {
+    type: Object,
+    default: () => ({
+      text: "",
+      style: "",
+    }),
+  },
+  subhead: {
+    type: Object,
+    default: () => ({
+      text: "",
+      style: "",
+    }),
+  },
   moduleTemplate: {
     type: String,
     default: "heroes",

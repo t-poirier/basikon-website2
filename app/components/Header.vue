@@ -14,19 +14,19 @@
           </NuxtLink>
 
           <div class="hidden h-full lg:flex items-center">
-            <div v-for="menu in page.menus" class="h-full flex items-center" :key="`${locale}-${menu.title}`">
-              <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block pl-3 pr-3 xl:pl-4 xl:pr-4">{{ menu.title }}</NuxtLink>
+            <div v-for="menu in page.menus" class="h-full flex items-center" :key="`${locale}-${menu.text}`">
+              <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block pl-3 pr-3 xl:pl-4 xl:pr-4">{{ menu.text }}</NuxtLink>
 
               <div v-else class="header-menu-block pl-3 pr-3 xl:pl-4 xl:pr-4 relative h-full flex items-center">
-                <div class="text-center cursor-pointer">{{ menu.title }}</div>
+                <div class="text-center cursor-pointer">{{ menu.text }}</div>
 
                 <div v-if="menu.items" class="absolute z-[1] top-[44px] pt-[10px]">
                   <div class="header-menu-items justify-between bg-white rounded-md">
                     <div v-for="item in menu.items" class="p-4">
-                      <div class="font-bold whitespace-nowrap p-1">{{ item.title }}</div>
+                      <div class="font-bold whitespace-nowrap p-1">{{ item.text }}</div>
 
                       <div v-for="subItem in item.items">
-                        <NuxtLink :href="localePath(subItem.href)" class="whitespace-nowrap p-1 block">{{ subItem.title }}</NuxtLink>
+                        <NuxtLink :href="localePath(subItem.href)" class="whitespace-nowrap p-1 block">{{ subItem.text }}</NuxtLink>
                       </div>
                     </div>
                   </div>
@@ -41,7 +41,7 @@
               :href="page.button.href"
               :class="'pointer-events-auto button button-sm' + (page.button.style ? ` button-${page.button.style}` : '')"
             >
-              {{ page.button.title }}
+              {{ page.button.text }}
             </NuxtLink>
 
             <div class="ml-2 flex lg:hidden burger-icon" @click.stop="toggleMobileMenu" :data-toggle="showMenu">
@@ -51,20 +51,20 @@
             </div>
 
             <div class="responsive-menu lg:!hidden h-screen w-full absolute z-[1] top-[44px] left-0" :data-show="showMenu">
-              <div v-for="menu in page.menus" class="" :key="`${locale}-${menu.title}`">
+              <div v-for="menu in page.menus" class="" :key="`${locale}-${menu.text}`">
                 <NuxtLink v-if="menu.href" :href="localePath(menu.href)" @click="closeMenu" class="block pl-5 pr-5 pt-2 pb-2">{{
-                  menu.title
+                  menu.text
                 }}</NuxtLink>
 
                 <div v-else class="header-menu-block-responsive pl-5 pr-5">
-                  <div class="cursor-pointer pt-2 pb-2">{{ menu.title }}</div>
+                  <div class="cursor-pointer pt-2 pb-2">{{ menu.text }}</div>
 
                   <div v-if="menu.items" class="header-menu-items-responsive pt-2 pb-2 bg-white">
                     <div v-if="menu.items" v-for="item in menu.items" class="">
-                      <div class="font-bold p-1 pl-4">{{ item.title }}</div>
+                      <div class="font-bold p-1 pl-4">{{ item.text }}</div>
 
                       <div v-for="subItem in item.items">
-                        <NuxtLink :href="localePath(subItem.href)" @click="closeMenu" class="p-1 pl-4 block">{{ subItem.title }}</NuxtLink>
+                        <NuxtLink :href="localePath(subItem.href)" @click="closeMenu" class="p-1 pl-4 block">{{ subItem.text }}</NuxtLink>
                       </div>
                     </div>
                   </div>
