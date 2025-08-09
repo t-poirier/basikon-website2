@@ -1,10 +1,10 @@
 <template>
   <div class="header grid-container fixed bg-white z-[10]">
-    <div class="row w-full">
-      <div class="col-xs-12 !p-0">
+    <div class="row">
+      <div class="col-xs-12">
         <div class="max-w-[2560px] m-auto flex justify-between items-center h-[44px]">
           <NuxtLink
-            class="h-full w-[260px] bg-no-repeat bg-center bg-contain"
+            class="h-full w-[260px] bg-no-repeat bg-left bg-contain"
             :style="{
               'background-image': `url(/img/basikon.svg)`,
             }"
