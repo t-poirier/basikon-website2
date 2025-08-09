@@ -31,6 +31,6 @@
   }
 
   .min-h-#{$i * 100}px {
-    height: $i * 100px;
+    min-height: $i * 100px;
   }
 }

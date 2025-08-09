@@ -1,21 +1,23 @@
 <template>
   <div :class="colClassName + (inArray ? '' : ' !p-0')">
-    <div :class="'mb-4 relative overflow-hidden' + (cardHeight ? ` h-${cardHeight}` : '') + (cardMinHeight ? ` min-h-${cardMinHeight}` : '')">
+    <div :class="'mb-4 relative overflow-hidden' + (cardHeight ? ` h-${cardHeight} min-h-${cardHeight}` : '')">
       <NuxtLink v-if="bgHref" :href="localePath(bgHref)" class="w-full h-full z-[3] left-[0] top-[0] absolute" tabindex="-1"></NuxtLink>
 
       <div
         v-if="imgUrl || bgCss"
         class="absolute w-full h-full bg-no-repeat bg-center bg-cover z-[1]"
-        :style="{...{
-          'background': bgCss,
-          'background-image': imgUrl ? `url(${imgUrl})` : undefined,
-        }}"
+        :style="{
+          ...{
+            background: bgCss,
+            'background-image': imgUrl ? `url(${imgUrl})` : undefined,
+          },
+        }"
       ></div>
       <video v-else-if="videoUrl" autoplay muted loop playsinline class="absolute w-full h-full z-[1]">
         <source :src="videoUrl" type="video/mp4" />
       </video>
 
-      <div class="pt-[61px] pb-[61px] h-full flex flex-col justify-between relative pointer-events-none z-[4]">
+      <div class="pt-[30px] pb-[30px] sm:pt-[60px] sm:pb-[60px] h-full flex flex-col justify-between relative pointer-events-none z-[4]">
         <CardBlock v-bind="blocks.top" />
         <CardBlock v-bind="blocks.middle" />
         <CardBlock v-bind="blocks.bottom" />
