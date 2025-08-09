@@ -59,7 +59,7 @@ function getItemCards({ item, data }) {
         height: "100px",
         background: {
           url: item.logoImg,
-          size: "15%"
+          size: "15%",
         },
       },
       {
@@ -79,7 +79,7 @@ function getItemCards({ item, data }) {
         },
       },
       {
-        height: "100px"
+        height: "100px",
       },
     ]
   }
@@ -91,15 +91,17 @@ function getItemCards({ item, data }) {
       },
       height: "300px",
       blocks: {
-        headline: {
-          text: item.title,
-          color: "midnight-blue-lightest",
-          fontWeight: "normal",
-        },
-        subhead: {
-          text: item.desc || item.meta,
-          color: "midnight-blue-lightest",
-          fontWeight: "normal",
+        top: {
+          headline: {
+            text: item.title,
+            color: "midnight-blue-lightest",
+            fontWeight: "normal",
+          },
+          subhead: {
+            text: item.desc || item.meta,
+            color: "midnight-blue-lightest",
+            fontWeight: "normal",
+          },
         },
       },
     },

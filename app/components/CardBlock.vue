@@ -5,7 +5,7 @@
     <div
       v-if="suphead?.text"
       :class="
-        'px-[2.5%] pointer-events-auto mt-2' +
+        'px-[2.5%] pointer-events-auto mt-2 max-w-[1200px] m-auto' +
         (suphead?.fontWeight === 'normal' ? '' : ' font-bold') +
         (suphead?.fontStyle === 'italic' ? ' italic' : '') +
         getTextStyle(suphead)
@@ -16,7 +16,7 @@
     <component
       :is="isHeroTemplate ? 'h2' : 'h3'"
       :class="
-        'px-[2.5%] pointer-events-auto mt-3' +
+        'px-[2.5%] pointer-events-auto mt-3 max-w-[1200px] m-auto' +
         (headline?.fontWeight === 'normal' ? '' : ' font-bold') +
         (headline?.fontStyle === 'italic' ? ' italic' : '') +
         (isHeroTemplate ? ' text-5xl leading-[3.5rem] ' : ' text-4xl leading-[3rem] ') +
@@ -29,7 +29,7 @@
     <div
       v-if="subhead?.text"
       :class="
-        'px-[2.5%] mt-1 pointer-events-auto' +
+        'px-[2.5%] mt-1 pointer-events-auto max-w-[1200px] m-auto' +
         (isHeroTemplate ? ' text-2xl' : ' text-xl') +
         (subhead?.fontWeight === 'bold' ? ' font-bold' : '') +
         (subhead?.fontStyle === 'italic' ? ' italic' : '') +

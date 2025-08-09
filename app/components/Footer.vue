@@ -2,7 +2,7 @@
   <div class="footer grid-container">
     <div class="row">
       <div class="col-xs-12">
-        <div class="max-w-[2560px] m-auto py-10">
+        <div class="max-w-[1200px] m-auto py-10">
           <NuxtLink
             class="h-[44px] w-[260px] block bg-no-repeat bg-left bg-contain"
             :style="{

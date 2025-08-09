@@ -2,7 +2,7 @@
   <div class="header grid-container fixed bg-white z-[10]">
     <div class="row">
       <div class="col-xs-12">
-        <div class="max-w-[2560px] m-auto flex justify-between items-center h-[44px]">
+        <div class="max-w-[1200px] m-auto flex justify-between items-center h-[44px]">
           <NuxtLink
             class="h-full w-[260px] bg-no-repeat bg-left bg-contain"
             :style="{
