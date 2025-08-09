@@ -77,7 +77,7 @@ h3 {
     color: #fff;
   }
 
-  &.button-primary-light {
+  &.button-white {
     background: #F5F5F7 !important;
     color: #000 !important;
 
@@ -86,7 +86,7 @@ h3 {
     }
   }
 
-  &.button-secondary {
+  &.button-midnight-blue {
     background: var(--color-midnight-blue);
     color: #FFF;
 
@@ -95,13 +95,13 @@ h3 {
     }
   }
 
-  &.button-tertiary {
+  &.button-transparent {
     background: transparent;
     color: #06c;
     border-color: #06c;
   }
 
-  &.button-tertiary-light {
+  &.button-white-light {
     border-color: #F5F5F7 !important;
     background: transparent !important;
     color: #F5F5F7 !important;
@@ -112,7 +112,7 @@ h3 {
     }
   }
 
-  &.button-fourth {
+  &.button-cyan {
     background: var(--color-cyan);
     color: #FFF;
 
