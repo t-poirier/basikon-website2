@@ -17,7 +17,12 @@
         <source :src="videoUrl" type="video/mp4" />
       </video>
 
-      <div class="pt-[30px] pb-[30px] lg:pt-[60px] lg:pb-[60px] h-full flex flex-col justify-between relative pointer-events-none z-[4]">
+      <ImgSlider v-if="imgSlider?.images?.length" :images="imgSlider.images" />
+
+      <div
+        v-if="blocks.top || blocks.middle || blocks.bottom"
+        class="pt-[30px] pb-[30px] lg:pt-[60px] lg:pb-[60px] h-full flex flex-col justify-between relative pointer-events-none z-[4]"
+      >
         <CardBlock v-bind="blocks.top" />
         <CardBlock v-bind="blocks.middle" />
         <CardBlock v-bind="blocks.bottom" />
@@ -39,13 +44,16 @@ const { lg, md, sm, xs, vh } = defineProps({
     default: "12",
   },
   cardHeight: String,
-  cardMinHeight: String,
+  imgSlider: {
+    type: Array,
+    default: () => [],
+  },
   blocks: {
     type: Object,
     default: () => ({
-      bottom: {},
-      middle: {},
-      top: {},
+      bottom: undefined,
+      middle: undefined,
+      top: undefined,
     }),
   },
   imgUrl: String,
