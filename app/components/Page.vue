@@ -36,7 +36,7 @@ function getBlogItemCards({ item, data }) {
             weight: "normal",
           },
           subhead: {
-            text: item.meta,
+            text: item.desc || item.meta,
             style: "midnight-blue-lightest",
             weight: "normal",
           },
