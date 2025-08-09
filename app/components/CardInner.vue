@@ -2,9 +2,9 @@
   <div :class="colClassName + (inArray ? '' : ' !p-0')">
     <div
       :class="
-        'mb-4 relative overflow-hidden flex items-center' +
+        'mb-4 relative overflow-hidden flex items-center justify-center' +
         (height ? ` h-${height} min-h-${height}` : '') +
-        (blocks?.align === 'side' ? '' : ' justify-center text-center')
+        (blocks?.align === 'side' ? '' : ' text-center')
       "
     >
       <NuxtLink
@@ -32,7 +32,10 @@
 
       <MediaSlider v-if="mediaSlider?.items?.length" :items="mediaSlider.items" />
 
-      <div v-if="blocks.top || blocks.middle || blocks.bottom" class="h-[85%] flex flex-col justify-between relative pointer-events-none z-[4]">
+      <div
+        v-if="blocks.top || blocks.middle || blocks.bottom"
+        class="h-[85%] w-[85%] flex flex-col justify-between relative pointer-events-none z-[4]"
+      >
         <CardBlock v-bind="blocks.top" :align="blocks?.align" />
         <CardBlock v-bind="blocks.middle" :align="blocks?.align" />
         <CardBlock v-bind="blocks.bottom" :align="blocks?.align" />

@@ -8,12 +8,12 @@
       v-html="parseMarkdown(subhead?.text)"
     ></div>
 
-    <div v-if="buttons.length" class="mt-5">
+    <div v-if="buttons.length" class="mt-2">
       <NuxtLink
         v-for="button in buttons"
         :key="button.text"
         :href="button.href"
-        :class="`ml-4 first:ml-0 pointer-events-auto button button-${button.style}`"
+        :class="`mt-3 ml-2 mr-2 first:ml-0 pointer-events-auto button button-${button.style}`"
       >
         {{ button.text }}
       </NuxtLink>
