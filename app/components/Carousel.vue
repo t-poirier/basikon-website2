@@ -6,18 +6,6 @@
       </div>
     </div>
 
-    <button
-      @click="prevSlide"
-      class="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full shadow size-[30px] flex cards-center justify-center"
-    >
-      ‹
-    </button>
-    <button
-      @click="nextSlide"
-      class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full shadow size-[30px] flex cards-center justify-center"
-    >
-      ›
-    </button>
 
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
       <button
