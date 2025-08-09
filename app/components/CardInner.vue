@@ -9,7 +9,7 @@
         :style="{
           ...{
             background: bgCss,
-            'background-image': imgUrl ? `url(${imgUrl})` : undefined,
+            'background-image': imgUrl ? `url(${resourcesUrl}${imgUrl})` : undefined,
           },
         }"
       ></div>
@@ -32,6 +32,7 @@
 </template>
 
 <script setup>
+import { resourcesUrl } from "@/services/utils"
 const { lg, md, sm, xs, vh } = defineProps({
   inArray: Boolean,
   bgHref: String,
