@@ -55,6 +55,20 @@ const htmlContent = markedInstance.parse(text.replaceAll("$v{resourcesUrl}", res
     font-size: 32px;
   }
 
+  h2.md-header:not(:first-child) {
+    position: relative;
+
+    &::before {
+      content: "";
+      border-top: 1px solid var(--heading-color);
+      display: block;
+      height: 1px;
+      position: absolute;
+      top: 8px;
+      width: 70%;
+    }
+  }
+
   h3 {
     color: var(--heading-color);
     font-size: 24px;

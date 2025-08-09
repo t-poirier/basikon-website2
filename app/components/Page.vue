@@ -35,6 +35,11 @@ function getBlogItemCards({ item, data }) {
             style: "midnight-blue-lightest",
             weight: "normal",
           },
+          subhead: {
+            text: item.meta,
+            style: "midnight-blue-lightest",
+            weight: "normal",
+          },
         },
       },
     },
@@ -43,6 +48,17 @@ function getBlogItemCards({ item, data }) {
         align: "side",
         markdown: {
           text: data.value,
+        },
+      },
+    },
+    {
+      blocks: {
+        markdown: {
+          text: new Date(item.date).toLocaleString(locale, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
         },
       },
     },
