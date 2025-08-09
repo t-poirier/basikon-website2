@@ -2,7 +2,8 @@
   <div :class="colClassName + (inArray ? '' : ' !p-0')">
     <div
       :class="
-        'mb-4 relative overflow-hidden flex items-center justify-center' +
+        'relative overflow-hidden flex items-center justify-center' +
+        (margins?.bottom === 0 ? '' : ' mb-4') +
         (height ? ` h-${height} min-h-${height}` : '') +
         (blocks?.align === 'side' ? '' : ' text-center')
       "
@@ -56,6 +57,12 @@ const { lg, md, sm, xs, vh } = defineProps({
     default: "12",
   },
   height: String,
+  margins: {
+    type: Object,
+    default: () => ({
+      bottom: undefined,
+    }),
+  },
   mediaSlider: {
     type: Array,
     default: () => [],
