@@ -64,10 +64,10 @@
 </template>
 
 <script setup>
-import { getLocaleMessages, getMarkedInstance, resourcesUrl } from "@/services/utils"
+import { getMarkedInstance, resourcesUrl } from "@/services/utils"
 import { ref } from "vue"
 
-const { lg, md, sm, xs, vh, moduleTemplate, summary } = defineProps({
+const { lg, md, sm, xs, vh, moduleTemplate, summary, messages } = defineProps({
   height: String,
   background: Object,
   headline: {
@@ -107,10 +107,10 @@ const { lg, md, sm, xs, vh, moduleTemplate, summary } = defineProps({
     type: Array,
     default: () => [],
   },
+  messages: Object,
 })
 
 const isHeroTemplate = moduleTemplate === "heroes"
-const { locale } = useI18n()
 const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
 
@@ -122,20 +122,8 @@ function getTextStyle({ color } = {}) {
   return color === "ai-gradient" ? ` ${color}` : color ? ` text-${color}` : ""
 }
 
-/**
- * $t{}
- */
-function extractTranslationKey(text) {
-  const regex = /^\$t\{(.+)\}$/
-  const match = text.match(regex)
-  const localeMessages = getLocaleMessages(locale.value)
-  const translationKey = match?.[1]
-  return match ? localeMessages?.[translationKey] || translationKey : text
-}
-
 function parseText(text) {
-  const translatedText = extractTranslationKey(text)
-  return markedInstance.parse(translatedText.replaceAll("$v{resourcesUrl}", resourcesUrl))
+  return markedInstance.parse((messages?.[text] || text).replaceAll("$v{resourcesUrl}", resourcesUrl))
 }
 
 function toggleSummary() {

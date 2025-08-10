@@ -29,9 +29,9 @@
       >
         <!-- We need the 3 blocks to always be present in the DOM for the flex justify between effect to occur -->
         <!-- Inside the card block there can be nothing as long as the wrapper is there -->
-        <CardBlock v-bind="blocks.top" />
-        <CardBlock v-bind="blocks.middle" />
-        <CardBlock v-bind="blocks.bottom" />
+        <CardBlock v-bind="blocks.top" :messages="messages" />
+        <CardBlock v-bind="blocks.middle" :messages="messages" />
+        <CardBlock v-bind="blocks.bottom" :messages="messages" />
       </div>
     </div>
   </div>
@@ -59,6 +59,7 @@ const { lg, md, sm, xs, vh } = defineProps({
   hubspotForm: Object,
   mediaSlider: Object,
   markdown: Object,
+  messages: Object,
   categoryList: Object,
   align: String,
   blocks: {

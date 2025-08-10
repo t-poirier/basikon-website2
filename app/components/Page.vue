@@ -2,10 +2,10 @@
   <div v-for="card in cards" class="row">
     <div class="col-xs-12" v-if="Array.isArray(card)">
       <div class="row">
-        <Card v-bind="row" v-for="row in card" inArray />
+        <Card v-bind="row" v-for="row in card" inArray :messages="messages" />
       </div>
     </div>
-    <Card v-else v-bind="card" />
+    <Card v-else v-bind="card" :messages="messages" />
   </div>
 </template>
 
@@ -23,6 +23,7 @@ const { locale } = useI18n()
 const notFoundPagePath = `/${locale.value}/404`
 
 const cards = ref([])
+const messages = ref({})
 
 function getItemCards({ item, markdownText }) {
   if (pageCategory === "customers-success-stories") {
@@ -150,37 +151,75 @@ if (pageCategory) {
   if (pageName.startsWith("_")) {
     router.push(notFoundPagePath)
   } else {
-    const [{ data, refresh: refreshFragments }, { data: page, refreshPage }] = await Promise.all([
-      useAsyncData(`_fragments-${locale.value}`, () => $fetch(`${resourcesUrl}/pages/${locale.value}/_fragments.json`)),
+    const [messagesRef, pageRef] = await Promise.allSettled([
+      useAsyncData(`messages-${pageName}-${locale.value}`, () => $fetch(`${resourcesUrl}/pages/${locale.value}/messages/${pageName}.json`)),
       useAsyncData(`${pageName}-${locale.value}`, () => $fetch(`${resourcesUrl}/pages/${locale.value}/${pageName}.json`)),
     ])
-    const { fragments } = data.value || {}
+    const { data: _messages, refresh: refreshMessages } = messagesRef.value || {}
+    const { data: page, refreshPage } = pageRef.value || {}
 
+    messages.value = _messages.value
+
+    const fragmentsToCollect = new Set()
     if (page.value?.cards) {
       for (let i = 0; i < page.value.cards.length; i++) {
         const cardOrArray = page.value.cards[i]
         if (Array.isArray(cardOrArray)) {
           for (let j = 0; j < cardOrArray.length; j++) {
             const card = cardOrArray[j]
-            const fragment = fragments?.find(fragment => fragment.id === card.fragmentId)
-            if (fragment) {
-              page.value.cards[i][j] = fragment
+            if (card.fragmentId) fragmentsToCollect.add(card.fragmentId)
+          }
+        } else if (cardOrArray.fragmentId) {
+          fragmentsToCollect.add(cardOrArray.fragmentId)
+        }
+      }
+
+      if (fragmentsToCollect.size) {
+        const fragments = await Promise.all(
+          Array.from(fragmentsToCollect).map(fragmentId => {
+            return useAsyncData(`fragments-${fragmentId}-${locale.value}`, () =>
+              $fetch(`${resourcesUrl}/pages/${locale.value}/fragments/${fragmentId}.json`),
+            )
+          }),
+        )
+
+        for (let i = 0; i < page.value.cards.length; i++) {
+          const cardOrArray = page.value.cards[i]
+          if (Array.isArray(cardOrArray)) {
+            for (let j = 0; j < cardOrArray.length; j++) {
+              const card = cardOrArray[j]
+              const fragment = fragments?.find(fragment => fragment.data.value.id === card.fragmentId)
+              if (fragment) {
+                page.value.cards[i][j] = fragment.data.value
+              }
+            }
+          } else {
+            if (cardOrArray.fragmentId) {
+              const fragment = fragments?.find(fragment => fragment.data.value.id === cardOrArray.fragmentId)
+              if (fragment) {
+                page.value.cards[i] = fragment.data.value
+              }
             }
           }
-        } else {
-          if (cardOrArray.fragmentId) {
-            const fragment = fragments?.find(fragment => fragment.id === cardOrArray.fragmentId)
-            if (fragment) {
-              page.value.cards[i] = fragment
-            }
-          }
+        }
+
+        const fragmentsMessages = await Promise.all(
+          Array.from(fragmentsToCollect).map(fragmentId => {
+            return useAsyncData(`fragments-${fragmentId}-messages-${locale.value}`, () =>
+              $fetch(`${resourcesUrl}/pages/${locale.value}/messages/${fragmentId}.json`),
+            )
+          }),
+        )
+
+        for (const fragmentMessages of fragmentsMessages) {
+          Object.assign(messages.value, fragmentMessages.data.value)
         }
       }
 
       cards.value = page.value.cards
 
       watch(locale, async () => {
-        await refreshFragments()
+        await refreshMessages()
         await refreshPage()
       })
 
