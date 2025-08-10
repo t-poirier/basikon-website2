@@ -24,7 +24,7 @@ const notFoundPagePath = `/${locale.value}/404`
 
 const cards = ref([])
 
-function getItemCards({ item, data }) {
+function getItemCards({ item, markdownText }) {
   if (pageCategory === "customers-success-stories") {
     return [
       {
@@ -68,7 +68,7 @@ function getItemCards({ item, data }) {
       {
         blocks: {
           align: "side",
-          markdown: { text: data.value },
+          markdown: { text: markdownText.value },
         },
       },
       { height: "100px" },
@@ -95,7 +95,7 @@ function getItemCards({ item, data }) {
       },
     },
     {
-      blocks: { align: "side", markdown: { text: data.value } },
+      blocks: { align: "side", markdown: { text: markdownText.value } },
     },
     {
       blocks: {
@@ -120,11 +120,11 @@ if (pageCategory) {
 
   const categoryItem = categoryItems.value?.find(c => c?.uri === pageName)
   if (categoryItem) {
-    const { data, refresh: refreshMarkdown } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.md`, () =>
+    const { data: markdownText, refresh: refreshMarkdown } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.md`, () =>
       $fetch(`${resourcesUrl}/content/${pageCategory}/${pageName}/${locale.value}.md`),
     )
 
-    cards.value = getItemCards({ item: categoryItem, data })
+    cards.value = getItemCards({ item: categoryItem, markdownText })
 
     watch(locale, async () => {
       await refreshCategoryIndex()
