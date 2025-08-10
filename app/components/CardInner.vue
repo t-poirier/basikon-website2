@@ -41,12 +41,12 @@
 const { lg, md, sm, xs, vh } = defineProps({
   show: { type: Boolean, default: true },
   inArray: Boolean,
-  lg: String,
-  md: String,
-  sm: String,
+  lg: Number,
+  md: Number,
+  sm: Number,
   xs: {
-    type: String,
-    default: "12",
+    type: Number,
+    default: 12,
   },
   maxWidth: String,
   height: String,
