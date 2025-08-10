@@ -1,11 +1,19 @@
 <template>
   <div class="relative w-full mx-auto overflow-hidden">
     <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
-      <div v-for="(card, index) in cards" :key="index" class="w-full flex-shrink-0">
-        <CardInner v-bind="card" :messages="messages" />
-      </div>
+      <template v-for="(card, index) in cards" :key="index">
+        <div class="w-full flex-shrink-0">
+          <div class="row" v-if="Array.isArray(card)">
+            <div class="col-xs-12">
+              <div class="row">
+                <CardInner v-for="row in card" v-bind="row" :messages="messages" />
+              </div>
+            </div>
+          </div>
+          <CardInner v-else v-bind="card" :messages="messages" />
+        </div>
+      </template>
     </div>
-
 
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
       <button
