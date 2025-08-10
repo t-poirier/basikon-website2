@@ -155,7 +155,7 @@ const htmlContent = markedInstance.parse(text.value.replaceAll("$v{resourcesUrl}
       font-size: 80px;
       left: -8px;
       position: absolute;
-      top: w26px;
+      top: 26px;
     }
 
     p {
