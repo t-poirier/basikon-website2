@@ -8,7 +8,7 @@
       v-if="suphead?.text"
       :class="
         'px-[2.5%] pointer-events-auto mt-2 max-w-[1200px] m-auto' +
-        (subhead?.fontWeight === 'bold' ? ' font-bold' : '') +
+        (suphead?.fontWeight === 'bold' ? ' font-bold' : '') +
         (suphead?.fontStyle === 'italic' ? ' italic' : '') +
         getTextStyle(suphead)
       "
