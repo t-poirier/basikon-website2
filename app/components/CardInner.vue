@@ -19,7 +19,7 @@
       <CardBackground absolute :background="background" />
 
       <MediaSlider v-if="mediaSlider?.items?.length" :items="mediaSlider.items" />
-      <HubspotForm v-if="hubspotForm" :hubspotForm="hubspotForm" />
+      <HubspotForm v-if="hubspotForm" :hubspotForm="hubspotForm" :messages="messages" />
       <Markdown v-if="markdown" :markdown="markdown" />
       <CategoryList v-if="categoryList" :content="categoryList" />
 

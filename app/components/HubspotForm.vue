@@ -1,21 +1,30 @@
 <template>
-  <div id="hubspotForm" class="max-w-[500px] w-full px-4"></div>
+  <div :id="target" class="max-w-[500px] w-full px-4"></div>
 </template>
 
 <script setup>
-import { onMounted } from "vue"
+import { onMounted, toRaw } from "vue"
 
-const { hubspotForm } = defineProps({
+const { hubspotForm, messages } = defineProps({
   hubspotForm: {
     type: Object,
     default: () => ({
       region: "",
       portalId: "",
       formId: "",
-      target: "",
     }),
   },
+  messages: Object,
 })
+
+const rawHubspotForm = toRaw(hubspotForm)
+const rawMessages = toRaw(messages)
+const target = "hubspot-form"
+const formParams = {
+  ...rawHubspotForm,
+  target: "#" + target,
+  formId: rawMessages[rawHubspotForm.formId] || rawHubspotForm.formId,
+}
 
 onMounted(() => {
   const script = document.createElement("script")
@@ -23,7 +32,7 @@ onMounted(() => {
   script.async = true
   script.onload = () => {
     if (window.hbspt) {
-      window.hbspt.forms.create(hubspotForm)
+      window.hbspt.forms.create(formParams)
     }
   }
   document.body.appendChild(script)
