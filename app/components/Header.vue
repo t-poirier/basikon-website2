@@ -39,7 +39,7 @@
             <NuxtLink
               v-if="page.button"
               :href="localePath(page.button.href)"
-              :class="'pointer-events-auto button button-sm' + (page.button.style ? ` button-${page.button.style}` : '')"
+              :class="'pointer-events-auto button button-sm' + (page.button.color ? ` button-${page.button.color}` : '')"
             >
               {{ page.button.text }}
             </NuxtLink>
