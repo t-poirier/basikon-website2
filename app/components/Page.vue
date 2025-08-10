@@ -219,7 +219,16 @@ if (pageCategory) {
       await refreshPage()
     })
 
-    useHead(page.value.head)
+    useHead({
+      ...(page.value.head || {}),
+      title: messages.value[page.value.head?.title] || page.value.head?.title,
+      meta: page.value.head?.meta?.map(meta => {
+        return {
+          name: meta.name,
+          content: messages.value[meta.content] || meta.content,
+        }
+      }),
+    })
   } else {
     router.push(notFoundPagePath)
   }
