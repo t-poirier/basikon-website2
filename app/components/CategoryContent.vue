@@ -58,8 +58,8 @@ const cards = items.value?.map(item => {
       hrefTarget: isExternalUri ? "_blank" : "",
       hrefOverlay: true,
     },
+    align: "side",
     blocks: {
-      align: "side",
       top: {
         height: height || "300px",
         background: {

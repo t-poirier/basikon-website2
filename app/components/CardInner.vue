@@ -6,7 +6,7 @@
         (margin?.bottom === 0 ? '' : ' mb-4') +
         (maxWidth ? ` max-w-${maxWidth} m-auto` : '') +
         (height ? ` min-h-${height}` : '') +
-        (blocks?.align === 'side' ? ' text-left' : ' text-center')
+        (align === 'side' ? ' text-left' : ' text-center')
       "
     >
       <NuxtLink
@@ -18,10 +18,10 @@
 
       <CardBackground absolute :background="background" />
 
-      <MediaSlider v-if="blocks?.mediaSlider?.items?.length" :items="blocks?.mediaSlider.items" />
-      <HubspotForm v-if="blocks?.hubspotForm" :hubspotForm="blocks.hubspotForm" />
-      <Markdown v-if="blocks?.markdown" :markdown="blocks.markdown" />
-      <CategoryContent v-if="blocks?.categoryContent" :content="blocks.categoryContent" />
+      <MediaSlider v-if="mediaSlider?.items?.length" :items="mediaSlider.items" />
+      <HubspotForm v-if="hubspotForm" :hubspotForm="hubspotForm" />
+      <Markdown v-if="markdown" :markdown="markdown" />
+      <CategoryContent v-if="categoryContent" :content="categoryContent" />
 
       <div
         v-if="blocks.top || blocks.middle || blocks.bottom"
@@ -56,14 +56,17 @@ const { lg, md, sm, xs, vh } = defineProps({
       bottom: undefined,
     }),
   },
+  hubspotForm: Object,
+  mediaSlider: Object,
+  markdown: Object,
+  categoryContent: Object,
+  align: String,
   blocks: {
     type: Object,
     default: () => ({
-      align: undefined,
       bottom: undefined,
       middle: undefined,
       top: undefined,
-      mediaSlider: undefined,
     }),
   },
   background: {

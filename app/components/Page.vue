@@ -60,16 +60,12 @@ function getItemCards({ item, markdownText }) {
         background: { url: item.logoImg, size: "15%" },
       },
       {
-        blocks: {
-          align: "side",
-          markdown: { text: item.companyBrief?.join("<br>") },
-        },
+        align: "side",
+        markdown: { text: item.companyBrief?.join("<br>") },
       },
       {
-        blocks: {
-          align: "side",
-          markdown: { text: markdownText.value },
-        },
+        markdown: { text: markdownText.value },
+        align: "side",
       },
       { height: "100px" },
     ]
@@ -94,31 +90,25 @@ function getItemCards({ item, markdownText }) {
         },
       },
     },
+    { markdown: { text: markdownText.value }, blocks: { align: "side" } },
     {
-      blocks: { align: "side", markdown: { text: markdownText.value } },
-    },
-    {
-      blocks: {
-        markdown: {
-          text: item.date
-            ? new Date(item.date).toLocaleString(locale.value, {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })
-            : "",
-        },
+      markdown: {
+        text: item.date
+          ? new Date(item.date).toLocaleString(locale.value, {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          : "",
       },
     },
     {
       height: "150px",
     },
     {
-      blocks: {
-        categoryContent: {
-          category: pageCategory,
-          pagination: 3,
-        },
+      categoryContent: {
+        category: pageCategory,
+        pagination: 3,
       },
     },
     {
