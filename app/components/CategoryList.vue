@@ -62,11 +62,14 @@ const cards = items.value?.map(item => {
       top: {
         height: topBlockHeight || "300px",
         background: {
-          url: encodeURI((item.storyTitleImg ? item.storyTitleImg : "") || item.imgSrc || itemUri),
+          url: (item.storyTitleImg ? item.storyTitleImg : "") || item.imgSrc || itemUri,
           type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
           position: background?.position || "bottom",
           size: background?.size,
           borderRadius: background?.borderRadius || "5px",
+          autoplay: item?.autoplay,
+          muted: item?.muted,
+          loop: item?.loop,
         },
       },
       middle: {
