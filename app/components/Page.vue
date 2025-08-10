@@ -111,12 +111,18 @@ function getItemCards({ item, markdownText }) {
       },
     },
     {
+      height: "150px",
+    },
+    {
       blocks: {
         categoryContent: {
-          category: "blog",
+          category: pageCategory,
           pagination: 3,
         },
       },
+    },
+    {
+      height: "150px",
     },
   ]
 }
