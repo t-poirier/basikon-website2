@@ -171,13 +171,21 @@ if (pageCategory) {
     }
 
     if (fragmentsToCollect.size) {
-      const fragments = await Promise.all(
-        Array.from(fragmentsToCollect).map(fragmentId => {
-          return useAsyncData(`fragments-${fragmentId}-${locale.value}`, () =>
-            $fetch(`${resourcesUrl}/pages/${locale.value}/fragments/${fragmentId}.json`),
-          )
-        }),
-      )
+      const fragmentsPromises = []
+      const fragmentsMessagesPromises = []
+      for (const fragmentId of fragmentsToCollect) {
+        fragmentsPromises.push(
+          useAsyncData(`fragments-${fragmentId}-${locale.value}`, () => $fetch(`${resourcesUrl}/pages/${locale.value}/fragments/${fragmentId}.json`)),
+        )
+        fragmentsMessagesPromises.push(
+          useAsyncData(`fragments-${fragmentId}-messages-${locale.value}`, () =>
+            $fetch(`${resourcesUrl}/pages/${locale.value}/messages/${fragmentId}.json`),
+          ),
+        )
+      }
+
+      const fragments = await Promise.allSettled(fragmentsPromises)
+      const fragmentsMessages = await Promise.allSettled(fragmentsMessagesPromises)
 
       for (let i = 0; i < page.value.cards.length; i++) {
         const cardOrArray = page.value.cards[i]
@@ -185,30 +193,26 @@ if (pageCategory) {
           for (let j = 0; j < cardOrArray.length; j++) {
             const card = cardOrArray[j]
             if (card.fragmentId) {
-              const fragment = fragments?.find(fragment => fragment.data.value.id === card.fragmentId)
+              const fragment = fragments?.find(fragment => {
+                return fragment.value?.data?.value?.id === card.fragmentId
+              })
               if (fragment) {
-                page.value.cards[i][j] = fragment.data.value
+                page.value.cards[i][j] = fragment.value?.data?.value
               }
             }
           }
         } else if (cardOrArray.fragmentId) {
-          const fragment = fragments?.find(fragment => fragment.data.value.id === cardOrArray.fragmentId)
+          const fragment = fragments?.find(fragment => {
+            return fragment.value?.data?.value?.id === cardOrArray.fragmentId
+          })
           if (fragment) {
-            page.value.cards[i] = fragment.data.value
+            page.value.cards[i] = fragment.value?.data?.value
           }
         }
       }
 
-      const fragmentsMessages = await Promise.all(
-        Array.from(fragmentsToCollect).map(fragmentId => {
-          return useAsyncData(`fragments-${fragmentId}-messages-${locale.value}`, () =>
-            $fetch(`${resourcesUrl}/pages/${locale.value}/messages/${fragmentId}.json`),
-          )
-        }),
-      )
-
       for (const fragmentMessages of fragmentsMessages) {
-        Object.assign(messages.value, fragmentMessages.data.value)
+        Object.assign(messages.value, fragmentMessages.value?.data?.value)
       }
     }
 
