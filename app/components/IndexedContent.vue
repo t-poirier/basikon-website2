@@ -1,15 +1,16 @@
 <template>
   <div class="row">
-    <Card v-bind="card" v-for="card in cards" inArray />
-    <div class="col-xs-12 my-10">
-      <button class="button">{{ $t("viewMore") }}</button>
+    <Card v-bind="card" v-for="card in cards?.filter((dummy, index) => currentPagination ? index < currentPagination : true)" inArray />
+
+    <div v-if="pagination && currentPagination < cards.length" class="col-xs-12 my-10">
+      <button class="button" @click.stop="viewMore">{{ $t("viewMore") }}</button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { resourcesUrl } from "@/services/utils"
-import { watch } from "vue"
+import { ref, watch } from "vue"
 
 const { content } = defineProps({
   content: Object,
@@ -17,12 +18,17 @@ const { content } = defineProps({
 
 const { locale, t: loc } = useI18n()
 const { type, pagination, height, background } = content || {}
+const currentPagination = ref(pagination)
 
 const { data: items, refresh } = await useAsyncData(`${type}-${locale.value}.json`, () =>
   $fetch(`${resourcesUrl}/content/${type}/index_${locale.value}.json`),
 )
 
 watch(locale, () => refresh())
+
+function viewMore() {
+  currentPagination.value += pagination
+}
 
 const cards = items.value?.map(item => {
   const href =
