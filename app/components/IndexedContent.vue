@@ -21,10 +21,9 @@ const { data: items, refresh } = await useAsyncData(`${type}-${locale.value}.jso
 watch(locale, () => refresh())
 
 const cards = items.value?.map(item => {
-  const href = item.uri?.startsWith("http") ? item.uri : type + item.uri
+  const href = item.uri?.startsWith("http") || item.uri?.startsWith("/imp") ? item.uri : '/' + locale.value + "/" + type + "/" + item.uri
   return {
     sm: "4",
-    height: "600px",
     maxWidth: "400px",
     blocks: {
       align: "side",
@@ -39,10 +38,11 @@ const cards = items.value?.map(item => {
       },
       bottom: {
         moduleTemplate: "promo",
-        headline: {
-          text: item.title,
-        },
         subhead: {
+          text: item.title,
+          fontWeight: "bold",
+        },
+        summary: {
           text: item.desc || item.meta,
         },
         buttons: [

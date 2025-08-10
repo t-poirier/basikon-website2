@@ -39,14 +39,8 @@
       v-html="parseMarkdown(subhead?.text)"
     ></div>
 
-    <div
-      v-if="summary?.text"
-      :class="
-        'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px] m-auto' +
-        getTextStyle(summary)
-      "
-      v-html="parseMarkdown(summary?.text)"
-    ></div>
+    <div v-if="summaryText" :class="'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px] m-auto'" v-html="parseMarkdown(showFullSummary ? summary.text : summaryText)"></div>
+    <div v-if="shouldCutSummary" class="px-[2.5%] text-blue pointer-events-auto cursor-pointer" @click.stop="showFullSummary = !showFullSummary">{{ "Read more" }}</div>
 
     <div v-if="buttons.length" class="mt-1 px-[2.5%] max-w-[1200px] m-auto">
       <NuxtLink
@@ -64,7 +58,7 @@
 <script setup>
 import { getMarkedInstance, resourcesUrl } from "@/services/utils"
 
-const { lg, md, sm, xs, vh, moduleTemplate } = defineProps({
+const { lg, md, sm, xs, vh, moduleTemplate, summary } = defineProps({
   height: String,
   background: {
     type: Object,
@@ -100,6 +94,7 @@ const { lg, md, sm, xs, vh, moduleTemplate } = defineProps({
     default: () => ({
       text: "",
       style: "",
+      maxLength: undefined,
     }),
   },
   moduleTemplate: {
@@ -115,6 +110,10 @@ const { lg, md, sm, xs, vh, moduleTemplate } = defineProps({
 const isHeroTemplate = moduleTemplate === "heroes"
 const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
+
+let showFullSummary = false
+const shouldCutSummary = summary?.maxLength < summary?.text?.length
+const summaryText = shouldCutSummary ? summary?.text.substring(0, summary.maxLength) + "..." : summary?.text
 
 function getTextStyle({ color } = {}) {
   return color === "ai-gradient" ? ` ${color}` : color ? ` text-${color}` : ""
