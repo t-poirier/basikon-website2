@@ -12,7 +12,7 @@
         v-for="(slide, index) in cards"
         :key="index"
         @click="goToSlide(index)"
-        :class="['size-3 rounded-full', currentSlide === index ? 'bg-white' : 'bg-white/50']"
+        :class="['size-3 rounded-full border', currentSlide === index ? 'bg-white' : 'bg-white/50']"
       />
     </div>
   </div>
