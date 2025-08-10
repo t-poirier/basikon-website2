@@ -11,6 +11,7 @@
     >
       <NuxtLink
         v-if="background?.href"
+        :target="background?.hrefTarget"
         :href="localePath(background.href)"
         :class="'size-full left-[0] top-[0] absolute' + (background?.hrefOverlay ? ' z-[10] ' : ' z-[3] ')"
       ></NuxtLink>

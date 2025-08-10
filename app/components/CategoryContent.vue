@@ -31,12 +31,16 @@ function viewMore() {
 }
 
 const cards = items.value?.map(item => {
+  const itemUri = item.uri || item.url
+  const isExternalUri = item.isExternalUri || itemUri?.startsWith("http")
   const href =
-    item.uri?.startsWith("http") || item.uri?.startsWith("/imp")
+    isExternalUri || itemUri?.startsWith("/imp")
       ? item.videoSrc || item.youtubeSrc
         ? ""
-        : item.uri
-      : `/${locale.value}/${category}/${item.uri}`
+        : itemUri
+      : itemUri.startsWith(`/${locale.value}`)
+        ? itemUri
+        : `/${locale.value}/${category}/${itemUri}`
 
   const itemDate = item.date
     ? new Date(item.date).toLocaleString(locale.value, {
@@ -51,6 +55,7 @@ const cards = items.value?.map(item => {
     maxWidth: "400px",
     background: {
       href,
+      hrefTarget: isExternalUri ? "_blank" : "",
       hrefOverlay: true,
     },
     blocks: {
@@ -58,7 +63,7 @@ const cards = items.value?.map(item => {
       top: {
         height: height || "300px",
         background: {
-          url: encodeURI((item.storyTitleImg ? item.storyTitleImg : "") || item.imgSrc || item.uri),
+          url: encodeURI((item.storyTitleImg ? item.storyTitleImg : "") || item.imgSrc || itemUri),
           type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
           position: background?.position || "bottom",
           size: background?.size,
