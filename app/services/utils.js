@@ -42,7 +42,9 @@ function getMarkedInstance({ localePath, useHeadingAnchors } = {}) {
         .toLowerCase()
         .replace(/\s/g, "-")
         .replace(/\W_/g, "")
-        .replace(/¿|\?|!|'|"|\.|%|’/g, "")
+        .replace(/è/g, "e")
+        .replace(/¿|\?|:|!|'|"|\.|%|’/g, "")
+        .replace(/--/g, "-")
 
       return `
 <h${depth} class="md-header">
