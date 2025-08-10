@@ -1,5 +1,5 @@
 
-const resourcesUrl = (process.env.NODE_ENV === "production" ? "" : `http://localhost`) + "/imp/website"
+import { resourcesUrl } from "@/services/utils"
 
 export default defineI18nLocale(locale => {
   // for example, fetch locale messages from nuxt server

@@ -7,32 +7,32 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/i18n', '@nuxtjs/tailwindcss', '@nuxtjs/sitemap'],
   i18n: {
-    langDir: './',
+    langDir: '../app/services/',
     locales: [
       {
         code: 'en',
         name: 'English',
-        files: ['ext.js']
+        files: ['i18n.js']
       },
       {
         code: 'fr',
         name: 'Français',
-        files: ['ext.js']
+        files: ['i18n.js']
       },
       {
         code: 'es',
         name: 'Español',
-        files: ['ext.js']
+        files: ['i18n.js']
       },
       {
         code: 'de',
         name: 'Deutsch',
-        files: ['ext.js']
+        files: ['i18n.js']
       },
       {
         code: 'it',
         name: 'Italiano',
-        files: ['ext.js']
+        files: ['i18n.js']
       }
     ],
     defaultLocale: 'en',
