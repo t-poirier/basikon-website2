@@ -73,7 +73,7 @@ const cards = items.value?.map(item => {
       middle: {
         moduleTemplate: "promo",
         suphead: {
-          text: item.category,
+          text: item.category || item.label,
         },
         subhead: {
           text: item.storyTitle || item.title,
