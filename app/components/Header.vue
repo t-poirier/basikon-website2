@@ -26,7 +26,7 @@
                       <div class="font-bold whitespace-nowrap p-1">{{ item.text }}</div>
 
                       <div v-for="subItem in item.items">
-                        <NuxtLink :href="localePath(subItem.href)" class="whitespace-nowrap p-1 block">{{ subItem.text }}</NuxtLink>
+                        <NuxtLink :href="localePath(subItem.href)" class="whitespace-nowrap p-1 block min-w-[140px]">{{ subItem.text }}</NuxtLink>
                       </div>
                     </div>
                   </div>
