@@ -149,16 +149,16 @@ if (pageCategory) {
   const messagesKeyUrl = `${resourcesUrl}/pages/${locale.value}/messages/${pageName}.json`
   const pageKeyUrl = `${resourcesUrl}/pages/${locale.value}/${pageName}.json`
 
-  const [messagesRef, pageRef] = await Promise.allSettled([
+  const [messagesRef, pageRef] = await Promise.all([
     useAsyncData(messagesKeyUrl, () => $fetch(messagesKeyUrl)),
     useAsyncData(pageKeyUrl, () => $fetch(pageKeyUrl)),
   ])
-  const { data: _messages, refresh: refreshMessages } = messagesRef?.value || {}
-  const { data: localePage, refresh: localeRefreshPage } = pageRef?.value || {}
+  const { data: _messages, refresh: refreshMessages } = messagesRef || {}
+  const { data: localePage, error: localePageError, refresh: localeRefreshPage } = pageRef || {}
 
   let page = localePage?.value
   let refreshPage = localeRefreshPage
-  if (!page) {
+  if (localePageError.value) {
     const defaultPageKeyUrl = `${resourcesUrl}/pages/${defaultLocale}/${pageName}.json`
     const pageRef = await useAsyncData(defaultPageKeyUrl, () => $fetch(defaultPageKeyUrl))
     page = pageRef.data.value
@@ -192,8 +192,19 @@ if (pageCategory) {
         fragmentsMessagesPromises.push(useAsyncData(fragmentMessagesKeyUrl, () => $fetch(fragmentMessagesKeyUrl)))
       }
 
-      const fragments = await Promise.allSettled(fragmentsPromises)
-      const fragmentsMessages = await Promise.allSettled(fragmentsMessagesPromises)
+      const fragmentsRef = await Promise.all(fragmentsPromises)
+      const fragmentsMessagesRef = await Promise.all(fragmentsMessagesPromises)
+
+      let index = 0
+      for (const fragmentId of fragmentsToCollect) {
+        const fragment = fragmentsRef[index]
+        if (fragment.error.value) {
+          const defaultFragmentKeyUrl = `${resourcesUrl}/pages/${defaultLocale}/fragments/${fragmentId}.json`
+          const fragmentRef = await useAsyncData(defaultFragmentKeyUrl, () => $fetch(defaultFragmentKeyUrl))
+          fragmentsRef[index].data.value = fragmentRef.data.value
+        }
+        index++
+      }
 
       for (let i = 0; i < page.cards.length; i++) {
         const cardOrArray = page.cards[i]
@@ -201,26 +212,26 @@ if (pageCategory) {
           for (let j = 0; j < cardOrArray.length; j++) {
             const card = cardOrArray[j]
             if (card.fragmentId) {
-              const fragment = fragments?.find(fragment => {
-                return fragment.value?.data?.value?.id === card.fragmentId
+              const fragment = fragmentsRef?.find(fragment => {
+                return fragment?.data?.value?.id === card.fragmentId
               })
               if (fragment) {
-                page.cards[i][j] = fragment?.value?.data?.value
+                page.cards[i][j] = fragment?.data?.value
               }
             }
           }
         } else if (cardOrArray.fragmentId) {
-          const fragment = fragments?.find(fragment => {
-            return fragment.value?.data?.value?.id === cardOrArray.fragmentId
+          const fragment = fragmentsRef?.find(fragment => {
+            return fragment?.data?.value?.id === cardOrArray.fragmentId
           })
           if (fragment) {
-            page.cards[i] = fragment.value?.data?.value
+            page.cards[i] = fragment?.data?.value
           }
         }
       }
 
-      for (const fragmentMessages of fragmentsMessages) {
-        Object.assign(messages.value, fragmentMessages?.value?.data?.value || {})
+      for (const fragmentMessages of fragmentsMessagesRef) {
+        Object.assign(messages.value, fragmentMessages?.data?.value || {})
       }
     }
 
