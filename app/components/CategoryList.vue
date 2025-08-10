@@ -3,7 +3,7 @@
     <Card v-bind="card" v-for="card in cards?.filter((dummy, index) => (currentPagination ? index < currentPagination : true))" inArray />
 
     <div v-if="pagination && currentPagination < cards.length" class="col-xs-12 my-10">
-      <button class="button" @click.stop="viewMore">{{ $t("viewMore") }}</button>
+      <button class="button" @click.stop="viewMore">{{ $t("View more") }}</button>
     </div>
   </div>
 </template>
@@ -86,7 +86,7 @@ const cards = items.value?.map(item => {
       bottom: {
         moduleTemplate: "promo",
         suphead: {
-          text: `${itemDate}\n${item.readingMinutes ? ` ${item.readingMinutes} ${loc("readingMinutes")}` : ""}`,
+          text: `${itemDate}\n${item.readingMinutes ? ` ${item.readingMinutes} ${loc("reading minutes")}` : ""}`,
           color: "black-lightest",
         },
       },

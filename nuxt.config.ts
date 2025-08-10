@@ -12,27 +12,27 @@ export default defineNuxtConfig({
       {
         code: 'en',
         name: 'English',
-        files: ['en/index.json']
+        files: ['ext.js']
       },
       {
         code: 'fr',
         name: 'Français',
-        files: ['fr/index.json']
+        files: ['ext.js']
       },
       {
         code: 'es',
         name: 'Español',
-        files: ['es/index.json']
+        files: ['ext.js']
       },
       {
         code: 'de',
         name: 'Deutsch',
-        files: ['de/index.json']
+        files: ['ext.js']
       },
       {
         code: 'it',
         name: 'Italiano',
-        files: ['it/index.json']
+        files: ['ext.js']
       }
     ],
     defaultLocale: 'en',
