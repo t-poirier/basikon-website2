@@ -57,7 +57,7 @@
         :href="localePath(button.href)"
         :class="`mt-3 mx-2 first:ml-0 pointer-events-auto button button-${button.color}`"
       >
-        {{ messages[button.text] || button.text }}
+        {{ messages?.[button.text] || button.text }}
       </NuxtLink>
     </div>
   </div>
