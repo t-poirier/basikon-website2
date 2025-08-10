@@ -22,7 +22,7 @@ html {
 
 body {
   color: var(--text-color);
-  line-height: var(--line-height);
+  line-height: 1.5;
   font-family: Avenir, sans-serif;
   margin: 0 auto;
 }
@@ -98,7 +98,7 @@ body {
 }
 
 a {
-  color: var(--link-color);
+  color: var(--color-blue);
   cursor: pointer;
 
   &:hover {

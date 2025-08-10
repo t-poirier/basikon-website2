@@ -18,22 +18,6 @@
   --color-midnight-blue: #182431;
   --color-midnight-blue-lighter: #394552;
   --color-midnight-blue-lightest: #072B6A;
-
-  --color-states-blue: #005FBE;
-  --color-states-green: #007600;
-  --color-states-orange: #D16200;
-  --color-states-purple: #8C45AF;
-  --color-states-red: #D00000;
-  --color-states-yellow: #E1B400;
-  --color-states-cyan: #03a3a6;
-  --color-states-gray: var(--color-gray-darker);
-
-  --color-bg-blue: hsl(207, 48%, 90%);
-  --color-bg-green: hsl(120, 61%, 91%);
-  --color-bg-orange: hsl(35, 100%, 90%);
-  --color-bg-yellow: hsl(48, 100%, 94%);
-  --color-bg-red: hsl(356, 100%, 94%);
-
   --color-white: hsl(0, 0%, 100%);
   --color-gray-lightest: hsl(0, 0%, 96%);
   --color-gray-lighter: hsl(0, 0%, 90%);
@@ -44,50 +28,17 @@
   --color-black-lighter: hsl(0, 0%, 23%);
   --color-black: hsl(0, 0%, 0%);
 
-  --btn-blue: var(--color-blue);
-  --btn-green: var(--color-green);
-  --btn-orange: var(--color-orange);
-  --btn-purple: var(--color-purple);
-  --btn-red: var(--color-red);
-  --btn-yellow: var(--color-yellow);
-  --btn-gray: var(--color-gray);
-
-  --btn-blue-states-color: var(--color-states-blue);
-  --btn-green-states-color: var(--color-states-green);
-  --btn-orange-states-color: var(--color-states-orange);
-  --btn-purple-states-color: var(--color-states-purple);
-  --btn-red-states-color: var(--color-states-red);
-  --btn-yellow-states-color: var(--color-states-yellow);
-  --btn-gray-states-color: var(--color-states-gray);
-
-  --primary-color: var(--color-blue);
-  --primary-states-color: var(--color-states-blue);
-  --primary-background-color: var(--color-bg-blue);
-  --info-color: var(--color-blue);
-  --info-states-color: var(--color-states-blue);
-  --info-background-color: var(--color-bg-blue);
-  --success-color: var(--color-green);
-  --success-states-color: var(--color-states-green);
-  --success-background-color: var(--color-bg-green);
-  --yellow-background-color: var(--color-bg-orange);
-  --warning-color: var(--color-orange);
-  --warning-states-color: var(--color-states-orange);
-  --warning-background-color: var(--color-bg-orange);
-  --danger-color: var(--color-red);
-  --danger-states-color: var(--color-states-red);
-  --danger-background-color: var(--color-bg-red);
-  --muted-color: var(--color-gray-darkest);
-  --muted-background-color: var(--color-gray-lightest);
-  --muted-border-color: var(--color-gray-lighter);
+  --color-states-blue: #005FBE;
+  --color-states-green: #007600;
+  --color-states-orange: #D16200;
+  --color-states-purple: #8C45AF;
+  --color-states-red: #D00000;
+  --color-states-yellow: #E1B400;
+  --color-states-cyan: #03a3a6;
+  --color-states-gray: var(--color-gray-darker);
 
   --text-color: var(--color-black);
-  --link-color: var(--color-blue);
-  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  --line-height: 1.5; // min required for accessibility
   --spacing: 16px;
-  
-  // the min size value to reach AA accessibility level
-  --wcag-aa-min-size: 24px;
 }
 
 @include meta.load-css("global.scss");

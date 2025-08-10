@@ -27,7 +27,6 @@ const htmlContent = markedInstance.parse(text.value.replaceAll("$v{resourcesUrl}
 <style scoped lang="scss">
 .markdown :deep() {
   --heading-color: #072b6a;
-  --text-color: var(--color-black-lighter);
 
   hr {
     border-color: var(--heading-color);
