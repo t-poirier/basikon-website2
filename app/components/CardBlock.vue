@@ -32,7 +32,7 @@
     <div
       v-if="subhead?.text"
       :class="
-        'px-[2.5%] mt-1 pointer-events-auto max-w-[1200px] m-auto' +
+        'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px] m-auto' +
         (isHeroTemplate ? ' text-2xl' : ' text-xl') +
         (subhead?.fontWeight === 'bold' ? ' font-bold' : '') +
         (subhead?.fontStyle === 'italic' ? ' italic' : '') +

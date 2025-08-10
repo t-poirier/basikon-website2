@@ -12,7 +12,7 @@ const { type } = defineProps({
   type: String,
 })
 
-const { locale } = useI18n()
+const { locale, t: loc } = useI18n()
 
 const { data: items, refresh } = await useAsyncData(`${type}-${locale.value}.json`, () =>
   $fetch(`${resourcesUrl}/content/${type}/index_${locale.value}.json`),
@@ -28,13 +28,19 @@ const cards = items.value?.map(item => {
         : item.uri
       : `/${locale.value}/${type}/${item.uri}`
 
+  const itemDate = item.date
+    ? new Date(item.date).toLocaleString(locale.value, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : ""
+
   return {
     sm: "4",
     maxWidth: "400px",
     background: {
       href,
-      // url: item.uri,
-      // type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
     },
     blocks: {
       align: "side",
@@ -42,14 +48,13 @@ const cards = items.value?.map(item => {
         height: "300px",
         background: {
           href,
-          // url: item.imgSrc,
-      url: item.imgSrc || item.uri,
-      type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
+          url: item.imgSrc || item.uri,
+          type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
           position: "bottom",
           borderRadius: "rounded",
         },
       },
-      bottom: {
+      middle: {
         moduleTemplate: "promo",
         subhead: {
           text: item.title,
@@ -57,6 +62,13 @@ const cards = items.value?.map(item => {
         },
         summary: {
           text: item.desc || item.meta,
+        },
+      },
+      bottom: {
+        moduleTemplate: "promo",
+        suphead: {
+          text: `${itemDate}<br>${item.readingMinutes ? ` ${item.readingMinutes} ${loc("readingMinutes")}` : ""}`,
+          color: "black-lightest"
         },
       },
     },
