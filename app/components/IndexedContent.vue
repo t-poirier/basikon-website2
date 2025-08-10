@@ -46,7 +46,7 @@ const cards = items.value?.map(item => {
       })
     : ""
 
-  return {
+    return {
     sm: "4",
     maxWidth: "400px",
     background: {
@@ -58,11 +58,11 @@ const cards = items.value?.map(item => {
       top: {
         height: height || "300px",
         background: {
-          url: item.imgSrc || item.uri,
+          url: (item.storyTitleImg ? item.storyTitleImg : '') || item.imgSrc || item.uri,
           type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
           position: background?.position || "bottom",
           size: background?.size,
-          borderRadius: "rounded",
+          borderRadius: background?.borderRadius || "5px",
         },
       },
       middle: {
