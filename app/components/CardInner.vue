@@ -12,7 +12,7 @@
       <NuxtLink
         v-if="background?.href"
         :href="localePath(background.href)"
-        class="size-full z-[3] left-[0] top-[0] absolute"
+        :class="'size-full left-[0] top-[0] absolute' + (background?.hrefOverlay ? ' z-[10] ' : ' z-[3] ')"
         tabindex="-1"
       ></NuxtLink>
 

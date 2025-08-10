@@ -41,13 +41,13 @@ const cards = items.value?.map(item => {
     maxWidth: "400px",
     background: {
       href,
+      hrefOverlay: true,
     },
     blocks: {
       align: "side",
       top: {
         height: "300px",
         background: {
-          href,
           url: item.imgSrc || item.uri,
           type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
           position: "bottom",
