@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { resourcesUrl } from "@/services/utils"
+import { defaultLocale, resourcesUrl } from "@/services/utils"
 import { ref, watch } from "vue"
 
 const { pageName, pageCategory } = defineProps({
@@ -124,7 +124,7 @@ if (pageCategory) {
 
   const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(categoryKeyUrl, () => $fetch(categoryKeyUrl))
 
-  const categoryItem = categoryItems.value?.find(categoryItem => categoryItem?.uri === pageName)
+  const categoryItem = categoryItems?.value?.find(categoryItem => categoryItem?.uri === pageName)
   if (categoryItem) {
     const { data: markdownText, refresh: refreshMarkdown } = await useAsyncData(categoryMdKeyUrl, () => $fetch(categoryMdKeyUrl))
 
@@ -153,15 +153,24 @@ if (pageCategory) {
     useAsyncData(messagesKeyUrl, () => $fetch(messagesKeyUrl)),
     useAsyncData(pageKeyUrl, () => $fetch(pageKeyUrl)),
   ])
-  const { data: _messages, refresh: refreshMessages } = messagesRef.value || {}
-  const { data: page, refreshPage } = pageRef.value || {}
+  const { data: _messages, refresh: refreshMessages } = messagesRef?.value || {}
+  const { data: localePage, refresh: localeRefreshPage } = pageRef?.value || {}
 
-  messages.value = _messages.value
+  let page = localePage?.value
+  let refreshPage = localeRefreshPage
+  if (!page) {
+    const defaultPageKeyUrl = `${resourcesUrl}/pages/${defaultLocale}/${pageName}.json`
+    const pageRef = await useAsyncData(defaultPageKeyUrl, () => $fetch(defaultPageKeyUrl))
+    page = pageRef.data
+    refreshPage = pageRef.value?.refresh
+  }
+
+  messages.value = _messages?.value
 
   const fragmentsToCollect = new Set()
-  if (page.value?.cards) {
-    for (let i = 0; i < page.value.cards.length; i++) {
-      const cardOrArray = page.value.cards[i]
+  if (page?.value?.cards) {
+    for (let i = 0; i < page.value?.cards.length; i++) {
+      const cardOrArray = page.value?.cards[i]
       if (Array.isArray(cardOrArray)) {
         for (let j = 0; j < cardOrArray.length; j++) {
           const card = cardOrArray[j]
@@ -186,8 +195,8 @@ if (pageCategory) {
       const fragments = await Promise.allSettled(fragmentsPromises)
       const fragmentsMessages = await Promise.allSettled(fragmentsMessagesPromises)
 
-      for (let i = 0; i < page.value.cards.length; i++) {
-        const cardOrArray = page.value.cards[i]
+      for (let i = 0; i < page?.value.cards.length; i++) {
+        const cardOrArray = page?.value.cards[i]
         if (Array.isArray(cardOrArray)) {
           for (let j = 0; j < cardOrArray.length; j++) {
             const card = cardOrArray[j]
@@ -196,7 +205,7 @@ if (pageCategory) {
                 return fragment.value?.data?.value?.id === card.fragmentId
               })
               if (fragment) {
-                page.value.cards[i][j] = fragment.value?.data?.value
+                page.value.cards[i][j] = fragment?.value?.data?.value
               }
             }
           }
@@ -211,11 +220,11 @@ if (pageCategory) {
       }
 
       for (const fragmentMessages of fragmentsMessages) {
-        Object.assign(messages.value, fragmentMessages.value?.data?.value)
+        Object.assign(messages.value, fragmentMessages?.value?.data?.value)
       }
     }
 
-    cards.value = page.value.cards
+    cards.value = page?.value?.cards
 
     watch(locale, async () => {
       await refreshMessages()
@@ -224,11 +233,11 @@ if (pageCategory) {
 
     useHead({
       ...(page.value.head || {}),
-      title: messages.value?.[page.value.head?.title] || page.value?.head?.title,
+      title: messages.value?.[page?.value?.head?.title] || page?.value?.head?.title,
       meta: page.value?.head?.meta?.map(meta => {
         return {
           name: meta?.name,
-          content: messages.value?.[meta.content] || meta?.content,
+          content: messages.value?.[meta?.content] || meta?.content,
         }
       }),
     })

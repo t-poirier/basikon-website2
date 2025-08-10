@@ -83,7 +83,7 @@
 </template>
 
 <script setup>
-import { resourcesUrl } from "@/services/utils"
+import { defaultLocale, resourcesUrl } from "@/services/utils"
 import { ref } from "vue"
 
 const localePath = useLocalePath()
@@ -93,7 +93,16 @@ const showMenu = ref(false)
 const pageName = "header"
 
 const pageKeyUrl = `${resourcesUrl}/pages/${locale.value}/${pageName}.json`
-const { data: page, refresh } = await useAsyncData(pageKeyUrl, () => $fetch(pageKeyUrl))
+const { data: localePage, refresh: localeRefresh } = await useAsyncData(pageKeyUrl, () => $fetch(pageKeyUrl))
+
+let page = localePage?.value
+let refresh = localeRefresh
+if (!page) {
+  const defaultPageKeyUrl = `${resourcesUrl}/pages/${defaultLocale}/${pageName}.json`
+  const pageRef = await useAsyncData(defaultPageKeyUrl, () => $fetch(defaultPageKeyUrl))
+  page = pageRef.data
+  refresh = pageRef.value?.refresh
+}
 
 watch(locale, () => {
   refresh()

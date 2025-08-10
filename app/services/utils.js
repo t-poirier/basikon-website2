@@ -1,5 +1,6 @@
 import { Marked } from "marked"
 
+const defaultLocale = "en"
 const resourcesUrl = (process.env.NODE_ENV === "production" ? "http://localhost" : "http://localhost") + "/imp/website"
 
 function getMarkedInstance({ localePath, useHeadingAnchors } = {}) {
@@ -60,5 +61,4 @@ function getMarkedInstance({ localePath, useHeadingAnchors } = {}) {
   return markedInstance
 }
 
-export { getMarkedInstance, resourcesUrl }
-
+export { defaultLocale, getMarkedInstance, resourcesUrl }
