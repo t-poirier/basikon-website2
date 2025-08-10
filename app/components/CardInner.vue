@@ -19,7 +19,7 @@
 
       <MediaSlider v-if="blocks?.mediaSlider?.items?.length" :items="blocks?.mediaSlider.items" />
       <HubspotForm v-if="blocks?.hubspotForm" :hubspotForm="blocks.hubspotForm" />
-      <Markdown v-if="blocks?.markdown" :text="blocks.markdown.text" />
+      <Markdown v-if="blocks?.markdown" :markdown="blocks.markdown" />
       <CategoryContent v-if="blocks?.categoryContent" :content="blocks.categoryContent" />
 
       <div

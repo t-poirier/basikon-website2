@@ -4,14 +4,24 @@
 
 <script setup>
 import { getMarkedInstance, resourcesUrl } from "@/services/utils"
+import { ref } from "vue"
 
-const { text } = defineProps({
-  text: String,
+const { markdown } = defineProps({
+  markdown: Object,
 })
 const localePath = useLocalePath()
+const { locale } = useI18n()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
 
-const htmlContent = markedInstance.parse(text.replaceAll("$v{resourcesUrl}", resourcesUrl))
+const text = ref("")
+if (markdown.url) {
+  const { data, refresh } = await useAsyncData(`${resourcesUrl}${markdown.url}`, () => $fetch(`${resourcesUrl}${markdown.url}`))
+  text.value = data.value
+  watch(locale, refresh)
+} else {
+  text.value = markdown?.text
+}
+const htmlContent = markedInstance.parse(text.value.replaceAll("$v{resourcesUrl}", resourcesUrl))
 </script>
 
 <style scoped lang="scss">
