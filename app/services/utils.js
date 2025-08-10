@@ -29,7 +29,8 @@ function getMarkedInstance({ localePath, useHeadingAnchors } = {}) {
         }
       }
 
-      return `<a${optionalTags} href="${localePath(href)}">${text}</a>`
+      const parsedHref = href.startsWith("#") || href.startsWith("http") ? href : localePath(href)
+      return `<a${optionalTags} href="${parsedHref}">${text}</a>`
     },
   }
 
@@ -41,7 +42,7 @@ function getMarkedInstance({ localePath, useHeadingAnchors } = {}) {
         .toLowerCase()
         .replace(/\s/g, "-")
         .replace(/\W_/g, "")
-        .replace(/¿|\?|!|\.|%|’/g, "")
+        .replace(/¿|\?|!|'|"|\.|%|’/g, "")
 
       return `
 <h${depth} class="md-header">
