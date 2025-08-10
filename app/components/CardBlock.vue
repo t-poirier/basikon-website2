@@ -39,8 +39,14 @@
       v-html="parseMarkdown(subhead?.text)"
     ></div>
 
-    <div v-if="summaryText" :class="'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px] m-auto'" v-html="parseMarkdown(showFullSummary ? summary.text : summaryText)"></div>
-    <div v-if="shouldCutSummary" class="px-[2.5%] text-blue pointer-events-auto cursor-pointer" @click.stop="showFullSummary = !showFullSummary">{{ "Read more" }}</div>
+    <div
+      v-if="summaryText"
+      :class="'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px] m-auto'"
+      v-html="parseMarkdown(showFullSummary ? summary.text : summaryText)"
+    ></div>
+    <div v-if="shouldCutSummary && !showFullSummary" class="px-[2.5%] text-blue pointer-events-auto cursor-pointer" @click.stop="toggleSummary">
+      {{ $t("readMore") }}
+    </div>
 
     <div v-if="buttons.length" class="mt-1 px-[2.5%] max-w-[1200px] m-auto">
       <NuxtLink
@@ -57,6 +63,7 @@
 
 <script setup>
 import { getMarkedInstance, resourcesUrl } from "@/services/utils"
+import { ref } from "vue"
 
 const { lg, md, sm, xs, vh, moduleTemplate, summary } = defineProps({
   height: String,
@@ -111,7 +118,7 @@ const isHeroTemplate = moduleTemplate === "heroes"
 const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
 
-let showFullSummary = false
+const showFullSummary = ref(false)
 const shouldCutSummary = summary?.maxLength < summary?.text?.length
 const summaryText = shouldCutSummary ? summary?.text.substring(0, summary.maxLength) + "..." : summary?.text
 
@@ -121,5 +128,9 @@ function getTextStyle({ color } = {}) {
 
 function parseMarkdown(text) {
   return markedInstance.parse(text.replaceAll("$v{resourcesUrl}", resourcesUrl))
+}
+
+function toggleSummary() {
+  showFullSummary.value = !showFullSummary.value
 }
 </script>
