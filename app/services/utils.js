@@ -1,7 +1,7 @@
 import { Marked } from "marked"
 
 const defaultLocale = "en"
-const resourcesUrl = (process.env.NODE_ENV === "production" ? "http://localhost" : "http://localhost") + "/imp/website"
+const resourcesUrl = (process.env.NODE_ENV === "production" ? "" : "http://localhost") + "/imp/website"
 
 function getMarkedInstance({ localePath, useHeadingAnchors } = {}) {
   const markedInstance = new Marked()
@@ -61,4 +61,10 @@ function getMarkedInstance({ localePath, useHeadingAnchors } = {}) {
   return markedInstance
 }
 
-export { defaultLocale, getMarkedInstance, resourcesUrl }
+function prefixWithResourcesUrl(url) {
+  if (url.startsWith("http") || url.startsWith(resourcesUrl)) return url
+  return resourcesUrl + url
+}
+
+export { defaultLocale, getMarkedInstance, prefixWithResourcesUrl, resourcesUrl }
+

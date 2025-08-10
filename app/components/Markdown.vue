@@ -3,11 +3,12 @@
 </template>
 
 <script setup>
-import { getMarkedInstance, resourcesUrl } from "@/services/utils"
-import { ref } from "vue"
+import { getMarkedInstance, prefixWithResourcesUrl, resourcesUrl } from "@/services/utils"
+import { ref, toRaw } from "vue"
 
-const { markdown } = defineProps({
+const { markdown, messages } = defineProps({
   markdown: Object,
+  messages: Object,
 })
 const localePath = useLocalePath()
 const { locale } = useI18n()
@@ -15,7 +16,8 @@ const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true }
 
 const text = ref("")
 if (markdown.url) {
-  const markdownKeyUrl = `${resourcesUrl}${markdown.url}`
+  const rawMessages = toRaw(messages)
+  const markdownKeyUrl = prefixWithResourcesUrl(rawMessages[markdown.url] || markdown.url)
   const { data, refresh } = await useAsyncData(markdownKeyUrl, () => $fetch(markdownKeyUrl))
   text.value = data.value
   watch(locale, refresh)
