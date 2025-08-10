@@ -64,8 +64,8 @@ function getItemCards({ item, markdownText }) {
         markdown: { text: item.companyBrief?.join("<br>") },
       },
       {
-        markdown: { text: markdownText.value },
         align: "side",
+        markdown: { text: markdownText.value },
       },
       { height: "100px" },
     ]
@@ -90,7 +90,7 @@ function getItemCards({ item, markdownText }) {
         },
       },
     },
-    { markdown: { text: markdownText.value }, blocks: { align: "side" } },
+    { align: "side", markdown: { text: markdownText.value } },
     {
       markdown: {
         text: item.date
