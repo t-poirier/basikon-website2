@@ -22,13 +22,13 @@ const router = useRouter()
 const { locale } = useI18n()
 const notFoundPagePath = `/${locale.value}/404`
 
+const cards = ref([])
+
 function getItemCards({ item, data }) {
   if (pageCategory === "customers-success-stories") {
     return [
       {
-        background: {
-          color: "ice-mist",
-        },
+        background: { color: "ice-mist" },
         blocks: {
           top: {
             headline: {
@@ -39,7 +39,7 @@ function getItemCards({ item, data }) {
           },
           middle: {
             suphead: {
-              text: "“" + item.quote?.text + "“",
+              text: `“${item.quote?.text}“`,
               color: "midnight-blue-lightest",
               fontStyle: "italic",
               fontWeight: "normal",
@@ -57,38 +57,27 @@ function getItemCards({ item, data }) {
       {
         show: item.logoImg,
         height: "100px",
-        background: {
-          url: item.logoImg,
-          size: "15%",
+        background: { url: item.logoImg, size: "15%" },
+      },
+      {
+        blocks: {
+          align: "side",
+          markdown: { text: item.companyBrief?.join("<br>") },
         },
       },
       {
         blocks: {
           align: "side",
-          markdown: {
-            text: item.companyBrief?.join("<br>"),
-          },
+          markdown: { text: data.value },
         },
       },
-      {
-        blocks: {
-          align: "side",
-          markdown: {
-            text: data.value,
-          },
-        },
-      },
-      {
-        height: "100px",
-      },
+      { height: "100px" },
     ]
   }
 
   return [
     {
-      background: {
-        color: "ice-mist",
-      },
+      background: { color: "ice-mist" },
       height: "300px",
       blocks: {
         top: {
@@ -106,12 +95,7 @@ function getItemCards({ item, data }) {
       },
     },
     {
-      blocks: {
-        align: "side",
-        markdown: {
-          text: data.value,
-        },
-      },
+      blocks: { align: "side", markdown: { text: data.value } },
     },
     {
       blocks: {
@@ -129,40 +113,29 @@ function getItemCards({ item, data }) {
   ]
 }
 
-let cards = ref([])
 if (pageCategory) {
   const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.json`, () =>
     $fetch(`${resourcesUrl}/content/${pageCategory}/index_${locale.value}.json`),
   )
-  let _categoryItem
-  for (const categoryItem of categoryItems.value) {
-    if (categoryItem?.uri === pageName) {
-      _categoryItem = categoryItem
-      break
-    }
-  }
 
-  if (_categoryItem) {
+  const categoryItem = categoryItems.value?.find(c => c?.uri === pageName)
+  if (categoryItem) {
     const { data, refresh: refreshMarkdown } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.md`, () =>
       $fetch(`${resourcesUrl}/content/${pageCategory}/${pageName}/${locale.value}.md`),
     )
-    cards = getItemCards({ item: _categoryItem, data })
+
+    cards.value = getItemCards({ item: categoryItem, data })
 
     watch(locale, async () => {
       await refreshCategoryIndex()
       await refreshMarkdown()
     })
+
     useHead({
-      title: _categoryItem.title,
+      title: categoryItem.title,
       meta: [
-        {
-          name: "description",
-          content: _categoryItem.desc || _categoryItem.meta,
-        },
-        {
-          property: "og:title",
-          content: _categoryItem.title,
-        },
+        { name: "description", content: categoryItem.desc || categoryItem.meta },
+        { property: "og:title", content: categoryItem.title },
       ],
     })
   } else {
@@ -173,12 +146,10 @@ if (pageCategory) {
     $fetch(`${resourcesUrl}/pages/${locale.value}/${pageName}.json`),
   )
 
-  cards = page.value?.cards
-  const head = page.value?.head
-
-  if (cards) {
-    watch(locale, () => refresh())
-    useHead(head)
+  if (page.value?.cards) {
+    cards.value = page.value.cards
+    watch(locale, refresh)
+    useHead(page.value.head)
   } else {
     router.push(notFoundPagePath)
   }
