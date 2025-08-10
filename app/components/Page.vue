@@ -117,7 +117,7 @@ function getItemCards({ item, data }) {
       blocks: {
         markdown: {
           text: item.date
-            ? new Date(item.date).toLocaleString(locale, {
+            ? new Date(item.date).toLocaleString(locale.value, {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
