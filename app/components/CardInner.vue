@@ -21,7 +21,7 @@
       <MediaSlider v-if="mediaSlider?.items?.length" :items="mediaSlider.items" />
       <HubspotForm v-if="hubspotForm" :hubspotForm="hubspotForm" />
       <Markdown v-if="markdown" :markdown="markdown" />
-      <CategoryContent v-if="categoryContent" :content="categoryContent" />
+      <CategoryList v-if="categoryList" :content="categoryList" />
 
       <div
         v-if="blocks.top || blocks.middle || blocks.bottom"
@@ -59,7 +59,7 @@ const { lg, md, sm, xs, vh } = defineProps({
   hubspotForm: Object,
   mediaSlider: Object,
   markdown: Object,
-  categoryContent: Object,
+  categoryList: Object,
   align: String,
   blocks: {
     type: Object,

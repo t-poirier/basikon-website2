@@ -106,7 +106,7 @@ function getItemCards({ item, markdownText }) {
       height: "150px",
     },
     {
-      categoryContent: {
+      categoryList: {
         category: pageCategory,
         pagination: 3,
       },
