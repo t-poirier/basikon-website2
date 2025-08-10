@@ -39,7 +39,7 @@
 
           <div class="flex flex-wrap justify-between">
             <div v-for="menu in page.menus" class="h-full w-full sm:w-auto" :key="`${locale}-${menu.text}`">
-              <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="block text-white">{{ menu.text }}</NuxtLink>
+              <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="block text-white py-2">{{ menu.text }}</NuxtLink>
 
               <div v-else class="header-menu-block relative h-full">
                 <div v-if="menu.items" class="">
