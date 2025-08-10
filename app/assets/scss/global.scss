@@ -28,12 +28,12 @@ body {
 }
 
 .button {
-  background: #0071e3;
+  background: var(--color-blue);
   border-color: transparent;
   border-radius: 980px;
   border-style: solid;
   border-width: 1px;
-  color: #fff;
+  color: var(--color-white);
   cursor: pointer;
   display: inline-block;
   font-size: 1.1rem;
@@ -48,22 +48,22 @@ body {
   }
 
   &:hover {
-    background: #0077ED;
-    color: #fff;
+    background: var(--color-blue-lighter);
+    color: var(--color-white);
   }
 
   &.button-white {
-    background: #F5F5F7 !important;
-    color: #000 !important;
+    background: var(--color-white) !important;
+    color: var(--color-black) !important;
 
     &:hover {
-      background: #FFF !important;
+      background: var(--color-white) !important;
     }
   }
 
   &.button-midnight-blue {
     background: var(--color-midnight-blue);
-    color: #FFF;
+    color: var(--color-white);
 
     &:hover {
       background: var(--color-midnight-blue-lighter);
@@ -72,33 +72,33 @@ body {
 
   &.button-transparent {
     background: transparent;
-    color: #06c;
-    border-color: #06c;
+    color: var(--color-blue);
+    border-color: var(--color-blue);
   }
 
   &.button-white-light {
-    border-color: #F5F5F7 !important;
+    border-color: var(--color-white) !important;
     background: transparent !important;
-    color: #F5F5F7 !important;
+    color: var(--color-white) !important;
 
     &:hover {
-      background: #FFF !important;
+      background: var(--color-white) !important;
       color: #000 !important;
     }
   }
 
   &.button-cyan {
     background: var(--color-cyan);
-    color: #FFF;
+    color: var(--color-white);
 
     &:hover {
-      background: var(--color-states-cyan);
+      background: var(--color-cyan-lighter);
     }
   }
 }
 
 a {
-  color: var(--color-blue);
+  color: var(--link-color);
   cursor: pointer;
 
   &:hover {

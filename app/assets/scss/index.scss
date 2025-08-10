@@ -8,12 +8,14 @@
   // except for green and orange that have only 3:1, but that is acceptable if used for UI elements only,
   // and the yellow and gray that have their text in button set to the white color.
   --color-blue: #006EDC;
+  --color-blue-lighter: #177fe6;
   --color-green: #008A00;
   --color-orange: #EF7000; 
   --color-purple: #A451CD;
   --color-red: #EE0000;
   --color-yellow: #FFCC00;
   --color-cyan: #01B2B5;
+  --color-cyan-lighter: #03a3a6;
   --color-ice-mist: #EDF7FF;
   --color-midnight-blue: #182431;
   --color-midnight-blue-lighter: #394552;
@@ -27,15 +29,6 @@
   --color-black-lightest: hsl(0, 0%, 46%); // the lightest acceptable for WCAG AA requirement
   --color-black-lighter: hsl(0, 0%, 23%);
   --color-black: hsl(0, 0%, 0%);
-
-  --color-states-blue: #005FBE;
-  --color-states-green: #007600;
-  --color-states-orange: #D16200;
-  --color-states-purple: #8C45AF;
-  --color-states-red: #D00000;
-  --color-states-yellow: #E1B400;
-  --color-states-cyan: #03a3a6;
-  --color-states-gray: var(--color-gray-darker);
 
   --text-color: var(--color-black);
   --spacing: 16px;
