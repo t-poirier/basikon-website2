@@ -43,7 +43,6 @@ const htmlContent = markedInstance.parse(text.value.replaceAll("$v{resourcesUrl}
 
   ol,
   ul {
-    list-style-type: disc;
     margin: 16px 0;
     padding-left: 18px;
 
