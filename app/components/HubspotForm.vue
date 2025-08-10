@@ -1,5 +1,5 @@
 <template>
-  <div :id="target" class="max-w-[500px] w-full px-4"></div>
+  <div :id="target" class="max-w-[500px] min-h-[600px] w-full px-4"></div>
 </template>
 
 <script setup>
