@@ -83,9 +83,8 @@ const { locale } = useI18n()
 
 const pageName = "footer"
 
-const { data: page, refresh } = await useAsyncData(`${pageName}-${locale.value}`, () =>
-  $fetch(`${resourcesUrl}/pages/${locale.value}/${pageName}.json`),
-)
+const pageKeyUrl = `${resourcesUrl}/pages/${locale.value}/${pageName}.json`
+const { data: page, refresh } = await useAsyncData(pageKeyUrl, () => $fetch(pageKeyUrl))
 
 watch(locale, () => {
   refresh()

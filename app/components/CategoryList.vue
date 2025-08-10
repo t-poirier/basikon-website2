@@ -20,9 +20,8 @@ const { locale, t: loc } = useI18n()
 const { category, pagination, topBlockHeight, maxWidth, sm, background } = content || {}
 const currentPagination = ref(pagination)
 
-const { data: items, refresh } = await useAsyncData(`${category}-${locale.value}.json`, () =>
-  $fetch(`${resourcesUrl}/content/${category}/index_${locale.value}.json`),
-)
+const categoryKeyUrl = `${resourcesUrl}/content/${category}/index_${locale.value}.json`
+const { data: items, refresh } = await useAsyncData(categoryKeyUrl, () => $fetch(categoryKeyUrl))
 
 watch(locale, () => refresh())
 

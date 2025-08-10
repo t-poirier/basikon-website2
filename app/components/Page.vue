@@ -119,15 +119,14 @@ function getItemCards({ item, markdownText }) {
 }
 
 if (pageCategory) {
-  const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(`${pageCategory}-${locale.value}.json`, () =>
-    $fetch(`${resourcesUrl}/content/${pageCategory}/index_${locale.value}.json`),
-  )
+  const categoryKeyUrl = `${resourcesUrl}/content/${pageCategory}/index_${locale.value}.json`
+  const categoryMdKeyUrl = `${resourcesUrl}/content/${pageCategory}/${pageName}/${locale.value}.md`
+
+  const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(categoryKeyUrl, () => $fetch(categoryKeyUrl))
 
   const categoryItem = categoryItems.value?.find(categoryItem => categoryItem?.uri === pageName)
   if (categoryItem) {
-    const { data: markdownText, refresh: refreshMarkdown } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.md`, () =>
-      $fetch(`${resourcesUrl}/content/${pageCategory}/${pageName}/${locale.value}.md`),
-    )
+    const { data: markdownText, refresh: refreshMarkdown } = await useAsyncData(categoryMdKeyUrl, () => $fetch(categoryMdKeyUrl))
 
     cards.value = getItemCards({ item: categoryItem, markdownText })
 
@@ -147,9 +146,12 @@ if (pageCategory) {
     router.push(notFoundPagePath)
   }
 } else {
+  const messagesKeyUrl = `${resourcesUrl}/pages/${locale.value}/messages/${pageName}.json`
+  const pageKeyUrl = `${resourcesUrl}/pages/${locale.value}/${pageName}.json`
+
   const [messagesRef, pageRef] = await Promise.allSettled([
-    useAsyncData(`messages-${pageName}-${locale.value}`, () => $fetch(`${resourcesUrl}/pages/${locale.value}/messages/${pageName}.json`)),
-    useAsyncData(`${pageName}-${locale.value}`, () => $fetch(`${resourcesUrl}/pages/${locale.value}/${pageName}.json`)),
+    useAsyncData(messagesKeyUrl, () => $fetch(messagesKeyUrl)),
+    useAsyncData(pageKeyUrl, () => $fetch(pageKeyUrl)),
   ])
   const { data: _messages, refresh: refreshMessages } = messagesRef.value || {}
   const { data: page, refreshPage } = pageRef.value || {}
@@ -174,14 +176,11 @@ if (pageCategory) {
       const fragmentsPromises = []
       const fragmentsMessagesPromises = []
       for (const fragmentId of fragmentsToCollect) {
-        fragmentsPromises.push(
-          useAsyncData(`fragments-${fragmentId}-${locale.value}`, () => $fetch(`${resourcesUrl}/pages/${locale.value}/fragments/${fragmentId}.json`)),
-        )
-        fragmentsMessagesPromises.push(
-          useAsyncData(`fragments-${fragmentId}-messages-${locale.value}`, () =>
-            $fetch(`${resourcesUrl}/pages/${locale.value}/messages/${fragmentId}.json`),
-          ),
-        )
+        const fragmentKeyUrl = `${resourcesUrl}/pages/${locale.value}/fragments/${fragmentId}.json`
+        const fragmentMessagesKeyUrl = `${resourcesUrl}/pages/${locale.value}/messages/${fragmentId}.json`
+
+        fragmentsPromises.push(useAsyncData(fragmentKeyUrl, () => $fetch(fragmentKeyUrl)))
+        fragmentsMessagesPromises.push(useAsyncData(fragmentMessagesKeyUrl, () => $fetch(fragmentMessagesKeyUrl)))
       }
 
       const fragments = await Promise.allSettled(fragmentsPromises)

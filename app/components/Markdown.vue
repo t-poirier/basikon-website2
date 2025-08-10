@@ -15,7 +15,8 @@ const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true }
 
 const text = ref("")
 if (markdown.url) {
-  const { data, refresh } = await useAsyncData(`${resourcesUrl}${markdown.url}`, () => $fetch(`${resourcesUrl}${markdown.url}`))
+  const markdownKeyUrl = `${resourcesUrl}${markdown.url}`
+  const { data, refresh } = await useAsyncData(markdownKeyUrl, () => $fetch(markdownKeyUrl))
   text.value = data.value
   watch(locale, refresh)
 } else {
