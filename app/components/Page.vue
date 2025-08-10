@@ -184,17 +184,17 @@ if (pageCategory) {
         if (Array.isArray(cardOrArray)) {
           for (let j = 0; j < cardOrArray.length; j++) {
             const card = cardOrArray[j]
-            const fragment = fragments?.find(fragment => fragment.data.value.id === card.fragmentId)
-            if (fragment) {
-              page.value.cards[i][j] = fragment.data.value
+            if (card.fragmentId) {
+              const fragment = fragments?.find(fragment => fragment.data.value.id === card.fragmentId)
+              if (fragment) {
+                page.value.cards[i][j] = fragment.data.value
+              }
             }
           }
-        } else {
-          if (cardOrArray.fragmentId) {
-            const fragment = fragments?.find(fragment => fragment.data.value.id === cardOrArray.fragmentId)
-            if (fragment) {
-              page.value.cards[i] = fragment.data.value
-            }
+        } else if (cardOrArray.fragmentId) {
+          const fragment = fragments?.find(fragment => fragment.data.value.id === cardOrArray.fragmentId)
+          if (fragment) {
+            page.value.cards[i] = fragment.data.value
           }
         }
       }
