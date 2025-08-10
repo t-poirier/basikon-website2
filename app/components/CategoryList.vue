@@ -2,7 +2,7 @@
   <div class="row">
     <Card v-bind="card" v-for="card in cards?.filter((dummy, index) => (currentPagination ? index < currentPagination : true))" inArray />
 
-    <div v-if="pagination && currentPagination < cards.length" class="col-xs-12 my-10">
+    <div v-if="pagination && currentPagination < cards?.length" class="col-xs-12 my-10">
       <button class="button" @click.stop="viewMore">{{ $t("index.viewMore") }}</button>
     </div>
   </div>
