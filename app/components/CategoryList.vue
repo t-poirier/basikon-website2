@@ -86,7 +86,7 @@ const cards = items.value?.map(item => {
       bottom: {
         moduleTemplate: "promo",
         suphead: {
-          text: `${itemDate}<br>${item.readingMinutes ? ` ${item.readingMinutes} ${loc("readingMinutes")}` : ""}`,
+          text: `${itemDate}\n${item.readingMinutes ? ` ${item.readingMinutes} ${loc("readingMinutes")}` : ""}`,
           color: "black-lightest",
         },
       },
