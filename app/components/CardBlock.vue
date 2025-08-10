@@ -1,6 +1,8 @@
 <template>
   <div :class="'card-block relative' + (height ? ` min-h-${height}` : '')">
-    <CardBackground :background="background" />
+    <div v-if="Object.keys(background || {}).length" class="px-[2.5%] size-full">
+      <CardBackground :background="background" />
+    </div>
 
     <div
       v-if="suphead?.text"
@@ -67,14 +69,7 @@ import { ref } from "vue"
 
 const { lg, md, sm, xs, vh, moduleTemplate, summary } = defineProps({
   height: String,
-  background: {
-    type: Object,
-    default: () => ({
-      url: "",
-      position: "",
-      size: "",
-    }),
-  },
+  background: Object,
   headline: {
     type: Object,
     default: () => ({
