@@ -1,5 +1,5 @@
 <template>
-  <div class="markdown" v-if="htmlContent" v-html="htmlContent"></div>
+  <div class="markdown w-full max-w-[940px] text-lg px-[2.5%]" v-if="htmlContent" v-html="htmlContent"></div>
 </template>
 
 <script setup>
@@ -27,11 +27,7 @@ const htmlContent = markedInstance.parse(text.value.replaceAll("$v{resourcesUrl}
 <style scoped lang="scss">
 .markdown :deep() {
   --heading-color: #072b6a;
-  --text-color: #464646;
-
-  font-size: 1.1rem;
-  max-width: 940px;
-  width: 100%;
+  --text-color: var(--color-black-lighter);
 
   hr {
     border-color: var(--heading-color);
@@ -77,16 +73,20 @@ const htmlContent = markedInstance.parse(text.value.replaceAll("$v{resourcesUrl}
 
   h1 {
     color: var(--heading-color);
-    font-size: 44px;
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 3.3rem;
     padding: 32px 0 16px;
   }
 
   h2 {
     color: var(--heading-color);
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 2.3rem;
     margin-bottom: -10px;
     margin: 0;
     padding: 32px 0 16px;
-    font-size: 32px;
   }
 
   h2.md-header:not(:first-child) {
@@ -105,7 +105,9 @@ const htmlContent = markedInstance.parse(text.value.replaceAll("$v{resourcesUrl}
 
   h3 {
     color: var(--heading-color);
-    font-size: 24px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    line-height: 1.9rem;
     margin: 24px 0 12px;
   }
 
@@ -155,7 +157,7 @@ const htmlContent = markedInstance.parse(text.value.replaceAll("$v{resourcesUrl}
       font-size: 80px;
       left: -8px;
       position: absolute;
-      top: -26px;
+      top: w26px;
     }
 
     p {
