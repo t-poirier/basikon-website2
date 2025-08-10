@@ -17,7 +17,7 @@ const { content } = defineProps({
 })
 
 const { locale, t: loc } = useI18n()
-const { category, pagination, height, background } = content || {}
+const { category, pagination, topBlockHeight, maxWidth, sm, background } = content || {}
 const currentPagination = ref(pagination)
 
 const { data: items, refresh } = await useAsyncData(`${category}-${locale.value}.json`, () =>
@@ -51,8 +51,8 @@ const cards = items.value?.map(item => {
     : ""
 
   return {
-    sm: "4",
-    maxWidth: "400px",
+    sm: sm || "4",
+    maxWidth: maxWidth || "400px",
     background: {
       href,
       hrefTarget: isExternalUri ? "_blank" : "",
@@ -61,7 +61,7 @@ const cards = items.value?.map(item => {
     align: "side",
     blocks: {
       top: {
-        height: height || "300px",
+        height: topBlockHeight || "300px",
         background: {
           url: encodeURI((item.storyTitleImg ? item.storyTitleImg : "") || item.imgSrc || itemUri),
           type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
