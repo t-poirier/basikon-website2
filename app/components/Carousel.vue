@@ -2,7 +2,7 @@
   <div class="relative w-full mx-auto overflow-hidden">
     <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
       <div v-for="(card, index) in cards" :key="index" class="w-full flex-shrink-0">
-        <CardInner v-bind="card" />
+        <CardInner v-bind="card" :messages="messages" />
       </div>
     </div>
 
@@ -30,6 +30,7 @@ const { cards, nextSlideInterval } = defineProps({
     type: Number,
     default: 7000,
   },
+  messages: Object,
 })
 
 const currentSlide = ref(0)
