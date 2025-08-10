@@ -8,11 +8,12 @@
 import { resourcesUrl } from "@/services/utils"
 import { watch } from "vue"
 
-const { type } = defineProps({
-  type: String,
+const { content } = defineProps({
+  content: Object,
 })
 
 const { locale, t: loc } = useI18n()
+const { type, height, background } = content || {}
 
 const { data: items, refresh } = await useAsyncData(`${type}-${locale.value}.json`, () =>
   $fetch(`${resourcesUrl}/content/${type}/index_${locale.value}.json`),
@@ -46,11 +47,12 @@ const cards = items.value?.map(item => {
     blocks: {
       align: "side",
       top: {
-        height: "300px",
+        height: height || "300px",
         background: {
           url: item.imgSrc || item.uri,
           type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
-          position: "bottom",
+          position: background?.position || "bottom",
+          size: background?.size,
           borderRadius: "rounded",
         },
       },
@@ -68,7 +70,7 @@ const cards = items.value?.map(item => {
         moduleTemplate: "promo",
         suphead: {
           text: `${itemDate}<br>${item.readingMinutes ? ` ${item.readingMinutes} ${loc("readingMinutes")}` : ""}`,
-          color: "black-lightest"
+          color: "black-lightest",
         },
       },
     },
