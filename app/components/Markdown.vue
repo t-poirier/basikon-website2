@@ -1,6 +1,5 @@
 <template>
-  <div class="markdown" v-if="htmlContent" v-html="htmlContent">
-  </div>
+  <div class="markdown" v-if="htmlContent" v-html="htmlContent"></div>
 </template>
 
 <script setup>
@@ -10,7 +9,7 @@ const { text } = defineProps({
   text: String,
 })
 const localePath = useLocalePath()
-const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true  })
+const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
 
 const htmlContent = markedInstance.parse(text.replaceAll("$v{resourcesUrl}", resourcesUrl))
 </script>
@@ -35,6 +34,29 @@ const htmlContent = markedInstance.parse(text.replaceAll("$v{resourcesUrl}", res
     font-weight: 300;
     margin-top: 0;
     margin-bottom: 32px;
+  }
+
+  ol,
+  ul {
+    list-style-type: disc;
+    margin: 16px 0;
+    padding-left: 18px;
+
+    li a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
   }
 
   ul,
