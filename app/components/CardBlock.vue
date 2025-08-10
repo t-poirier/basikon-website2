@@ -12,7 +12,7 @@
         (suphead?.fontStyle === 'italic' ? ' italic' : '') +
         getTextStyle(suphead)
       "
-      v-html="parseMarkdown(suphead?.text)"
+      v-html="parseText(suphead?.text)"
     ></div>
 
     <component
@@ -26,7 +26,7 @@
         getTextStyle(headline)
       "
     >
-      <span v-html="parseMarkdown(headline?.text)"></span>
+      <span v-html="parseText(headline?.text)"></span>
     </component>
 
     <div
@@ -38,13 +38,13 @@
         (subhead?.fontStyle === 'italic' ? ' italic' : '') +
         getTextStyle(subhead)
       "
-      v-html="parseMarkdown(subhead?.text)"
+      v-html="parseText(subhead?.text)"
     ></div>
 
     <div
       v-if="summaryText"
       :class="'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px] m-auto'"
-      v-html="parseMarkdown(showFullSummary ? summary.text : summaryText)"
+      v-html="parseText(showFullSummary ? summary.text : summaryText)"
     ></div>
     <div v-if="shouldCutSummary && !showFullSummary" class="px-[2.5%] text-blue pointer-events-auto cursor-pointer" @click.stop="toggleSummary">
       {{ $t("Read more") }}
@@ -64,7 +64,7 @@
 </template>
 
 <script setup>
-import { getMarkedInstance, resourcesUrl } from "@/services/utils"
+import { getLocaleMessages, getMarkedInstance, resourcesUrl } from "@/services/utils"
 import { ref } from "vue"
 
 const { lg, md, sm, xs, vh, moduleTemplate, summary } = defineProps({
@@ -110,6 +110,7 @@ const { lg, md, sm, xs, vh, moduleTemplate, summary } = defineProps({
 })
 
 const isHeroTemplate = moduleTemplate === "heroes"
+const { locale } = useI18n()
 const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
 
@@ -121,8 +122,20 @@ function getTextStyle({ color } = {}) {
   return color === "ai-gradient" ? ` ${color}` : color ? ` text-${color}` : ""
 }
 
-function parseMarkdown(text) {
-  return markedInstance.parse(text.replaceAll("$v{resourcesUrl}", resourcesUrl))
+/**
+ * $t{}
+ */
+function extractTranslationKey(text) {
+  const regex = /^\$t\{(.+)\}$/
+  const match = text.match(regex)
+  const localeMessages = getLocaleMessages(locale.value)
+  const translationKey = match?.[1]
+  return match ? localeMessages?.[translationKey] || translationKey : text
+}
+
+function parseText(text) {
+  const translatedText = extractTranslationKey(text)
+  return markedInstance.parse(translatedText.replaceAll("$v{resourcesUrl}", resourcesUrl))
 }
 
 function toggleSummary() {

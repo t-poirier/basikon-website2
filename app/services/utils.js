@@ -2,6 +2,17 @@ import { Marked } from "marked"
 
 const resourcesUrl = (process.env.NODE_ENV === "production" ? "" : `http://localhost`) + "/imp/website"
 
+const state = {
+  messages: {}
+}
+function setLocaleMessages(locale, messages) {
+  state.messages[locale] = messages
+}
+
+function getLocaleMessages(locale) {
+  return state.messages[locale]
+}
+
 function getMarkedInstance({ localePath, useHeadingAnchors } = {}) {
   const markedInstance = new Marked()
 
@@ -60,4 +71,5 @@ function getMarkedInstance({ localePath, useHeadingAnchors } = {}) {
   return markedInstance
 }
 
-export { getMarkedInstance, resourcesUrl }
+export { getLocaleMessages, getMarkedInstance, resourcesUrl, setLocaleMessages }
+
