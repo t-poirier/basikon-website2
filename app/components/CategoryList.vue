@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { resourcesUrl } from "@/services/utils"
+import { prefixWithResourcesUrl } from "@/services/utils"
 import { ref, watch } from "vue"
 
 const { content } = defineProps({
@@ -20,7 +20,7 @@ const { locale, t: loc } = useI18n()
 const { category, pagination, topBlockHeight, maxWidth, sm, background } = content || {}
 const currentPagination = ref(pagination)
 
-const categoryKeyUrl = `${resourcesUrl}/content/${category}/index_${locale.value}.json`
+const categoryKeyUrl = prefixWithResourcesUrl(`/content/${category}/index_${locale.value}.json`)
 const { data: items, refresh } = await useAsyncData(categoryKeyUrl, () => $fetch(categoryKeyUrl))
 
 watch(locale, () => refresh())
@@ -37,7 +37,7 @@ const cards = items.value?.map(item => {
       ? item.videoSrc || item.youtubeSrc
         ? ""
         : itemUri
-      : itemUri.startsWith(`/${locale.value}`)
+      : itemUri?.startsWith(`/${locale.value}`)
         ? itemUri
         : `/${locale.value}/${category}/${itemUri}`
 

@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { defaultLocale, resourcesUrl } from "@/services/utils"
+import { defaultLocale, prefixWithResourcesUrl } from "@/services/utils"
 import { ref, watch } from "vue"
 
 const { pageName, pageCategory } = defineProps({
@@ -119,8 +119,8 @@ function getItemCards({ item, markdownText }) {
 }
 
 if (pageCategory) {
-  const categoryKeyUrl = `${resourcesUrl}/content/${pageCategory}/index_${locale.value}.json`
-  const categoryMdKeyUrl = `${resourcesUrl}/content/${pageCategory}/${pageName}/${locale.value}.md`
+  const categoryKeyUrl = prefixWithResourcesUrl(`/content/${pageCategory}/index_${locale.value}.json`)
+  const categoryMdKeyUrl = prefixWithResourcesUrl(`/content/${pageCategory}/${pageName}/${locale.value}.md`)
 
   const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(categoryKeyUrl, () => $fetch(categoryKeyUrl))
 
@@ -146,8 +146,8 @@ if (pageCategory) {
     router.push(notFoundPagePath)
   }
 } else {
-  const messagesKeyUrl = `${resourcesUrl}/pages/${locale.value}/messages/${pageName}.json`
-  const pageKeyUrl = `${resourcesUrl}/pages/${locale.value}/${pageName}.json`
+  const messagesKeyUrl = prefixWithResourcesUrl(`/pages/${locale.value}/messages/${pageName}.json`)
+  const pageKeyUrl = prefixWithResourcesUrl(`/pages/${locale.value}/${pageName}.json`)
 
   const [messagesRef, pageRef] = await Promise.all([
     useAsyncData(messagesKeyUrl, () => $fetch(messagesKeyUrl)),
@@ -159,7 +159,7 @@ if (pageCategory) {
   let page = localePage?.value
   let refreshPage = localeRefreshPage
   if (localePageError.value) {
-    const defaultPageKeyUrl = `${resourcesUrl}/pages/${defaultLocale}/${pageName}.json`
+    const defaultPageKeyUrl = prefixWithResourcesUrl(`/pages/${defaultLocale}/${pageName}.json`)
     const pageRef = await useAsyncData(defaultPageKeyUrl, () => $fetch(defaultPageKeyUrl))
     page = pageRef.data.value
     refreshPage = pageRef.refresh
@@ -185,8 +185,8 @@ if (pageCategory) {
       const fragmentsPromises = []
       const fragmentsMessagesPromises = []
       for (const fragmentId of fragmentsToCollect) {
-        const fragmentKeyUrl = `${resourcesUrl}/pages/${locale.value}/fragments/${fragmentId}.json`
-        const fragmentMessagesKeyUrl = `${resourcesUrl}/pages/${locale.value}/messages/${fragmentId}.json`
+        const fragmentKeyUrl = prefixWithResourcesUrl(`/pages/${locale.value}/fragments/${fragmentId}.json`)
+        const fragmentMessagesKeyUrl = prefixWithResourcesUrl(`/pages/${locale.value}/messages/${fragmentId}.json`)
 
         fragmentsPromises.push(useAsyncData(fragmentKeyUrl, () => $fetch(fragmentKeyUrl)))
         fragmentsMessagesPromises.push(useAsyncData(fragmentMessagesKeyUrl, () => $fetch(fragmentMessagesKeyUrl)))
@@ -199,7 +199,7 @@ if (pageCategory) {
       for (const fragmentId of fragmentsToCollect) {
         const fragment = fragmentsRef[index]
         if (fragment.error.value) {
-          const defaultFragmentKeyUrl = `${resourcesUrl}/pages/${defaultLocale}/fragments/${fragmentId}.json`
+          const defaultFragmentKeyUrl = prefixWithResourcesUrl(`/pages/${defaultLocale}/fragments/${fragmentId}.json`)
           const fragmentRef = await useAsyncData(defaultFragmentKeyUrl, () => $fetch(defaultFragmentKeyUrl))
           fragmentsRef[index].data.value = fragmentRef.data.value
         }

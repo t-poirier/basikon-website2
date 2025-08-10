@@ -28,7 +28,7 @@
     :style="{
       ...{
         'background-color': background.color ? `var(--color-${background.color})` : undefined,
-        'background-image': background.url ? `url(${resourcesUrl + encodeURI(background.url)})` : undefined,
+        'background-image': background.url ? `url(${prefixWithResourcesUrl(encodeURI(background.url))})` : undefined,
         'background-position': background.position,
         'background-size': background.size,
         filter: background.filter,
@@ -38,7 +38,8 @@
 </template>
 
 <script setup>
-import { resourcesUrl } from "@/services/utils"
+import { prefixWithResourcesUrl } from "@/services/utils"
+
 defineProps({
   absolute: Boolean,
   background: {

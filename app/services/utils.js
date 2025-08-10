@@ -62,6 +62,7 @@ function getMarkedInstance({ localePath, useHeadingAnchors } = {}) {
 }
 
 function prefixWithResourcesUrl(url) {
+  if (!url || typeof url !== "string") return url
   if (url.startsWith("http") || url.startsWith(resourcesUrl)) return url
   return resourcesUrl + url
 }

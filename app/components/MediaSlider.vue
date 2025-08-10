@@ -3,14 +3,14 @@
     <div class="wrapper">
       <!--  We want multiple copies of these images for a seamless transition.  -->
       <div v-for="copy of [1, 2, 3]" :key="copy" class="flex items-center">
-        <img v-for="(item, index) of items" :key="index" :src="`${resourcesUrl}${item.url}`" :alt="item.url" />
+        <img v-for="(item, index) of items" :key="index" :src="prefixWithResourcesUrl(item.url)" :alt="item.url" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { resourcesUrl } from "@/services/utils"
+import { prefixWithResourcesUrl } from "@/services/utils"
 
 defineProps({
   items: {
