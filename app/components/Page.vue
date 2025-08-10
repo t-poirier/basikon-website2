@@ -110,15 +110,23 @@ function getItemCards({ item, markdownText }) {
         },
       },
     },
+    {
+      blocks: {
+        categoryContent: {
+          category: "blog",
+          pagination: 3,
+        },
+      },
+    },
   ]
 }
 
 if (pageCategory) {
-  const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.json`, () =>
+  const { data: categoryItems, refresh: refreshCategoryIndex } = await useAsyncData(`${pageCategory}-${locale.value}.json`, () =>
     $fetch(`${resourcesUrl}/content/${pageCategory}/index_${locale.value}.json`),
   )
 
-  const categoryItem = categoryItems.value?.find(c => c?.uri === pageName)
+  const categoryItem = categoryItems.value?.find(categoryItem => categoryItem?.uri === pageName)
   if (categoryItem) {
     const { data: markdownText, refresh: refreshMarkdown } = await useAsyncData(`${pageCategory}-${pageName}-${locale.value}.md`, () =>
       $fetch(`${resourcesUrl}/content/${pageCategory}/${pageName}/${locale.value}.md`),

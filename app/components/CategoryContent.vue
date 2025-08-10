@@ -17,11 +17,11 @@ const { content } = defineProps({
 })
 
 const { locale, t: loc } = useI18n()
-const { type, pagination, height, background } = content || {}
+const { category, pagination, height, background } = content || {}
 const currentPagination = ref(pagination)
 
-const { data: items, refresh } = await useAsyncData(`${type}-${locale.value}.json`, () =>
-  $fetch(`${resourcesUrl}/content/${type}/index_${locale.value}.json`),
+const { data: items, refresh } = await useAsyncData(`${category}-${locale.value}.json`, () =>
+  $fetch(`${resourcesUrl}/content/${category}/index_${locale.value}.json`),
 )
 
 watch(locale, () => refresh())
@@ -36,7 +36,7 @@ const cards = items.value?.map(item => {
       ? item.videoSrc || item.youtubeSrc
         ? ""
         : item.uri
-      : `/${locale.value}/${type}/${item.uri}`
+      : `/${locale.value}/${category}/${item.uri}`
 
   const itemDate = item.date
     ? new Date(item.date).toLocaleString(locale.value, {
@@ -46,7 +46,7 @@ const cards = items.value?.map(item => {
       })
     : ""
 
-    return {
+  return {
     sm: "4",
     maxWidth: "400px",
     background: {
@@ -58,7 +58,7 @@ const cards = items.value?.map(item => {
       top: {
         height: height || "300px",
         background: {
-          url: (item.storyTitleImg ? item.storyTitleImg : '') || item.imgSrc || item.uri,
+          url: (item.storyTitleImg ? item.storyTitleImg : "") || item.imgSrc || item.uri,
           type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
           position: background?.position || "bottom",
           size: background?.size,
@@ -68,10 +68,10 @@ const cards = items.value?.map(item => {
       middle: {
         moduleTemplate: "promo",
         suphead: {
-          text:  item.category,
+          text: item.category,
         },
         subhead: {
-          text:  item.storyTitle || item.title,
+          text: item.storyTitle || item.title,
           fontWeight: "bold",
         },
         summary: {

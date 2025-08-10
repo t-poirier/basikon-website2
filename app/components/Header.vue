@@ -1,5 +1,5 @@
 <template>
-  <div class="header grid-container fixed bg-white z-[10]">
+  <div class="header grid-container fixed bg-white z-[100]">
     <div class="row">
       <div class="col-xs-12">
         <div class="max-w-[1200px] m-auto flex justify-between items-center h-[44px]">
