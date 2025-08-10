@@ -44,7 +44,7 @@
     <div
       v-if="summaryText"
       :class="'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px] m-auto'"
-      v-html="parseText(showFullSummary ? summary.text : summaryText)"
+      v-html="parseText(showFullSummary ? fullSummary : summaryText)"
     ></div>
     <div v-if="shouldCutSummary && !showFullSummary" class="px-[2.5%] text-blue pointer-events-auto cursor-pointer" @click.stop="toggleSummary">
       {{ $t("Read more") }}
@@ -115,8 +115,9 @@ const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
 
 const showFullSummary = ref(false)
-const shouldCutSummary = summary?.maxLength < summary?.text?.length
-const summaryText = shouldCutSummary ? summary?.text.substring(0, summary.maxLength) + "..." : summary?.text
+const fullSummary = messages?.[summary?.text] || ""
+const shouldCutSummary = summary?.maxLength < fullSummary.length
+const summaryText = shouldCutSummary ? fullSummary.substring(0, summary.maxLength) + "..." : fullSummary
 
 function getTextStyle({ color } = {}) {
   return color === "ai-gradient" ? ` ${color}` : color ? ` text-${color}` : ""
