@@ -1,5 +1,5 @@
 <template>
-  <select @change="switchLocale($event)" name="locales" :class="'cursor-pointer' + (responsive ? ' ml-2 hidden lg:block' : ' py-2 mx-5')">
+  <select @change="switchLocale($event)" name="locales" :class="'bg-white cursor-pointer' + (responsive ? ' ml-2 hidden lg:block' : ' py-2 mx-5')">
     <option
       v-for="availableLocale in availableLocales"
       :key="availableLocale.code"
