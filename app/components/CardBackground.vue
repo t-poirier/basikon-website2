@@ -7,13 +7,13 @@
     playsinline
     class="absolute size-full z-[1]"
   >
-    <source :src="encodeURI(background.url)" type="video/mp4" />
+    <source :src="prefixWithResourcesUrl(encodeURI(background.url))" type="video/mp4" />
   </video>
 
   <iframe
     v-if="background?.url && background?.type === 'videoIframe'"
     class="absolute size-full z-[1]"
-    :src="encodeURI(background.url)"
+    :src="prefixWithResourcesUrl(encodeURI(background.url))"
     title="Video player"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
