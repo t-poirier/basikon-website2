@@ -115,9 +115,9 @@ const localePath = useLocalePath()
 const markedInstance = getMarkedInstance({ localePath, useHeadingAnchors: true })
 
 const showFullSummary = ref(false)
-const fullSummary = messages?.[summary?.text] || ""
-const shouldCutSummary = summary?.maxLength < fullSummary.length
-const summaryText = shouldCutSummary ? fullSummary.substring(0, summary.maxLength) + "..." : fullSummary
+const fullSummary = messages?.[summary?.text] || summary?.text || ""
+const shouldCutSummary = summary?.maxLength < fullSummary?.length
+const summaryText = shouldCutSummary ? fullSummary.substring(0, summary?.maxLength) + "..." : fullSummary
 
 function getTextStyle({ color } = {}) {
   return color === "ai-gradient" ? ` ${color}` : color ? ` text-${color}` : ""

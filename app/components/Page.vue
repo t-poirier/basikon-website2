@@ -62,7 +62,7 @@ function getItemCards({ item, markdownText }) {
       },
       {
         align: "side",
-        markdown: { text: item.companyBrief?.join("\n") },
+        markdown: { text: item.companyBrief?.join("<br>") },
       },
       {
         align: "side",
