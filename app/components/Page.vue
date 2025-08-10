@@ -146,16 +146,48 @@ if (pageCategory) {
     router.push(notFoundPagePath)
   }
 } else {
-  const { data: page, refresh } = await useAsyncData(`${pageName}-${locale.value}`, () =>
-    $fetch(`${resourcesUrl}/pages/${locale.value}/${pageName}.json`),
-  )
-
-  if (page.value?.cards) {
-    cards.value = page.value.cards
-    watch(locale, refresh)
-    useHead(page.value.head)
-  } else {
+  // files starting with _ are not pages
+  if (pageName.startsWith("_")) {
     router.push(notFoundPagePath)
+  } else {
+    const [{ data, refresh: refreshFragments }, { data: page, refreshPage }] = await Promise.all([
+      useAsyncData(`_fragments-${locale.value}`, () => $fetch(`${resourcesUrl}/pages/${locale.value}/_fragments.json`)),
+      useAsyncData(`${pageName}-${locale.value}`, () => $fetch(`${resourcesUrl}/pages/${locale.value}/${pageName}.json`)),
+    ])
+    const { fragments } = data.value || {}
+
+    if (page.value?.cards) {
+      for (let i = 0; i < page.value.cards.length; i++) {
+        const cardOrArray = page.value.cards[i]
+        if (Array.isArray(cardOrArray)) {
+          for (let j = 0; j < cardOrArray.length; j++) {
+            const card = cardOrArray[j]
+            const fragment = fragments?.find(fragment => fragment.id === card.fragmentId)
+            if (fragment) {
+              page.value.cards[i][j] = fragment
+            }
+          }
+        } else {
+          if (cardOrArray.fragmentId) {
+            const fragment = fragments?.find(fragment => fragment.id === cardOrArray.fragmentId)
+            if (fragment) {
+              page.value.cards[i] = fragment
+            }
+          }
+        }
+      }
+
+      cards.value = page.value.cards
+
+      watch(locale, async () => {
+        await refreshFragments()
+        await refreshPage()
+      })
+
+      useHead(page.value.head)
+    } else {
+      router.push(notFoundPagePath)
+    }
   }
 }
 </script>
