@@ -131,7 +131,7 @@ const htmlContent = markedInstance.parse(text.value.replaceAll("$v{resourcesUrl}
   }
 
   img {
-    border-radius: 30px;
+    border-radius: 5px;
     display: block;
     margin: 0 auto;
     height: 300px;
