@@ -16,9 +16,6 @@
         tabindex="-1"
       ></NuxtLink>
 
-      <video v-if="background?.url && background?.type === 'video'" autoplay muted loop playsinline class="absolute size-full z-[1]">
-        <source :src="background.url" type="video/mp4" />
-      </video>
       <CardBackground absolute :background="background" />
 
       <MediaSlider v-if="blocks?.mediaSlider?.items?.length" :items="blocks?.mediaSlider.items" />

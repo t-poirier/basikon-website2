@@ -21,17 +21,30 @@ const { data: items, refresh } = await useAsyncData(`${type}-${locale.value}.jso
 watch(locale, () => refresh())
 
 const cards = items.value?.map(item => {
-  const href = item.uri?.startsWith("http") || item.uri?.startsWith("/imp") ? item.uri : '/' + locale.value + "/" + type + "/" + item.uri
+  const href =
+    item.uri?.startsWith("http") || item.uri?.startsWith("/imp")
+      ? item.videoSrc || item.youtubeSrc
+        ? ""
+        : item.uri
+      : `/${locale.value}/${type}/${item.uri}`
+
   return {
     sm: "4",
     maxWidth: "400px",
+    background: {
+      href,
+      // url: item.uri,
+      // type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
+    },
     blocks: {
       align: "side",
       top: {
         height: "300px",
         background: {
           href,
-          url: item.imgSrc,
+          // url: item.imgSrc,
+      url: item.imgSrc || item.uri,
+      type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
           position: "bottom",
           borderRadius: "rounded",
         },
@@ -45,13 +58,6 @@ const cards = items.value?.map(item => {
         summary: {
           text: item.desc || item.meta,
         },
-        buttons: [
-          {
-            href,
-            text: "Read more",
-            color: "transparent",
-          },
-        ],
       },
     },
   }

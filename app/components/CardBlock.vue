@@ -1,5 +1,5 @@
 <template>
-  <div :class="'card-block' + (height ? ` min-h-${height}` : '')">
+  <div :class="'card-block relative' + (height ? ` min-h-${height}` : '')">
     <CardBackground :background="background" />
 
     <div

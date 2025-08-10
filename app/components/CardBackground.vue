@@ -1,4 +1,18 @@
 <template>
+  <video v-if="background?.url && background?.type === 'video'" autoplay muted loop playsinline class="absolute size-full z-[1]">
+    <source :src="background.url" type="video/mp4" />
+  </video>
+
+  <iframe
+    v-if="background?.url && background?.type === 'videoIframe'"
+    class="absolute size-full z-[1]"
+    :src="background.url"
+    title="Video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+
   <div
     v-if="(background?.url || background?.color) && ['image', undefined].includes(background?.type)"
     :class="'size-full bg-no-repeat bg-center bg-cover z-[1]' + (absolute ? ' absolute' : '') + (background?.borderRadius ? ' rounded-[30px]' : '')"
@@ -8,7 +22,7 @@
         'background-image': background.url ? `url(${resourcesUrl}${background.url})` : undefined,
         'background-position': background.position,
         'background-size': background.size,
-        filter: background.filter
+        filter: background.filter,
       },
     }"
   ></div>
