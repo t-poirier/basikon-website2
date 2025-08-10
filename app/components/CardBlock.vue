@@ -47,7 +47,7 @@
       v-html="parseText(showFullSummary ? fullSummary : summaryText)"
     ></div>
     <div v-if="shouldCutSummary && !showFullSummary" class="px-[2.5%] text-blue pointer-events-auto cursor-pointer" @click.stop="toggleSummary">
-      {{ $t("Read more") }}
+      {{ $t("index.readMore") }}
     </div>
 
     <div v-if="buttons.length" class="mt-1 px-[2.5%] max-w-[1200px] m-auto">
