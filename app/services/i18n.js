@@ -1,7 +1,12 @@
+import { defaultLocale, resourcesUrl } from "@/services/utils"
 
-import { resourcesUrl } from "@/services/utils"
-
-export default defineI18nLocale(locale => {
+export default defineI18nLocale(async locale => {
   // for example, fetch locale messages from nuxt server
-  return $fetch(`${resourcesUrl}/pages/${locale}/messages/index.json`)
+  let messages
+  try {
+    messages = await $fetch(`${resourcesUrl}/pages/${locale}/messages/index.json`)
+  } catch (error) {
+    messages = await $fetch(`${resourcesUrl}/pages/${defaultLocale}/messages/index.json`)
+  }
+  return messages
 })

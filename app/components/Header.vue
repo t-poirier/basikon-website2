@@ -101,7 +101,7 @@ if (!page) {
   const defaultPageKeyUrl = `${resourcesUrl}/pages/${defaultLocale}/${pageName}.json`
   const pageRef = await useAsyncData(defaultPageKeyUrl, () => $fetch(defaultPageKeyUrl))
   page = pageRef.data
-  refresh = pageRef.value?.refresh
+  refresh = pageRef.refresh
 }
 
 watch(locale, () => {

@@ -161,16 +161,16 @@ if (pageCategory) {
   if (!page) {
     const defaultPageKeyUrl = `${resourcesUrl}/pages/${defaultLocale}/${pageName}.json`
     const pageRef = await useAsyncData(defaultPageKeyUrl, () => $fetch(defaultPageKeyUrl))
-    page = pageRef.data
-    refreshPage = pageRef.value?.refresh
+    page = pageRef.data.value
+    refreshPage = pageRef.refresh
   }
 
-  messages.value = _messages?.value
+  messages.value = _messages?.value || {}
 
   const fragmentsToCollect = new Set()
-  if (page?.value?.cards) {
-    for (let i = 0; i < page.value?.cards.length; i++) {
-      const cardOrArray = page.value?.cards[i]
+  if (page?.cards) {
+    for (let i = 0; i < page.cards.length; i++) {
+      const cardOrArray = page.cards[i]
       if (Array.isArray(cardOrArray)) {
         for (let j = 0; j < cardOrArray.length; j++) {
           const card = cardOrArray[j]
@@ -195,8 +195,8 @@ if (pageCategory) {
       const fragments = await Promise.allSettled(fragmentsPromises)
       const fragmentsMessages = await Promise.allSettled(fragmentsMessagesPromises)
 
-      for (let i = 0; i < page?.value.cards.length; i++) {
-        const cardOrArray = page?.value.cards[i]
+      for (let i = 0; i < page.cards.length; i++) {
+        const cardOrArray = page.cards[i]
         if (Array.isArray(cardOrArray)) {
           for (let j = 0; j < cardOrArray.length; j++) {
             const card = cardOrArray[j]
@@ -205,7 +205,7 @@ if (pageCategory) {
                 return fragment.value?.data?.value?.id === card.fragmentId
               })
               if (fragment) {
-                page.value.cards[i][j] = fragment?.value?.data?.value
+                page.cards[i][j] = fragment?.value?.data?.value
               }
             }
           }
@@ -214,17 +214,17 @@ if (pageCategory) {
             return fragment.value?.data?.value?.id === cardOrArray.fragmentId
           })
           if (fragment) {
-            page.value.cards[i] = fragment.value?.data?.value
+            page.cards[i] = fragment.value?.data?.value
           }
         }
       }
 
       for (const fragmentMessages of fragmentsMessages) {
-        Object.assign(messages.value, fragmentMessages?.value?.data?.value)
+        Object.assign(messages.value, fragmentMessages?.value?.data?.value || {})
       }
     }
 
-    cards.value = page?.value?.cards
+    cards.value = page?.cards
 
     watch(locale, async () => {
       await refreshMessages()
@@ -232,9 +232,9 @@ if (pageCategory) {
     })
 
     useHead({
-      ...(page.value.head || {}),
-      title: messages.value?.[page?.value?.head?.title] || page?.value?.head?.title,
-      meta: page.value?.head?.meta?.map(meta => {
+      ...(page?.head || {}),
+      title: messages.value?.[page?.head?.title] || page?.head?.title,
+      meta: page?.head?.meta?.map(meta => {
         return {
           name: meta?.name,
           content: messages.value?.[meta?.content] || meta?.content,
