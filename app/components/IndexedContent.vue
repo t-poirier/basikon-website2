@@ -1,6 +1,9 @@
 <template>
   <div class="row">
     <Card v-bind="card" v-for="card in cards" inArray />
+    <div class="col-xs-12 my-10">
+      <button class="button">{{ $t("viewMore") }}</button>
+    </div>
   </div>
 </template>
 
@@ -13,7 +16,7 @@ const { content } = defineProps({
 })
 
 const { locale, t: loc } = useI18n()
-const { type, height, background } = content || {}
+const { type, pagination, height, background } = content || {}
 
 const { data: items, refresh } = await useAsyncData(`${type}-${locale.value}.json`, () =>
   $fetch(`${resourcesUrl}/content/${type}/index_${locale.value}.json`),

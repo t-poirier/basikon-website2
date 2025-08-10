@@ -1,5 +1,12 @@
 <template>
-  <video v-if="background?.url && background?.type === 'video'" autoplay muted loop playsinline class="absolute size-full z-[1]">
+  <video
+    v-if="background?.url && background?.type === 'video'"
+    :autoplay="background?.autoplay"
+    :muted="background?.muted"
+    :loop="background?.loop"
+    playsinline
+    class="absolute size-full z-[1]"
+  >
     <source :src="background.url" type="video/mp4" />
   </video>
 
