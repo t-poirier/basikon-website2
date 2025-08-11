@@ -42,15 +42,6 @@ import { prefixWithResourcesUrl } from "@/services/utils"
 
 defineProps({
   absolute: Boolean,
-  background: {
-    type: Object,
-    default: () => ({
-      url: "",
-      position: "",
-      size: "",
-      borderRadius: "",
-      filter: "",
-    }),
-  },
+  background: Object,
 })
 </script>
