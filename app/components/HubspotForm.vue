@@ -1,5 +1,7 @@
 <template>
-  <div :id="target" class="max-w-[500px] min-h-[600px] w-full px-4"></div>
+  <div class="w-[600px] min-h-[600px] p-6 bg-[--color-ice-mist] rounded-[5px]">
+    <div :id="target" class="w-full"></div>
+  </div>
 </template>
 
 <script setup>
@@ -38,5 +40,3 @@ onMounted(() => {
   document.body.appendChild(script)
 })
 </script>
-
-<style scoped lang="scss"></style>
