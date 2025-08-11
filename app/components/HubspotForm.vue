@@ -1,6 +1,6 @@
 <template>
-  <div class="w-[600px] min-h-[600px] p-6 bg-[--color-ice-mist] rounded-[5px]">
-    <div :id="target" class="w-full"></div>
+  <div class="w-[400px] sm:w-[600px] min-h-[600px] p-4 sm:p-10 bg-[--color-ice-mist] rounded-[5px]">
+    <div :id="target"></div>
   </div>
 </template>
 
