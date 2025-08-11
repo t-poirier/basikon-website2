@@ -1,9 +1,15 @@
 <template>
-  <div class="medias-slider h-full flex items-center">
-    <div class="wrapper">
+  <div class="overflow-x-hidden h-full flex items-center">
+    <div class="wrapper flex relative w-fit">
       <!--  We want multiple copies of these images for a seamless transition.  -->
       <div v-for="copy of [1, 2, 3]" :key="copy" class="flex items-center">
-        <img v-for="(item, index) of items" :key="index" :src="prefixWithResourcesUrl(item.url)" :alt="item.url" />
+        <img
+          class="h-[50px] max-w-none object-contain object-center mx-[50px]"
+          v-for="(item, index) of items"
+          :key="index"
+          :src="prefixWithResourcesUrl(item.url)"
+          :alt="item.url"
+        />
       </div>
     </div>
   </div>
@@ -21,23 +27,11 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
-.medias-slider {
-  overflow-x: hidden;
-}
-
 .wrapper {
   animation: scrollLogos 35s linear infinite;
-  display: flex;
-  position: relative;
-  width: fit-content;
 
   img {
     filter: brightness(0.6);
-    height: 50px;
-    margin: 0 55px;
-    max-width: unset;
-    object-fit: contain;
-    object-position: center;
   }
 }
 

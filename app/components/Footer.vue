@@ -1,5 +1,5 @@
 <template>
-  <div class="footer grid-container">
+  <div class="footer grid-container text-white bg-[--color-midnight-blue]">
     <div class="row">
       <div class="col-xs-12">
         <div class="max-w-[1200px] m-auto py-10">
@@ -99,10 +99,3 @@ watch(locale, () => {
   refresh()
 })
 </script>
-
-<style scoped lang="scss">
-.footer {
-  background-color: var(--color-midnight-blue);
-  color: var(--color-white);
-}
-</style>
