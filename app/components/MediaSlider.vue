@@ -1,16 +1,17 @@
 <template>
-  <div class="overflow-x-hidden h-full flex items-center">
-    <div class="wrapper flex relative w-fit">
-      <!--  We want multiple copies of these images for a seamless transition.  -->
-      <div v-for="copy of [1, 2, 3]" :key="copy" class="flex items-center">
-        <img
-          class="h-[50px] max-w-none object-contain object-center mx-[50px]"
-          v-for="(item, index) of items"
-          :key="index"
-          :src="prefixWithResourcesUrl(item.url)"
-          :alt="item.url"
-        />
-      </div>
+  <div class="logo-container flex flex-col m-auto max-w-screen">
+    <div class="logo-scroll flex overflow-hidden select-none">
+      <template v-for="copy of [1, 2, 3]" :key="copy">
+        <div class="logo-scroll-wrapper items-center flex shrink-[0] justify-around min-w-full">
+          <img
+            class="h-[50px] object-contain object-center mx-[--gap] brightness-[0.6]"
+            v-for="(item, index) of items"
+            :key="index"
+            :src="prefixWithResourcesUrl(item.url)"
+            :alt="item.url"
+          />
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -27,22 +28,28 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
-.wrapper {
-  animation: scrollLogos 35s linear infinite;
-
-  img {
-    filter: brightness(0.6);
-  }
+.logo-container {
+  --gap: 55px;
+  --duration: 5s;
+  --scroll-start: 0;
+  --scroll-end: calc(-100% - var(--gap));
 }
 
-// Assumes 3 copies of the logos list.
-@keyframes scrollLogos {
-  0% {
-    transform: translateX(-33.333333%);
-  }
+.logo-scroll {
+  /* Adds a gradient mask to fade edges */
+  mask-image: linear-gradient(to right, hsl(0 0% 0% / 0), hsl(0 0% 0% / 1) 30%, hsl(0 0% 0% / 1) 70%, hsl(0 0% 0% / 0));
+}
 
-  100% {
-    transform: translateX(-66.666666%);
+.logo-scroll-wrapper {
+  animation: scroll var(--duration) linear infinite;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(var(--scroll-start));
+  }
+  to {
+    transform: translateX(var(--scroll-end));
   }
 }
 </style>
