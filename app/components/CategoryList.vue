@@ -17,19 +17,22 @@ const { content } = defineProps({
 })
 
 const { locale, t: loc } = useI18n()
-const { category, pagination, topBlockHeight, maxWidth, sm, background } = content || {}
+const { category, pagination, topBlockHeight, maxWidth, sm, background, items: contentItems } = content || {}
 const currentPagination = ref(pagination)
 
-const categoryKeyUrl = prefixWithResourcesUrl(`/content/${category}/index_${locale.value}.json`)
-const { data: items, refresh } = await useAsyncData(categoryKeyUrl, () => $fetch(categoryKeyUrl))
-
-watch(locale, () => refresh())
+let items = contentItems
+if (!items?.length) {
+  const categoryKeyUrl = prefixWithResourcesUrl(`/content/${category}/index_${locale.value}.json`)
+  const { data, refresh } = await useAsyncData(categoryKeyUrl, () => $fetch(categoryKeyUrl))
+  items = data.value
+  watch(locale, () => refresh())
+}
 
 function viewMore() {
   currentPagination.value += pagination
 }
 
-const cards = items.value?.map(item => {
+const cards = items?.map(item => {
   const itemUri = item.uri || item.url
   const isExternalUri = item.isExternalUri || itemUri?.startsWith("http")
   const href =
@@ -39,7 +42,9 @@ const cards = items.value?.map(item => {
         : itemUri
       : itemUri?.startsWith(`/${locale.value}`)
         ? itemUri
-        : `/${locale.value}/${category}/${itemUri}`
+        : itemUri
+          ? `/${locale.value}/${category}/${itemUri}`
+          : ""
 
   const itemDate = item.date
     ? new Date(item.date).toLocaleString(locale.value, {
@@ -88,7 +93,7 @@ const cards = items.value?.map(item => {
       bottom: {
         moduleTemplate: "promo",
         suphead: {
-          text: `${itemDate}<br>${item.readingMinutes ? ` ${item.readingMinutes} ${loc("index.readingMinutes")}` : ""}`,
+          text: `${itemDate}${item.readingMinutes ? `<br>${item.readingMinutes} ${loc("index.readingMinutes")}` : ""}`,
           color: "black-lightest",
         },
       },
