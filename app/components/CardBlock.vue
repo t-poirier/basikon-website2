@@ -15,7 +15,7 @@
       "
     >
       <a v-if="suphead?.anchor" :id="suphead.anchor" :href="`#${suphead.anchor}`" class="absolute top-[-100px]" />
-      <template v-html="parseText(suphead.text)"></template>
+      <span v-html="parseText(suphead.text)"></span>
     </div>
 
     <component
@@ -46,7 +46,7 @@
       "
     >
       <a v-if="subhead?.anchor" :id="subhead.anchor" :href="`#${subhead.anchor}`" class="absolute top-[-100px]" />
-      <template v-html="parseText(subhead.text)"></template>
+      <span v-html="parseText(subhead.text)"></span>
     </div>
 
     <div
