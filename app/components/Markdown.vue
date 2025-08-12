@@ -1,5 +1,5 @@
 <template>
-  <div class="markdown w-full max-w-[940px] text-lg px-[2.5%]" v-if="htmlContent" v-html="htmlContent"></div>
+  <div class="markdown w-full text-lg px-[2.5%]" v-if="htmlContent" v-html="htmlContent"></div>
 </template>
 
 <script setup>
