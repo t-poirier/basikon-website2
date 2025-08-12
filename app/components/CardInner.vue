@@ -12,7 +12,7 @@
       <NuxtLink
         v-if="background?.href"
         :target="background?.hrefTarget"
-        :to="localePath(background.href)"
+        :to="background.href.startsWith(`/${locale}`) ? background.href : localePath(background.href)"
         :class="'size-full left-[0] top-[0] absolute' + (background?.hrefOverlay ? ' z-[10] ' : ' z-[3] ')"
       ></NuxtLink>
 
