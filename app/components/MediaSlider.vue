@@ -1,17 +1,15 @@
 <template>
-  <div class="logo-container flex flex-col m-auto max-w-screen">
-    <div class="logo-scroll flex overflow-hidden select-none">
-      <template v-for="copy of [1, 2, 3]" :key="copy">
-        <div class="logo-scroll-wrapper items-center flex shrink-[0] justify-around min-w-full">
-          <img
-            class="h-[50px] object-contain object-center mx-[--gap] brightness-[0.6]"
-            v-for="(item, index) of items"
-            :key="index"
-            :src="prefixWithResourcesUrl(item.url)"
-            :alt="item.url"
-          />
-        </div>
-      </template>
+  <div class="overflow-x-hidden h-full flex items-center">
+    <div class="wrapper flex">
+      <div v-for="copy in 3" :key="copy" class="flex items-center">
+        <img
+          v-for="(item, index) in items"
+          :key="`${copy}-${index}`"
+          class="h-[50px] max-w-none object-contain object-center mx-[50px]"
+          :src="prefixWithResourcesUrl(item.url)"
+          :alt="item.url"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -28,28 +26,21 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
-.logo-container {
-  --gap: 55px;
-  --duration: 5s;
-  --scroll-start: 0;
-  --scroll-end: calc(-100% - var(--gap));
-}
+.wrapper {
+  animation: scrollLogos 5s linear infinite;
 
-.logo-scroll {
-  /* Adds a gradient mask to fade edges */
-  mask-image: linear-gradient(to right, hsl(0 0% 0% / 0), hsl(0 0% 0% / 1) 30%, hsl(0 0% 0% / 1) 70%, hsl(0 0% 0% / 0));
-}
-
-.logo-scroll-wrapper {
-  animation: scroll var(--duration) linear infinite;
-}
-
-@keyframes scroll {
-  from {
-    transform: translateX(var(--scroll-start));
+  img {
+    filter: brightness(0.6);
   }
-  to {
-    transform: translateX(var(--scroll-end));
+}
+
+/* With 3 copies, we start at 0% and move by 1/3 of total width (33.333%) */
+@keyframes scrollLogos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.3333%);
   }
 }
 </style>
