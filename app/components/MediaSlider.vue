@@ -27,7 +27,7 @@ defineProps({
 
 <style scoped lang="scss">
 .wrapper {
-  animation: scrollLogos 5s linear infinite;
+  animation: scrollLogos 15s linear infinite;
 
   img {
     filter: brightness(0.6);
