@@ -7,20 +7,22 @@
     <div
       v-if="suphead?.text"
       :class="
-        'px-[2.5%] pointer-events-auto mt-2 max-w-[1200px]' +
+        'px-[2.5%] pointer-events-auto mt-2 max-w-[1200px] relative' +
         (align === 'side' ? '' : ' m-auto') +
         (suphead?.fontWeight === 'bold' ? ' font-bold' : '') +
         (suphead?.fontStyle === 'italic' ? ' italic' : '') +
         getTextStyle(suphead)
       "
-      v-html="parseText(suphead?.text)"
-    ></div>
+    >
+      <a v-if="suphead?.anchor" :id="suphead.anchor" :href="`#${suphead.anchor}`" class="absolute top-[-100px]" />
+      <template v-html="parseText(suphead.text)"></template>
+    </div>
 
     <component
       v-if="headline?.text"
       :is="isHeroTemplate ? 'h2' : 'h3'"
       :class="
-        'px-[2.5%] pointer-events-auto mt-3 max-w-[1200px]' +
+        'px-[2.5%] pointer-events-auto mt-3 max-w-[1200px] relative' +
         (align === 'side' ? '' : ' m-auto') +
         (headline?.fontWeight === 'normal' ? '' : ' font-bold') +
         (headline?.fontStyle === 'italic' ? ' italic' : '') +
@@ -28,7 +30,7 @@
         getTextStyle(headline)
       "
     >
-      <a v-if="headline?.anchor" :id="headline.anchor" :href="`#${headline.anchor}`" />
+      <a v-if="headline?.anchor" :id="headline.anchor" :href="`#${headline.anchor}`" class="absolute top-[-100px]" />
       <span v-html="parseText(headline?.text)"></span>
     </component>
 
@@ -42,8 +44,10 @@
         (subhead?.fontStyle === 'italic' ? ' italic' : '') +
         getTextStyle(subhead)
       "
-      v-html="parseText(subhead?.text)"
-    ></div>
+    >
+      <a v-if="subhead?.anchor" :id="subhead.anchor" :href="`#${subhead.anchor}`" class="absolute top-[-100px]" />
+      <template v-html="parseText(subhead.text)"></template>
+    </div>
 
     <div
       v-if="summaryText"
