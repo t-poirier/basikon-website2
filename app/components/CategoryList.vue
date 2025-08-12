@@ -56,7 +56,7 @@ const cards = items?.map(item => {
     : ""
 
   return {
-    sm: sm || "4",
+    sm: sm || 4,
     maxWidth: maxWidth || "400px",
     background: {
       href,
