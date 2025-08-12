@@ -15,12 +15,12 @@
       </template>
     </div>
 
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-2">
       <button
         v-for="(slide, index) in cards"
         :key="index"
         @click="goToSlide(index)"
-        :class="['size-3 rounded-full border', currentSlide === index ? 'bg-white' : 'bg-white/50']"
+        :class="['size-3 rounded-full', currentSlide === index ? ' bg-[--color-cyan]' : ' bg-white/50']"
       />
     </div>
   </div>
