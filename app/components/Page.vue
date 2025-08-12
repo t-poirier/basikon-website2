@@ -148,6 +148,19 @@ function getItemCards({ item, markdownText }) {
   ]
 }
 
+const metaArray = [
+  { name: "viewport", content: "width=device-width, initial-scale=1" },
+  { property: "og:site_name", content: "Basikon" },
+  { property: "og:locale", content: locale.value },
+]
+
+if (import.meta.client) {
+  metaArray.push({
+    property: "og:url",
+    content: window.location.href,
+  })
+}
+
 if (pageCategory) {
   const categoryKeyUrl = prefixWithResourcesUrl(`/content/${pageCategory}/index_${locale.value}.json`)
   const categoryMdKeyUrl = prefixWithResourcesUrl(`/content/${pageCategory}/${pageName}/${locale.value}.md`)
@@ -165,12 +178,14 @@ if (pageCategory) {
       await refreshMarkdown()
     })
 
+    // TODO: missing image
+    metaArray.push({ name: "description", content: categoryItem.desc || categoryItem.meta })
+    metaArray.push({ property: "og:title", content: categoryItem.title })
+    metaArray.push({ property: "og:type", content: "article" })
+
     useHead({
       title: categoryItem.title,
-      meta: [
-        { name: "description", content: categoryItem.desc || categoryItem.meta },
-        { property: "og:title", content: categoryItem.title },
-      ],
+      meta: metaArray,
     })
   } else {
     router.push(notFoundPagePath)
@@ -272,15 +287,20 @@ if (pageCategory) {
       await refreshPage()
     })
 
-    useHead({
-      ...(page?.head || {}),
-      title: messages.value?.[page?.head?.title] || page?.head?.title,
-      meta: page?.head?.meta?.map(meta => {
-        return {
-          name: meta?.name,
-          content: messages.value?.[meta?.content] || meta?.content,
+    metaArray.push({ property: "og:type", content: "website" })
+    if (Array.isArray(page?.head?.meta)) {
+      for (const metaItem of page?.head?.meta) {
+        const payload = {
+          content: messages.value?.[metaItem?.content] || metaItem?.content,
         }
-      }),
+        if (metaItem?.name) payload.name = metaItem.name
+        if (metaItem?.property) payload.property = metaItem.property
+        metaArray.push(payload)
+      }
+    }
+    useHead({
+      title: messages.value?.[page?.head?.title] || page?.head?.title,
+      meta: metaArray,
     })
   } else {
     router.push(notFoundPagePath)
