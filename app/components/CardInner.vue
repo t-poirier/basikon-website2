@@ -1,8 +1,8 @@
 <template>
-  <div :class="colClassName + (inArray ? '' : ' !p-0')">
+  <div :class="colClassName + (margin?.lateral === 0 || ! inArray? ' !p-0' : '')">
     <div
       :class="
-        'relative overflow-hidden flex flex-col items-center justify-center' +
+        'relative overflow-hidden flex flex-col items-center justify-center grow' +
         (margin?.bottom === 0 ? '' : ' mb-4') +
         (maxWidth ? ` max-w-${maxWidth} m-auto` : '') +
         (height ? ` min-h-${height}` : '') +
@@ -81,5 +81,5 @@ const { lg, md, sm, xs, vh } = defineProps({
 })
 
 const localePath = useLocalePath()
-const colClassName = (lg ? `col-lg-${lg}` : "") + (md ? ` col-md-${md}` : "") + (sm ? ` col-sm-${sm}` : "") + ` col-xs-${xs}`
+const colClassName = (lg ? `col-lg-${lg}` : "") + (md ? ` col-md-${md}` : "") + (sm ? ` col-sm-${sm}` : "") + ` col-xs-${xs} flex `
 </script>
