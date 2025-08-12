@@ -105,32 +105,34 @@ function getItemCards({ item, markdownText }) {
         },
       },
     },
-    [
-      {
-        sm: 2,
-      },
-      {
-        align: "side",
-        sm: 8,
-        markdown: {
-          text: markdownText.value,
+    {
+      row: [
+        {
+          sm: 2,
         },
-      },
-      {
-        markdown: {
-          text: item.date
-            ? new Date(item.date).toLocaleString(locale.value, {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })
-            : "",
+        {
+          align: "side",
+          sm: 8,
+          markdown: {
+            text: markdownText.value,
+          },
         },
-      },
-      {
-        sm: 2,
-      },
-    ],
+        {
+          markdown: {
+            text: item.date
+              ? new Date(item.date).toLocaleString(locale.value, {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              : "",
+          },
+        },
+        {
+          sm: 2,
+        },
+      ],
+    },
     {
       height: "150px",
     },
