@@ -12,6 +12,10 @@
 <script setup>
 import { defaultLocale, prefixWithResourcesUrl } from "@/services/utils"
 import { ref, watch } from "vue"
+import { useRoute } from "vue-router"
+
+const loading = ref(true)
+const route = useRoute()
 
 const { pageName, pageCategory } = defineProps({
   pageName: String,
@@ -281,4 +285,18 @@ if (pageCategory) {
     router.push(notFoundPagePath)
   }
 }
+
+watch(
+  () => route.hash,
+  async hash => {
+    if (hash) {
+      await nextTick()
+      const el = document.querySelector(hash)
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" })
+      }
+    }
+  },
+  { immediate: true },
+)
 </script>

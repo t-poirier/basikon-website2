@@ -49,7 +49,7 @@ function getMarkedInstance({ localePath, useHeadingAnchors } = {}) {
 
       return `
 <h${depth} class="md-header">
-  <a name="${escapedText}" class="md-anchor" href="#${escapedText}">
+  <a name="${escapedText}" class="md-anchor" id="${escapedText}" href="#${escapedText}">
     <span class="font-size-link"></span>
   </a>
   ${text}

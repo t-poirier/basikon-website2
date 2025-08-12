@@ -28,6 +28,7 @@
         getTextStyle(headline)
       "
     >
+      <a v-if="headline?.anchor" :id="headline.anchor" :href="`#${headline.anchor}`" />
       <span v-html="parseText(headline?.text)"></span>
     </component>
 
