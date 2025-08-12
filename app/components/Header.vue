@@ -21,7 +21,7 @@
                 <div class="text-center cursor-pointer" tabindex="1">{{ $t(menu.text) }}</div>
 
                 <div v-if="menu.items" class="absolute z-[1] top-[44px] pt-[10px]">
-                  <div class="header-menu-items justify-between bg-white rounded-md">
+                  <div class="header-menu-items hidden justify-between bg-white rounded-md">
                     <div v-for="item in menu.items" class="p-4">
                       <div class="font-bold whitespace-nowrap p-1">{{ $t(item.text) }}</div>
 
@@ -144,7 +144,6 @@ function closeMenu() {
 }
 
 .header-menu-items {
-  display: none;
   box-shadow: 0 1px 0 1px rgba(155, 155, 155, 0.1);
 }
 
@@ -156,6 +155,7 @@ function closeMenu() {
   }
 }
 
+// the initial hidden state is set with an inline css class to avoid flickering
 .header-menu-items-responsive {
   display: none;
   box-shadow: 0 0 0 1px rgba(100, 100, 100, 0.1);
