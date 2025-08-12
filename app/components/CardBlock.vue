@@ -7,7 +7,8 @@
     <div
       v-if="suphead?.text"
       :class="
-        'px-[2.5%] pointer-events-auto mt-2 max-w-[1200px] m-auto' +
+        'px-[2.5%] pointer-events-auto mt-2 max-w-[1200px]' +
+        (align === 'side' ? '' : ' m-auto') +
         (suphead?.fontWeight === 'bold' ? ' font-bold' : '') +
         (suphead?.fontStyle === 'italic' ? ' italic' : '') +
         getTextStyle(suphead)
@@ -19,7 +20,8 @@
       v-if="headline?.text"
       :is="isHeroTemplate ? 'h2' : 'h3'"
       :class="
-        'px-[2.5%] pointer-events-auto mt-3 max-w-[1200px] m-auto' +
+        'px-[2.5%] pointer-events-auto mt-3 max-w-[1200px]' +
+        (align === 'side' ? '' : ' m-auto') +
         (headline?.fontWeight === 'normal' ? '' : ' font-bold') +
         (headline?.fontStyle === 'italic' ? ' italic' : '') +
         (isHeroTemplate ? ' text-5xl leading-[3.5rem] ' : ' text-4xl leading-[3rem] ') +
@@ -32,7 +34,8 @@
     <div
       v-if="subhead?.text"
       :class="
-        'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px] m-auto' +
+        'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px]' +
+        (align === 'side' ? '' : ' m-auto') +
         (isHeroTemplate ? ' text-2xl' : ' text-xl') +
         (subhead?.fontWeight === 'bold' ? ' font-bold' : '') +
         (subhead?.fontStyle === 'italic' ? ' italic' : '') +
@@ -43,14 +46,14 @@
 
     <div
       v-if="summaryText"
-      :class="'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px] m-auto'"
+      :class="'px-[2.5%] mt-2 pointer-events-auto max-w-[1200px]' + (align === 'side' ? '' : ' m-auto')"
       v-html="parseText(showFullSummary ? fullSummary : summaryText)"
     ></div>
     <div v-if="shouldCutSummary && !showFullSummary" class="px-[2.5%] text-blue pointer-events-auto cursor-pointer" @click.stop="toggleSummary">
       {{ $t("index.readMore") }}
     </div>
 
-    <div v-if="buttons.length" class="mt-1 px-[2.5%] max-w-[1200px] m-auto">
+    <div v-if="buttons.length" :class="'mt-1 px-[2.5%] max-w-[1200px]' + (align === 'side' ? '' : ' m-auto')">
       <NuxtLink
         v-for="button in buttons"
         :key="button.text"
@@ -108,6 +111,7 @@ const { lg, md, sm, xs, vh, moduleTemplate, summary, messages } = defineProps({
     default: () => [],
   },
   messages: Object,
+  align: String,
 })
 
 const isHeroTemplate = moduleTemplate === "heroes"

@@ -24,9 +24,9 @@
       >
         <!-- We need the 3 blocks to always be present in the DOM for the flex justify between effect to occur -->
         <!-- Inside the card block there can be nothing as long as the wrapper is there -->
-        <CardBlock v-bind="blocks.top" :messages="messages" />
-        <CardBlock v-bind="blocks.middle" :messages="messages" />
-        <CardBlock v-bind="blocks.bottom" :messages="messages" />
+        <CardBlock v-bind="blocks.top" :messages="messages" :align="align" />
+        <CardBlock v-bind="blocks.middle" :messages="messages" :align="align" />
+        <CardBlock v-bind="blocks.bottom" :messages="messages" :align="align" />
       </div>
 
       <MediaSlider v-if="mediaSlider?.items?.length" :items="mediaSlider.items" />
