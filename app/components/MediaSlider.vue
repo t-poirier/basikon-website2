@@ -5,7 +5,7 @@
         <img
           v-for="(item, index) in items"
           :key="`${copy}-${index}`"
-          class="h-[50px] max-w-none object-contain object-center mx-[50px]"
+          class="h-[50px] max-w-none object-contain object-center mx-[50px] brightness-[0.6]"
           :src="prefixWithResourcesUrl(item.url)"
           :alt="item.url"
         />
@@ -28,10 +28,6 @@ defineProps({
 <style scoped lang="scss">
 .wrapper {
   animation: scrollLogos 15s linear infinite;
-
-  img {
-    filter: brightness(0.6);
-  }
 }
 
 /* With 3 copies, we start at 0% and move by 1/3 of total width (33.333%) */
