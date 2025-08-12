@@ -12,8 +12,9 @@
 import { prefixWithResourcesUrl } from "@/services/utils"
 import { ref, watch } from "vue"
 
-const { content } = defineProps({
+const { content, messages } = defineProps({
   content: Object,
+  messages: Object,
 })
 
 const { locale, t: loc } = useI18n()
@@ -80,14 +81,14 @@ const cards = items?.map(item => {
       middle: {
         moduleTemplate: "promo",
         suphead: {
-          text: item.category || item.label,
+          text: messages[item.category || item.label] || item.category || item.label,
         },
         subhead: {
-          text: item.storyTitle || item.title,
+          text: messages[item.storyTitle || item.title] || item.storyTitle || item.title,
           fontWeight: "bold",
         },
         summary: {
-          text: item.desc || item.meta,
+          text: messages[item.desc || item.meta] || item.desc || item.meta,
         },
       },
       bottom: {
