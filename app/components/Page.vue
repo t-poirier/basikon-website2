@@ -1,8 +1,8 @@
 <template>
   <div v-for="card in cards" class="row">
-    <div class="col-xs-12" v-if="Array.isArray(card)">
+    <div class="col-xs-12" v-if="Array.isArray(card.row)">
       <div class="row">
-        <Card v-bind="row" v-for="row in card" inArray :messages="messages" />
+        <Card v-bind="row" v-for="row in card.row" inArray :messages="messages" />
       </div>
     </div>
     <Card v-else v-bind="card" :messages="messages" />

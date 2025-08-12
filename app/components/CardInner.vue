@@ -81,5 +81,5 @@ const { lg, md, sm, xs, vh } = defineProps({
 })
 
 const localePath = useLocalePath()
-const colClassName = (lg ? `col-lg-${lg}` : "") + (md ? ` col-md-${md}` : "") + (sm ? ` col-sm-${sm}` : "") + ` col-xs-${xs} flex `
+const colClassName = (lg ? `col-lg-${lg}` : "") + (md ? ` col-md-${md}` : "") + (sm ? ` col-sm-${sm}` : "") + ` col-xs-${xs} flex`
 </script>

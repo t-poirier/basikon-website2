@@ -3,10 +3,10 @@
     <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
       <template v-for="(card, index) in cards" :key="index">
         <div class="w-full flex-shrink-0">
-          <div class="row" v-if="Array.isArray(card)">
+          <div class="row" v-if="Array.isArray(card.row)">
             <div class="col-xs-12">
               <div class="row">
-                <CardInner v-for="row in card" v-bind="row" :messages="messages" />
+                <CardInner v-for="row in card.row" v-bind="row" :messages="messages" />
               </div>
             </div>
           </div>
