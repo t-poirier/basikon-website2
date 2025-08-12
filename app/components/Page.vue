@@ -1,7 +1,7 @@
 <template>
   <div v-for="card in cards" class="row">
     <div class="col-xs-12" v-if="Array.isArray(card.row)">
-      <div class="row">
+      <div :class="'row' + (card.flexColReverse?.xs ? ' flex-col-reverse sm:flex-row' : '')">
         <Card v-bind="row" v-for="row in card.row" inArray :messages="messages" />
       </div>
     </div>

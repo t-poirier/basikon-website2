@@ -1,5 +1,5 @@
 <template>
-  <div :class="colClassName + (margin?.lateral === 0 || ! inArray? ' !p-0' : '')">
+  <div :class="colClassName + (margin?.lateral === 0 || !inArray ? ' !p-0' : '')">
     <div
       :class="
         'relative overflow-hidden flex flex-col items-center justify-center grow' +

@@ -209,7 +209,8 @@
   }
 }
 
-[class*="col-"] {
+// We target only classes starting with col- and not those having -col- in their name like flex-col-reverse
+[class*="col-"]:not([class*="-col-"]) {
   max-width: 100%;
   padding-left: calc(var(--spacing) / 2);
   padding-right: calc(var(--spacing) / 2);

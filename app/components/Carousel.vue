@@ -3,19 +3,20 @@
     <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
       <template v-for="(card, index) in cards" :key="index">
         <div class="w-full flex-shrink-0">
-          <div class="row" v-if="Array.isArray(card.row)">
-            <div class="col-xs-12">
-              <div class="row">
-                <CardInner v-for="row in card.row" v-bind="row" :messages="messages" />
+          <div class="row">
+            <div class="col-xs-12" v-if="Array.isArray(card.row)">
+              <div :class="'row' + (card.flexColReverse?.xs ? ' flex-col-reverse sm:flex-row' : '')">
+                <CardInner v-for="row in card.row" v-bind="row" :messages="messages" inArray />
               </div>
             </div>
+
+            <CardInner v-else v-bind="card" :messages="messages" />
           </div>
-          <CardInner v-else v-bind="card" :messages="messages" />
         </div>
       </template>
     </div>
 
-    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-2">
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
       <button
         v-for="(slide, index) in cards"
         :key="index"
