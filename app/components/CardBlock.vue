@@ -1,6 +1,6 @@
 <template>
-  <div :class="'card-block relative' + (height ? ` min-h-${height}` : '')">
-    <div v-if="Object.keys(background || {}).length" class="px-[2.5%] size-full">
+  <div :class="'card-block flex flex-col relative' + (height ? ` min-h-${height}` : '')">
+    <div v-if="Object.keys(background || {}).length" class="px-[2.5%] grow flex flex-col size-full">
       <CardBackground :background="background" />
     </div>
 

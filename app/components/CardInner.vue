@@ -2,7 +2,7 @@
   <div :class="colClassName + (inArray ? '' : ' !p-0')">
     <div
       :class="
-        'relative overflow-hidden flex justify-center' +
+        'relative overflow-hidden flex flex-col items-center justify-center' +
         (margin?.bottom === 0 ? '' : ' mb-4') +
         (maxWidth ? ` max-w-${maxWidth} m-auto` : '') +
         (height ? ` min-h-${height}` : '') +
@@ -18,11 +18,6 @@
 
       <CardBackground absolute :background="background" />
 
-      <MediaSlider v-if="mediaSlider?.items?.length" :items="mediaSlider.items" />
-      <HubspotForm v-if="hubspotForm" :hubspotForm="hubspotForm" :messages="messages" />
-      <Markdown v-if="markdown" :markdown="markdown" :messages="messages" />
-      <CategoryList v-if="categoryList" :content="categoryList" />
-
       <div
         v-if="blocks.top || blocks.middle || blocks.bottom"
         class="py-[2.5%] grow w-full flex flex-col justify-between relative pointer-events-none z-[4]"
@@ -33,6 +28,11 @@
         <CardBlock v-bind="blocks.middle" :messages="messages" />
         <CardBlock v-bind="blocks.bottom" :messages="messages" />
       </div>
+
+      <MediaSlider v-if="mediaSlider?.items?.length" :items="mediaSlider.items" />
+      <HubspotForm v-if="hubspotForm" :hubspotForm="hubspotForm" :messages="messages" />
+      <Markdown v-if="markdown" :markdown="markdown" :messages="messages" />
+      <CategoryList v-if="categoryList" :content="categoryList" />
     </div>
   </div>
 </template>

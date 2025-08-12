@@ -23,7 +23,9 @@
   <div
     v-if="(background?.url || background?.color) && ['image', undefined].includes(background?.type)"
     :class="
-      'size-full bg-no-repeat bg-center bg-cover z-[1]' + (absolute ? ' absolute' : '') + (background?.borderRadius === '5px' ? ' rounded-[5px]' : '')
+      'size-full grow bg-no-repeat bg-center bg-cover z-[1]' +
+      (absolute ? ' absolute' : '') +
+      (background?.borderRadius === '5px' ? ' rounded-[5px]' : '')
     "
     :style="{
       ...{
