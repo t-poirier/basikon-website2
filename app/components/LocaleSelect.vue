@@ -8,7 +8,7 @@
         :value="availableLocale.code"
         :selected="availableLocale.code === locale"
       >
-        {{ availableLocale.code.toUpperCase() }}
+        {{ availableLocale.name }}
       </option>
     </select>
   </div>
