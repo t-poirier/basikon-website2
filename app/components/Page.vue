@@ -14,7 +14,6 @@ import { defaultLocale, prefixWithResourcesUrl } from "@/services/utils"
 import { ref, watch } from "vue"
 import { useRoute } from "vue-router"
 
-const loading = ref(true)
 const route = useRoute()
 
 const { pageName, pageCategory } = defineProps({
