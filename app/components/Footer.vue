@@ -39,7 +39,7 @@
 
           <div class="flex flex-wrap justify-between">
             <div v-for="menu in page.menus" class="h-full w-full sm:w-auto" :key="`${locale}-${menu.text}`">
-              <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="block text-white py-2">{{ $t(menu.text) }}</NuxtLink>
+              <NuxtLink v-if="menu.href" :to="localePath(menu.href)" class="block text-white py-2">{{ $t(menu.text) }}</NuxtLink>
 
               <div v-else class="header-menu-block relative h-full">
                 <div v-if="menu.items" class="">
@@ -48,7 +48,7 @@
                       <div class="font-bold whitespace-nowrap">{{ $t(item.text) }}</div>
 
                       <div v-for="subItem in item.items">
-                        <NuxtLink :href="localePath(subItem.href)" class="whitespace-nowrap block text-white py-2">{{ $t(subItem.text) }}</NuxtLink>
+                        <NuxtLink :to="localePath(subItem.href)" class="whitespace-nowrap block text-white py-2">{{ $t(subItem.text) }}</NuxtLink>
                       </div>
                     </div>
                   </div>
@@ -60,10 +60,10 @@
           <hr class="border-t border-gray-700 my-4" />
 
           <div>
-            <NuxtLink class="text-white block pt-2 pb-2" :href="localePath(page.corporateResponsibility?.href)">
+            <NuxtLink class="text-white block pt-2 pb-2" :to="localePath(page.corporateResponsibility?.href)">
               {{ $t(page.corporateResponsibility?.text) }}
             </NuxtLink>
-            <NuxtLink class="text-white block pt-2 pb-2" :href="localePath(page.privacyPolicy?.href)">
+            <NuxtLink class="text-white block pt-2 pb-2" :to="localePath(page.privacyPolicy?.href)">
               {{ $t(page.privacyPolicy?.text) }}
             </NuxtLink>
             <div class="pt-2 pb-2">{{ $t(page.copyrightMention?.text) }}</div>

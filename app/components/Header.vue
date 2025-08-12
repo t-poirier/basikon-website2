@@ -15,7 +15,7 @@
 
           <div class="hidden h-full lg:flex items-center">
             <div v-for="menu in page.menus" class="h-full flex items-center" :key="`${locale}-${menu.text}`">
-              <NuxtLink v-if="menu.href" :href="localePath(menu.href)" class="text-center block px-3 xl:px-4">{{ $t(menu.text) }}</NuxtLink>
+              <NuxtLink v-if="menu.href" :to="localePath(menu.href)" class="text-center block px-3 xl:px-4">{{ $t(menu.text) }}</NuxtLink>
 
               <div v-else class="header-menu-block px-3 xl:px-4 relative h-full flex items-center">
                 <div class="text-center cursor-pointer" tabindex="1">{{ $t(menu.text) }}</div>
@@ -26,7 +26,7 @@
                       <div class="font-bold whitespace-nowrap p-1">{{ $t(item.text) }}</div>
 
                       <div v-for="subItem in item.items">
-                        <NuxtLink :href="localePath(subItem.href)" class="whitespace-nowrap p-1 block min-w-[140px]">{{ $t(subItem.text) }}</NuxtLink>
+                        <NuxtLink :to="localePath(subItem.href)" class="whitespace-nowrap p-1 block min-w-[140px]">{{ $t(subItem.text) }}</NuxtLink>
                       </div>
                     </div>
                   </div>
@@ -38,7 +38,7 @@
           <div class="w-[260px] flex justify-end">
             <NuxtLink
               v-if="page.button"
-              :href="localePath(page.button.href)"
+              :to="localePath(page.button.href)"
               :class="'pointer-events-auto button button-sm' + (page.button.color ? ` button-${page.button.color}` : '')"
             >
               {{ $t(page.button.text) }}
@@ -52,7 +52,7 @@
 
             <div class="responsive-menu lg:!hidden h-screen w-full absolute z-[1] top-[44px] left-0" :data-show="showMenu">
               <div v-for="menu in page.menus" class="" :key="`${locale}-${menu.text}`">
-                <NuxtLink v-if="menu.href" :href="localePath(menu.href)" @click="closeMenu" class="block pl-5 pr-5 pt-2 pb-2">{{
+                <NuxtLink v-if="menu.href" :to="localePath(menu.href)" @click="closeMenu" class="block pl-5 pr-5 pt-2 pb-2">{{
                   $t(menu.text)
                 }}</NuxtLink>
 
@@ -64,7 +64,7 @@
                       <div class="font-bold p-1 pl-4">{{ $t(item.text) }}</div>
 
                       <div v-for="subItem in item.items">
-                        <NuxtLink :href="localePath(subItem.href)" @click="closeMenu" class="p-1 pl-4 block">{{ $t(subItem.text) }}</NuxtLink>
+                        <NuxtLink :to="localePath(subItem.href)" @click="closeMenu" class="p-1 pl-4 block">{{ $t(subItem.text) }}</NuxtLink>
                       </div>
                     </div>
                   </div>

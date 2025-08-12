@@ -12,7 +12,7 @@
       <NuxtLink
         v-if="background?.href"
         :target="background?.hrefTarget"
-        :href="localePath(background.href)"
+        :to="localePath(background.href)"
         :class="'size-full left-[0] top-[0] absolute' + (background?.hrefOverlay ? ' z-[10] ' : ' z-[3] ')"
       ></NuxtLink>
 
@@ -80,6 +80,7 @@ const { lg, md, sm, xs, vh } = defineProps({
   },
 })
 
+const { locale } = useI18n()
 const localePath = useLocalePath()
 const colClassName = (lg ? `col-lg-${lg}` : "") + (md ? ` col-md-${md}` : "") + (sm ? ` col-sm-${sm}` : "") + ` col-xs-${xs} flex`
 </script>
