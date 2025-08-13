@@ -26,7 +26,7 @@
         (align === 'side' ? '' : ' m-auto') +
         (headline?.fontWeight === 'normal' ? '' : ' font-bold') +
         (headline?.fontStyle === 'italic' ? ' italic' : '') +
-        (isHeroTemplate ? ' text-5xl leading-[3.5rem] ' : ' text-4xl leading-[3rem] ') +
+        (isHeroTemplate ? ' text-5xl leading-[3.2rem] sm:leading-[3.5rem] ' : ' text-4xl leading-[2.7rem] sm:leading-[3rem] ') +
         getTextStyle(headline)
       "
     >
