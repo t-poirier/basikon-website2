@@ -63,7 +63,7 @@
         v-for="button in buttons"
         :key="button.text"
         :to="localePath(button.href)"
-        :class="`mt-3 mr-4 pointer-events-auto button button-${button.color}`"
+        :class="`mt-3 [&:not(:only-child)]:mr-4 pointer-events-auto button button-${button.color}`"
       >
         {{ messages?.[button.text] || button.text }}
       </NuxtLink>
