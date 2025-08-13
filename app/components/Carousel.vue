@@ -10,7 +10,7 @@
               </div>
             </div>
 
-            <CardInner v-else v-bind="card" :messages="messages" />
+            <CardInner v-else v-bind="card" :messages="messages" inArray />
           </div>
         </div>
       </template>
