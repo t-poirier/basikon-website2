@@ -58,30 +58,32 @@ function getItemCards({ item, markdownText }) {
           },
         },
       },
-      [
-        {
-          sm: 1,
-        },
-        {
-          align: "side",
-          sm: 3,
-          markdown: { text: item.companyBrief?.join("<br>") },
-          blocks: {
-            top: {
-              height: "100px",
-              background: {
-                url: item.logoImg,
-                size: "80%",
+      {
+        row: [
+          {
+            sm: 1,
+          },
+          {
+            align: "side",
+            sm: 3,
+            markdown: { text: item.companyBrief?.join("<br>") },
+            blocks: {
+              top: {
+                height: "100px",
+                background: {
+                  url: item.logoImg,
+                  size: "80%",
+                },
               },
             },
           },
-        },
-        {
-          sm: 8,
-          align: "side",
-          markdown: { text: markdownText.value },
-        },
-      ],
+          {
+            sm: 8,
+            align: "side",
+            markdown: { text: markdownText.value },
+          },
+        ],
+      },
       { height: "100px" },
     ]
   }
