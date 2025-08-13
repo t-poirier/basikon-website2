@@ -78,9 +78,12 @@ function getItemCards({ item, markdownText }) {
             },
           },
           {
-            sm: 8,
+            sm: 7,
             align: "side",
             markdown: { text: markdownText.value },
+          },
+          {
+            sm: 1,
           },
         ],
       },
