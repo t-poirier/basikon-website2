@@ -4,7 +4,7 @@
       :class="
         'relative overflow-hidden flex flex-col items-center justify-center grow' +
         (margin?.bottom === 0 ? '' : ' mb-4') +
-        (maxWidth ? ` max-w-${maxWidth} m-auto` : '') +
+        (maxWidth ? ` max-w-${maxWidth} mx-auto` : '') +
         (height ? ` min-h-${height}` : '') +
         (align === 'side' ? ' text-left' : ' text-center')
       "
