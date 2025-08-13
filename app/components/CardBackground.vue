@@ -25,7 +25,17 @@
     :class="
       'size-full grow bg-no-repeat bg-center bg-cover z-[1]' +
       (absolute ? ' absolute' : '') +
-      (background?.borderRadius === '5px' ? ' rounded-[5px]' : '')
+      (background?.borderRadius === 'soft'
+        ? ' rounded-[5px]'
+        : background?.borderRadius === 'round'
+          ? ' rounded-[10px]'
+          : background?.borderRadius === 'pill'
+            ? ' rounded-[15px]'
+            : background?.borderRadius === 'full'
+              ? ' rounded-[300px]'
+              : background?.borderRadius === '50%'
+                ? ' rounded-[50%]'
+                : '')
     "
     :style="{
       ...{

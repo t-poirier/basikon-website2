@@ -72,7 +72,7 @@ const cards = items?.map(item => {
           type: item.videoSrc ? "video" : item.youtubeSrc ? "videoIframe" : undefined,
           position: background?.position || "bottom",
           size: background?.size,
-          borderRadius: background?.borderRadius || "5px",
+          borderRadius: background?.borderRadius || "soft",
           autoplay: item?.autoplay,
           muted: item?.muted,
           loop: item?.loop,
