@@ -148,10 +148,12 @@ function getItemCards({ item, markdownText }) {
   ]
 }
 
+// OpenGraph expects the locale to be like this
+const ogLocale = `${locale.value}_${locale.value.toUpperCase()}`
 const metaArray = [
   { name: "viewport", content: "width=device-width, initial-scale=1" },
   { property: "og:site_name", content: "Basikon" },
-  { property: "og:locale", content: locale.value },
+  { property: "og:locale", content: ogLocale },
 ]
 
 if (import.meta.client) {
