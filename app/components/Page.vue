@@ -66,35 +66,21 @@ function getItemCards({ item, markdownText }) {
           {
             align: "side",
             sm: 3,
+            markdown: { text: item.companyBrief?.join("<br>") },
             blocks: {
               top: {
-                height: "50px",
+                height: "100px",
                 background: {
                   url: item.logoImg,
-                  size: "contain",
+                  size: "80%",
                 },
               },
             },
           },
-        ],
-      },
-      {
-        row: [
           {
-            sm: 1,
-          },
-          {
-            align: "side",
-            sm: 3,
-            markdown: { text: item.companyBrief?.join("<br>") }
-          },
-          {
-            sm: 7,
+            sm: 8,
             align: "side",
             markdown: { text: markdownText.value },
-          },
-          {
-            sm: 1,
           },
         ],
       },
