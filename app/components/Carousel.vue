@@ -1,17 +1,13 @@
 <template>
-  <div class="relative w-full mx-auto overflow-hidden">
+  <div class="relative overflow-hidden col-xs-12 !p-0">
     <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
       <template v-for="(card, index) in cards" :key="index">
         <div class="w-full flex-shrink-0">
-          <div class="row">
-            <div class="col-xs-12" v-if="Array.isArray(card.row)">
-              <div :class="'row' + (card.flexColReverse?.xs ? ' flex-col-reverse sm:flex-row' : '')">
-                <CardInner v-for="row in card.row" v-bind="row" :messages="messages" inArray />
-              </div>
-            </div>
-
-            <CardInner v-else v-bind="card" :messages="messages" inArray />
+          <div v-if="Array.isArray(card.row)" :class="'row' + (card.flexColReverse?.xs ? ' flex-col-reverse sm:flex-row' : '')">
+            <CardInner v-for="row in card.row" v-bind="row" :messages="messages" />
           </div>
+
+          <CardInner v-else v-bind="card" :messages="messages" />
         </div>
       </template>
     </div>
